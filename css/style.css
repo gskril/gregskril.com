@@ -1,12 +1,13 @@
 :root {
 	--color-secondary-text: #A5A7AB;
 	--color-primary-text: #F5F7FA;
+	--color-dark-accent: #141516;
 }
 
 body {
 	background-color: #1D1E20;
 	color: #A5A7AB;
-	line-height: 1.6;
+	line-height: 1.65;
 	font-weight: 300;
 }
 
@@ -34,7 +35,10 @@ body {
 }
 
 .nav__title {
+	font-size: 1.125rem;
+	line-height: 1;
 	transition: .15s color ease-in-out;
+	color: var(--color-secondary-text);
 }
 
 .nav__title:hover {
@@ -57,12 +61,16 @@ body {
 	background: var(--color-secondary-text);
 	width: 100%;
 	height: 0.0625rem;
-	transition: width .15s ease-in-out;
+	transition: all .15s ease-in-out;
 }
 
 .nav__hamburger-line--1 { width: 100%; }
 .nav__hamburger-line--2 { width: 75%; }
 .nav__hamburger-line--3 { width: 50%; }
+
+.nav__hamburger:hover .nav__hamburger-line {
+	background: var(--color-primary-text);
+}
 
 .nav__hamburger:hover .nav__hamburger-line--1 {
 	width: 50%;
@@ -78,7 +86,7 @@ body {
 	position: absolute;
 	top: var(--negative-padding);
 	right: var(--negative-padding);
-	background: var(--color-secondary-text);
+	background: var(--color-dark-accent);
 	list-style: none;
 	color: var(--color-primary-text);
 	padding: var(--padding);
@@ -94,6 +102,25 @@ body {
 
 .nav__dropdown[open] .nav__hamburger-line {
 	background: white;
+}
+
+.nav__item {
+	opacity: 1;
+	transition: opacity 0.15s ease-in-out;
+}
+
+.nav__item-link {
+	display: block;
+	width: 100%;
+}
+
+.nav__item:not(:last-child) {
+	margin-bottom: 0.5rem;
+}
+
+.nav__item:hover,
+.nav__item:focus {
+	opacity: 0.8;
 }
 
 @keyframes fadeIn {
@@ -174,7 +201,23 @@ a {
 	margin-bottom: 0.5rem;
 }
 
-.footer {
+footer {
 	font-weight: 300;
-	margin-bottom: 2rem;
+	padding-bottom: 2rem;
+}
+
+.content {
+	margin-top: 2rem;
+}
+
+.title-with-image {
+	display: flex;
+}
+
+.title-with-image > img {
+	border-radius: 50%;
+	margin-right: 1rem;
+	object-fit: fill;
+	width: 3.0rem;
+	transform: translateY(-0.5rem);
 }
