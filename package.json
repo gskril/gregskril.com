@@ -1,0 +1,14 @@
+{
+  "name": "gregskril",
+  "version": "1.0.0",
+  "description": "Personal website for Greg Skriloff",
+  "dependencies": {},
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1"
+  },
+  "scripts": {
+    "start": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy"
+  },
+  "author": "Greg Skriloff"
+}

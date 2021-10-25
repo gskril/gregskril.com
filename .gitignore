@@ -11,5 +11,6 @@
 
 # Custom #
 .env
+_site
 ignore
 node_modules
