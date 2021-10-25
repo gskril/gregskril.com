@@ -1,3 +1,7 @@
+---
+permalink: about.html
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,37 +14,12 @@
 	<meta property="og:title" content="">
     <meta property="og:description" content="">
     <meta property="og:image" content="">
-	<link rel="canonical" href="">
+	<link rel="canonical" href="https://gregskril.com/{{page.fileSlug}}.html">
 
-	<meta property="og:type" content="website">
-	<meta property="og:locale" content="en_US">
-	<meta property="og:site_name" content="Greg Skriloff">
-	<meta name="twitter:card" content="summary_large_image">
-
-	<link rel="stylesheet" href="/css/normalize.css">
-	<link rel="stylesheet" href="/css/style.css">
+	{% include "./_includes/partials/head.njk" %}
 </head>
 <body>
-	<header class="container">
-		<nav class="nav">
-			<a href="/" class="nav__title">Greg Skriloff</a>
-			<details class="nav__dropdown">
-				<summary class="nav__hamburger">
-					<span class="nav__hamburger-line nav__hamburger-line--1"></span>
-					<span class="nav__hamburger-line nav__hamburger-line--2"></span>
-					<span class="nav__hamburger-line nav__hamburger-line--3"></span>
-				</summary>
-				<ul class="nav__list">
-					<li class="nav__item">
-						<a href="/about.html" class="nav__item-link">About</a>
-					</li>
-					<li class="nav__item">
-						<a href="/blog.html" class="nav__item-link">Blog</a>
-					</li>
-				</ul>
-			</details>
-		</nav>
-	</header>
+	{% include "./_includes/partials/header.njk" %}
 
 	<main class="container">
 		<div class="section">
@@ -57,27 +36,10 @@
 			</div>
 		</div>
 
-		<div class="section">
-			<h3>Connect with me</h3>
-			<div class="connect">
-				<div class="connect__item">
-					<span>Twitter</span>
-					<a href="https://twitter.com/gregskril">gregskril</a>
-				</div>
-				<div class="connect__item">
-					<span>Instagram</span>
-					<a href="https://instagram.com/gregskril">gregskril</a>
-				</div>
-				<div class="connect__item">
-					<span>GitHub</span>
-					<a href="https://github.com/gskril">gskril</a>
-				</div>
-			</div>
-		</div>
+		{% include "./_includes/partials/socials.njk" %}
 	</main>
 
-	<footer class="container">
-		<small>&copy; 2021 Greg Skriloff. All Rights Reserved.</small>
-	</footer>
+	{% include "./_includes/partials/footer.njk" %}
+	
 </body>
 </html>

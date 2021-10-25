@@ -1,0 +1,42 @@
+---
+permalink: blog.html
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>Blog - Greg Skriloff</title>
+	<meta name="description" content="">
+	<meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+	<link rel="canonical" href="https://gregskril.com/{{page.fileSlug}}.html">
+
+	{% include "./_includes/partials/head.njk" %}
+</head>
+<body>
+	{% include "./_includes/partials/header.njk" %}
+
+	<main class="container">
+		<div class="section">
+			<h1>My Thoughts</h1>
+			<div class="blog">
+				{% for article in collections.blog | reverse %}
+					<div class="blog__post">
+						<a href="{{ article.url | url }}" class="blog__title"><h4>{{ article.data.title }}</h4></a>
+						<span class="blog__excerpt">{{ article.data.description }}</span>
+						<a class="cta" href="{{ article.url | url }}">Read</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</main>
+
+	{% include "./_includes/partials/footer.njk" %}
+
+</body>
+</html>

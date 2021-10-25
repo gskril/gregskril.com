@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>{{ title }} - Greg Skriloff</title>
+	<meta name="description" content="{{ description }}">
+	<meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+	{% if sharing_image %}
+    <meta property="og:image" content="{{ sharing_image }}">
+	{% endif %}
+	<link rel="canonical" href="https://gregskril.com/blog/{{ page.fileSlug }}.html">
+
+	{% include "../partials/head.njk" %}
+</head>
+<body>
+	{% include "../partials/header.njk" %}
+
+	<main class="container">
+		<div class="section">
+			<h1>{{ title }}</h1>
+			<span class="subtitle">{{ subtitle }}</span>
+			<div class="content">
+				{{ content | safe }}
+			</div>
+		</div>
+	</main>
+
+	{% include "../partials/footer.njk" %}
+	
+</body>
+</html>

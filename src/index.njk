@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Greg Skriloff</title>
+	<meta name="description" content="">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+	<link rel="canonical" href="https://gregskril.com">
+
+	{% include "./_includes/partials/head.njk" %}
+</head>
+<body>
+	{% include "./_includes/partials/header.njk" %}
+
+	<main class="container">
+		<div class="section">
+			<h1>Just trying to make cool things.</h1>
+			<h2 class="subtitle">Tech / Crypto / Travel / Photography</h2>
+		</div>
+
+		<div class="section">
+			<h3>About Me</h3>
+			<p>Hey, I'm Greg - a maker of all sorts of things. I'm from the suburbs of New York City (about 45 minutes north of Manhattan), but currently live in Philadelphia studying Entrepreneurship, Marketing, and Interactive Digital Media.</p>
+			<a class="cta" href="/about.html">Read more</a>
+		</div>
+
+		<div class="section">
+			<h3>Recent Posts</h3>
+			<div class="blog">
+				{% for article in collections.blog | reverse | limit(3) %}
+					<div class="blog__post">
+						<a href="{{ article.url | url }}" class="blog__title"><h4>{{ article.data.title }}</h4></a>
+						<span class="blog__excerpt">{{ article.data.description }}</span>
+						<a class="cta" href="{{ article.url | url }}">Read</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+
+		{% include "./_includes/partials/socials.njk" %}
+	</main>
+
+	{% include "./_includes/partials/footer.njk" %}
+	
+</body>
+</html>

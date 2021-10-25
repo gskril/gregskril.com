@@ -242,17 +242,13 @@ footer {
 
 /* ----- BLOG ----- */
 .blog {
-	display: grid;
-	gap: 1rem;
-}
-
-.blog {
 	--spacing: 0.5rem;
 
-	display: block;
-	background: var(--color-dark-accent);
+	display: grid;
+	gap: 1rem;
 	padding: 1rem;
 	border-radius: 0.5rem;
+	background: var(--color-dark-accent);
 }
 
 .blog__title {
