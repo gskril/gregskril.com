@@ -23,6 +23,7 @@
 		<div class="section">
 			<h1>{{ title }}</h1>
 			<span class="subtitle subtitle--large">{{ subtitle }}</span>
+			<small class="read-time">~{{ content | readingTime }}ute read</small>
 			<div class="content">
 				{{ content | safe }}
 			</div>
