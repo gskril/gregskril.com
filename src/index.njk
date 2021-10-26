@@ -32,9 +32,9 @@
 		<div class="section">
 			<h3>Recent Posts</h3>
 			<div class="blog">
-				{% for article in collections.blog | reverse | limit(3) %}
+				{% for article in collections.blog | reverse | limit(2) %}
 					<div class="blog__post">
-						<a href="{{ article.url | url }}" class="blog__title"><h4>{{ article.data.title }}</h4></a>
+						<a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
 						<span class="blog__excerpt">{{ article.data.description }}</span>
 						<a class="cta" href="{{ article.url | url }}">Read</a>
 					</div>

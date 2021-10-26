@@ -12,17 +12,17 @@
 	{% if sharing_image %}
     <meta property="og:image" content="{{ sharing_image }}">
 	{% endif %}
-	<link rel="canonical" href="https://gregskril.com/blog/{{ page.fileSlug }}.html">
+	<link rel="canonical" href="https://gregskril.com{{ page.filePathStem }}.html">
 
 	{% include "../partials/head.njk" %}
 </head>
-<body>
+<body class="article">
 	{% include "../partials/header.njk" %}
 
-	<main class="container">
+	<main class="container container--small">
 		<div class="section">
 			<h1>{{ title }}</h1>
-			<span class="subtitle">{{ subtitle }}</span>
+			<span class="subtitle subtitle--large">{{ subtitle }}</span>
 			<div class="content">
 				{{ content | safe }}
 			</div>
