@@ -39,7 +39,7 @@ h3 {
 }
 
 p {
-	margin-bottom: 1.2rem;
+	margin-bottom: 1.35rem;
 }
 
 p:last-of-type {
@@ -59,7 +59,7 @@ a {
 blockquote {
 	padding-left: 1rem;
 	border-left: 0.1875rem solid var(--color-secondary-text);
-	margin-bottom: 1.2rem;
+	margin-bottom: 1.35rem;
 }
 
 .content a:not([class])::after {
@@ -107,6 +107,7 @@ footer {
 }
 
 .subtitle {
+	width: fit-content;
 	font-size: 1rem;
 	font-weight: 500;
 	line-height: 1.45;

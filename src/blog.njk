@@ -10,9 +10,9 @@ permalink: blog.html
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<title>Blog - Greg Skriloff</title>
-	<meta name="description" content="">
-	<meta property="og:title" content="">
-    <meta property="og:description" content="">
+	<meta name="description" content="Thoughts and tutorials on tech, crypto, and life.">
+	<meta property="og:title" content="Blog - Greg Skriloff">
+    <meta property="og:description" content="Thoughts and tutorials on tech, crypto, and life.">
     <meta property="og:image" content="">
 	<link rel="canonical" href="https://gregskril.com/{{page.fileSlug}}.html">
 
@@ -23,7 +23,10 @@ permalink: blog.html
 
 	<main class="container">
 		<div class="section">
-			<h1>My Thoughts</h1>
+			<h1>Blog</h1>
+			<h2 class="subtitle">Thoughts and tutorials on tech and crypto.</h2>
+		</div>
+		<div class="section">
 			<div class="blog">
 				{% for article in collections.blog | reverse %}
 					<div class="blog__post">
