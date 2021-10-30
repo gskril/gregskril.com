@@ -35,7 +35,7 @@ On the top right corner of OpenSea collections, you'll almost always see icons f
 
 ![NFT project's Discord community](https://i.ibb.co/TMKwP5p/nft-collection-links.jpg)
 
-I suggest joining a handful of Discord communities to see how people talk in there, see how things are organized, and get a feel for how this all works.
+I suggest joining a handful of Discord communities to observe how people communicate in there, see how things are organized, and get a feel for how this all works. One community I really enjoy and can strongly recommend joining is the [Bull Market Girlfriends Discord](https://discord.gg/5HaGKSEaQy). I'm on the team and very active in there.
 
 You'll find that there's a lot of crypto-specific slang used here which might be confusing at first. I'll be writing a post about this soon, but for now I recommend reading this [Twitter thread about NFT slang](https://twitter.com/punk6529/status/1433002033242595338). It's quite funny when you get the hang of it. 
 
