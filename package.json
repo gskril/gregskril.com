@@ -5,7 +5,9 @@
   "dependencies": {},
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
-    "eleventy-plugin-reading-time": "0.0.1"
+    "eleventy-plugin-reading-time": "0.0.1",
+    "markdown-it": "^12.2.0",
+    "markdown-it-link-attributes": "^3.0.0"
   },
   "scripts": {
     "start": "npx @11ty/eleventy --serve",
