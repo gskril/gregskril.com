@@ -1,15 +1,27 @@
 /* ----- GLOBAL ----- */
 :root {
+	--color-background: #1D1E20;
 	--color-secondary-text: #A5A7AB;
 	--color-primary-text: #F5F7FA;
-	--color-accent-1: #1a1a1d;
+	--color-accent-1: #18181a;
 	--color-accent-2: #607d9e;
 	--color-gradient: linear-gradient(90deg, #89B3E3, #CBDBEE);
 }
 
+@media (prefers-color-scheme: light) {
+	:root {
+		--color-background: #F5F7FA;
+		--color-secondary-text: #1a1a1d;
+		--color-primary-text: #1D1E20;
+		--color-accent-1: #e2eaf7;
+		--color-accent-2: #607d9e;
+		--color-gradient: linear-gradient(90deg, #4881c2, #9dadc0);		
+	}
+}
+
 body {
-	background-color: #1D1E20;
-	color: #A5A7AB;
+	background-color: var(--color-background);
+	color: var(--color-secondary-text);
 	line-height: 1.7;
 	letter-spacing: 0.015625rem;
 	font-weight: 300;
@@ -266,10 +278,6 @@ footer {
 
 .nav__dropdown[open] .nav__list {
 	animation: fadeIn .15s ease-in-out;
-}
-
-.nav__dropdown[open] .nav__hamburger-line {
-	background: white;
 }
 
 .nav__item {
