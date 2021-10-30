@@ -4,7 +4,7 @@
 	--color-secondary-text: #A5A7AB;
 	--color-primary-text: #F5F7FA;
 	--color-accent-1: #18181a;
-	--color-accent-2: #607d9e;
+	--color-accent-2: #A5C0E4;
 	--color-gradient: linear-gradient(90deg, #89B3E3, #CBDBEE);
 }
 
@@ -60,13 +60,8 @@ p:last-of-type {
 }
 
 a {
-	color: var(--color-primary-text);
-	background: var(--color-gradient);
-	background-clip: text;
+	color: var(--color-accent-2);
 	font-weight: 400;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	position: relative;
 }
 
 blockquote {
@@ -119,6 +114,7 @@ footer {
 }
 
 .subtitle {
+	display: block;
 	width: fit-content;
 	font-size: 1rem;
 	font-weight: 500;
@@ -206,14 +202,6 @@ footer {
 	position: relative;
 }
 
-.nav__title,
-.nav__item-link {
-	background: unset;
-	background-clip: unset;
-	-webkit-background-clip: unset;
-	-webkit-text-fill-color: unset;
-}
-
 .nav__title {
 	font-size: 1.125rem;
 	line-height: 1;
@@ -227,21 +215,28 @@ footer {
 
 .nav__hamburger {
 	width: 1.25rem;
-	height: 1rem;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	align-items: flex-end;
 	cursor: pointer;
 	position: relative;
 	z-index: 1;
 }
 
+.nav__hamburger::-webkit-details-marker {
+	display: none;
+}
+
 .nav__hamburger-line {
+	display: block;
 	background: var(--color-secondary-text);
 	width: 100%;
 	height: 0.0625rem;
 	transition: all .15s ease-in-out;
+}
+
+.nav__hamburger-line:not(:last-of-type) {
+	margin-bottom: 0.4rem;
 }
 
 .nav__hamburger-line--1 { width: 100%; }
@@ -288,6 +283,7 @@ footer {
 .nav__item-link {
 	display: block;
 	width: 100%;
+	color: var(--color-primary-text);
 }
 
 .nav__item:not(:last-child) {
@@ -328,10 +324,7 @@ footer {
 	font-size: 1.125rem;
 	font-weight: 500;
 	line-height: 1.45;
-	background: unset;
-	background-clip: unset;
-	-webkit-background-clip: unset;
-	-webkit-text-fill-color: unset;
+	color: var(--color-primary-text);
 	transition: opacity .15s ease-in-out;
 }
 
