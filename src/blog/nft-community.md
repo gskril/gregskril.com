@@ -2,7 +2,6 @@
 title: How to Get More Involved in the Crypto and NFT Community
 subtitle: The best way to learn about the space is by fully immersing yourself.
 description: A big part of NFTs are the community. It can be a bit overwhelming at first, but there's a lot to be learned if you know where to look.
-sharing_image:
 ---
 
 This whole space operates entirely on Twitter and Discord. That's the best way to find out about new projects, see what other people are talking about, interact with NFT projects, and meet new people.

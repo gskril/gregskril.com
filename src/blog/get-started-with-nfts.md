@@ -2,7 +2,6 @@
 title: How to Get Started with NFTs
 subtitle: Learn how to create a crypto wallet, connect to a dApp, and purchase your first NFT.
 description: After reading this post you should have a clear understanding of how to create a crypto wallet and purchase your first NFT.
-sharing_image:
 ---
 
 The world of NFTs (non-fungible tokens) can be overwhelming. It can seem very technical and expensive at times. My hope is that after reading this post you will have a clear understanding of how to navigate the Ethererum ecosystem (the network that most NFTs are on).
