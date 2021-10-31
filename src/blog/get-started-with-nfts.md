@@ -55,7 +55,7 @@ It's important to know that gas is priced in wei or gwei (basically a very small
 
 Now that you know how to buy an NFT, these are a few good follow-up articles to learn more about the whole ecosystem:
 
-[Immerse yourself in the NFT community](nft-community.html)
+[Immerse yourself in the NFT community](/blog/nft-community/)
 
 Learn the slang people use in these communities to communicate like a native (coming soon)
 

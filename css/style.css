@@ -107,6 +107,10 @@ footer {
 	font-weight: 500;
 	margin-top: 0;
 	transition: padding .15s ease-in-out;
+	background: var(--color-gradient);
+	background-clip: text;
+	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
 }
 
 .cta:hover {
