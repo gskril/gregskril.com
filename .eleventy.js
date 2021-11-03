@@ -2,9 +2,13 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("img")
 	eleventyConfig.addPassthroughCopy("css")
 	
-	// Add pluginf or reading time on blog posts
+	// Plugin for reading time on blog posts
 	const readingTime = require("eleventy-plugin-reading-time")
 	eleventyConfig.addPlugin(readingTime)
+
+	// Plugin for syntax highlighting code elements in blog posts
+	const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight")
+	eleventyConfig.addPlugin(syntaxHighlight)
 
 	// Optimize generated HTML links
 	const markdownIt = require("markdown-it")
