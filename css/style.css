@@ -345,8 +345,13 @@ footer {
 	font-size: .875rem;
 }
 
+.article .blog__meta {
+	margin-top: 1.25rem;
+	font-size: .925rem;
+}
+
 .blog__date {
-	margin-right: 1rem;
+	margin-right: 0.75rem;
 }
 
 .blog__tag {
@@ -355,10 +360,14 @@ footer {
 	padding: 0.07125rem 0.675rem;
 	border-radius: 0.25rem;
 	margin-right: 0.5rem;
-	color: inherit;
+	color: var(--color-secondary-text);
 	text-transform: capitalize;
 	font-weight: 300;
 	transition: color .15s ease-in-out;
+}
+
+.blog__tag--secondary {
+	background: var(--color-accent-1);
 }
 
 .blog__tag:hover,
@@ -373,7 +382,6 @@ footer {
 
 .read-time {
 	display: block;
-	margin-top: 1rem;
 }
 
 .post-end {
