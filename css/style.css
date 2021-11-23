@@ -340,6 +340,32 @@ footer {
 	opacity: 0.8;
 }
 
+.blog__meta {
+	margin: 0.125rem 0 0.5rem;
+	font-size: .875rem;
+}
+
+.blog__date {
+	margin-right: 1rem;
+}
+
+.blog__tag {
+	background: var(--color-background);
+	display: inline-block;
+	padding: 0.07125rem 0.675rem;
+	border-radius: 0.25rem;
+	margin-right: 0.5rem;
+	color: inherit;
+	text-transform: capitalize;
+	font-weight: 300;
+	transition: color .15s ease-in-out;
+}
+
+.blog__tag:hover,
+.blog__tage:focus-visible {
+	color: var(--color-primary-text);
+}
+
 .blog__excerpt {
 	display: block;
 	margin-bottom: var(--spacing);

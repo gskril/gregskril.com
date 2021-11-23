@@ -1,3 +1,7 @@
+---
+eleventyExcludeFromCollections: true
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,16 +29,28 @@
 
 		<div class="section">
 			<h3>About Me</h3>
-			<p>Hey, I'm Greg - a maker of all sorts of things. I'm from the suburbs of New York City (about 45 minutes north of Manhattan), but currently live in Philadelphia studying Entrepreneurship, Marketing, and Interactive Digital Media.</p>
+			<p>Hey, I'm Greg - a maker of all sorts of things. I'm from the suburbs of New York City, but currently live in Philadelphia studying Entrepreneurship, Marketing, and Interactive Digital Media.</p>
 			<a class="cta" href="/about/">Read more</a>
 		</div>
 
 		<div class="section">
 			<h3>Recent Posts</h3>
 			<div class="blog">
-				{% for article in collections.blog | reverse | limit(2) %}
+				{% for article in collections.all | reverse | limit(2) %}
 					<div class="blog__post">
 						<a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
+						<div class="blog__meta">
+							<span class="blog__date">{{ article.date | postDate }}</span>
+							{% for tag in article.data.tags %}
+								{% if tag === "crypto" %}
+									<a class="blog__tag" href="/crypto">{{ tag }}</a>
+								{% elseif tag === "blog" %}
+									<a class="blog__tag" href="/code">{{ tag }}</a>
+								{% else %}
+									<span class="blog__tag">{{ tag }}</span>
+								{% endif %}
+							{% endfor %}
+						</div>
 						<span class="blog__excerpt">{{ article.data.description }}</span>
 						<a class="cta" href="{{ article.url | url }}">Read</a>
 					</div>

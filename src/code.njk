@@ -9,11 +9,11 @@ eleventyExcludeFromCollections: true
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<title>Blog - Greg Skriloff</title>
-	<meta name="description" content="Thoughts and tutorials on tech, crypto, and life.">
-	<meta property="og:title" content="Blog - Greg Skriloff">
-    <meta property="og:description" content="Thoughts and tutorials on tech and crypto.">
-    <meta property="og:image" content="https://banners.beyondco.de/Blog.png?theme=dark&style=style_2&pattern=texture&description=Tech%20and%20crypto&md=0&showWatermark=0&fontSize=100px&images=x&widths=0&heights=0">
+	<title>Code - Greg Skriloff</title>
+	<meta name="description" content="Sharing my learnings and experiments with web development, bots, and more.">
+	<meta property="og:title" content="Code - Greg Skriloff">
+    <meta property="og:description" content="Sharing my learnings and experiments with web development, bots, and more.">
+    <meta property="og:image" content="https://banners.beyondco.de/Blog.png?theme=dark&style=style_2&pattern=texture&description=Code&md=0&showWatermark=0&fontSize=100px&images=x&widths=0&heights=0">
 	<link rel="canonical" href="https://gregskril.com/{{page.fileSlug}}/">
 
 	{% include "./_includes/partials/head.njk" %}
@@ -23,25 +23,16 @@ eleventyExcludeFromCollections: true
 
 	<main class="container">
 		<div class="section">
-			<h1>Blog</h1>
-			<h2 class="subtitle">Thoughts and learnings from my experiments in tech and crypto.</h2>
+			<h1>Crypto</h1>
+			<h2 class="subtitle">Sharing my learnings and experiments with web development, bots, and more.</h2>
 		</div>
 		<div class="section">
 			<div class="blog">
-				{% for article in collections.all | reverse %}
+				{% for article in collections.code | reverse %}
 					<div class="blog__post">
 						<a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
 						<div class="blog__meta">
 							<span class="blog__date">{{ article.date | postDate }}</span>
-							{% for tag in article.data.tags %}
-								{% if tag === "crypto" %}
-									<a class="blog__tag" href="/crypto">{{ tag }}</a>
-								{% elseif tag === "blog" %}
-									<a class="blog__tag" href="/code">{{ tag }}</a>
-								{% else %}
-									<span class="blog__tag">{{ tag }}</span>
-								{% endif %}
-							{% endfor %}
 						</div>
 						<span class="blog__excerpt">{{ article.data.description }}</span>
 						<a class="cta" href="{{ article.url | url }}">Read</a>
