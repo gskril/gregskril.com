@@ -21,16 +21,16 @@
 		<div class="section">
 			<h1>Blog</h1>
 			<h2 class="subtitle">Thoughts and tutorials on tech and crypto.</h2>
-		</div>
-		<div class="section">
-			<div class="blog">
-				{% for article in collections.blog | reverse %}
-					<div class="blog__post">
-						<a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
-						<span class="blog__excerpt">{{ article.data.description }}</span>
-						<a class="cta" href="{{ article.url | url }}">Read</a>
-					</div>
-				{% endfor %}
+			<div class="content">
+				<div class="blog">
+					{% for article in collections.blog | reverse %}
+						<div class="blog__post">
+							<a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
+							<span class="blog__excerpt">{{ article.data.description }}</span>
+							<a class="cta" href="{{ article.url | url }}">Read</a>
+						</div>
+					{% endfor %}
+				</div>
 			</div>
 		</div>
 	</main>
