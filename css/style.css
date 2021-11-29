@@ -340,6 +340,10 @@ footer {
 	opacity: 0.8;
 }
 
+.blog__title--static:hover {
+	opacity: initial;
+}
+
 .blog__excerpt {
 	display: block;
 	margin-bottom: var(--spacing);
