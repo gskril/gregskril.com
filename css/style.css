@@ -59,6 +59,10 @@ p:last-of-type {
 	margin-bottom: 0.75rem;
 }
 
+p + ul {
+	margin-top: -1rem;
+}
+
 strong {
 	font-weight: bold;
 }
@@ -362,6 +366,10 @@ footer {
 .read-time {
 	display: block;
 	margin-top: 1rem;
+}
+
+.twitter-tweet {
+	margin-bottom: 1.5rem !important;
 }
 
 .post-end {
