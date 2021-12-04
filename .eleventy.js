@@ -17,7 +17,7 @@ module.exports = function (eleventyConfig) {
 	// Date formatting for blog posts
 	eleventyConfig.addFilter("postDate", (dateObj) => {
 		// Add one day to the date to correct for time zones
-		return DateTime.fromJSDate(dateObj).plus({days: 1}).toLocaleString(DateTime.DATE_MED)
+		return DateTime.fromJSDate(dateObj, { zone: "America/New_York" }).plus({ days: 1 }).toLocaleString(DateTime.DATE_MED)
 	})
 
 	// Optimize generated HTML links
