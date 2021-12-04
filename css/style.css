@@ -59,6 +59,10 @@ p:last-of-type {
 	margin-bottom: 0.75rem;
 }
 
+p + ul {
+	margin-top: -1rem;
+}
+
 strong {
 	font-weight: bold;
 }
@@ -222,6 +226,8 @@ footer {
 }
 
 .nav__hamburger {
+	padding: 0.25rem;
+	box-sizing: initial;
 	width: 1.25rem;
 	display: flex;
 	flex-direction: column;
@@ -229,6 +235,11 @@ footer {
 	cursor: pointer;
 	position: relative;
 	z-index: 1;
+}
+
+.nav__dropdown[open] .nav__hamburger,
+.nav__dropdown[open] .nav__hamburger:focus {
+	outline: none;
 }
 
 .nav__hamburger::-webkit-details-marker {
@@ -251,14 +262,17 @@ footer {
 .nav__hamburger-line--2 { width: 75%; }
 .nav__hamburger-line--3 { width: 50%; }
 
-.nav__hamburger:hover .nav__hamburger-line {
+.nav__hamburger:hover .nav__hamburger-line,
+.nav__hamburger:focus .nav__hamburger-line {
 	background: var(--color-primary-text);
 }
 
-.nav__hamburger:hover .nav__hamburger-line--1 {
+.nav__hamburger:hover .nav__hamburger-line--1,
+.nav__hamburger:focus .nav__hamburger-line--1 {
 	width: 50%;
 }
-.nav__hamburger:hover .nav__hamburger-line--3 {
+.nav__hamburger:hover .nav__hamburger-line--3,
+.nav__hamburger:focus .nav__hamburger-line--3 {
 	width: 100%;
 }
 
@@ -375,6 +389,10 @@ footer {
 	color: var(--color-primary-text);
 }
 
+.blog__title--static:hover {
+	opacity: initial;
+}
+
 .blog__excerpt {
 	display: block;
 	margin-bottom: var(--spacing);
@@ -382,6 +400,10 @@ footer {
 
 .read-time {
 	display: block;
+}
+
+.twitter-tweet {
+	margin-bottom: 1.5rem !important;
 }
 
 .post-end {
