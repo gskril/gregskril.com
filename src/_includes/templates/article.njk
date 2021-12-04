@@ -22,16 +22,18 @@
 	<main class="container container--small">
 		<div class="section">
 			<h1>{{ title }}</h1>
-			<span class="subtitle subtitle--large">{{ subtitle }}</span>
+			{% if subtitle %}
+				<span class="subtitle subtitle--large">{{ subtitle }}</span>
+			{% endif %}
 			<div class="blog__meta">
 				<span class="read-time">~{{ content | readingTime }}ute read</span>
 				<span class="blog__date">{{ date | postDate }}</span>
 				{% for tag in tags %}
 					{% if tag === "crypto" %}
-						<a class="blog__tag blog__tag--secondary" href="/crypto">{{ tag }}</a>
-					{% elseif tag === "blog" %}
-						<a class="blog__tag blog__tag--secondary" href="/code">{{ tag }}</a>
-					{% else %}
+						<a class="blog__tag blog__tag--secondary" href="/crypto/">{{ tag }}</a>
+					{% elseif tag === "code" %}
+						<a class="blog__tag blog__tag--secondary" href="/code/">{{ tag }}</a>
+					{% elseif tag !== "blog" %}
 						<span class="blog__tag blog__tag--secondary">{{ tag }}</span>
 					{% endif %}
 				{% endfor %}

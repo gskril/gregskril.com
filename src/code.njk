@@ -25,19 +25,19 @@ eleventyExcludeFromCollections: true
 		<div class="section">
 			<h1>Crypto</h1>
 			<h2 class="subtitle">Sharing my learnings and experiments with web development, bots, and more.</h2>
-		</div>
-		<div class="section">
-			<div class="blog">
-				{% for article in collections.code | reverse %}
-					<div class="blog__post">
-						<a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
-						<div class="blog__meta">
-							<span class="blog__date">{{ article.date | postDate }}</span>
+			<div class="content">
+				<div class="blog">
+					{% for article in collections.code | reverse %}
+						<div class="blog__post">
+							<a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
+							<div class="blog__meta">
+								<span class="blog__date">{{ article.date | postDate }}</span>
+							</div>
+							<span class="blog__excerpt">{{ article.data.description }}</span>
+							<a class="cta" href="{{ article.url | url }}">Read</a>
 						</div>
-						<span class="blog__excerpt">{{ article.data.description }}</span>
-						<a class="cta" href="{{ article.url | url }}">Read</a>
-					</div>
-				{% endfor %}
+					{% endfor %}
+				</div>
 			</div>
 		</div>
 	</main>

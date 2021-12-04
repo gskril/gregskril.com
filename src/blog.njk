@@ -27,17 +27,17 @@ eleventyExcludeFromCollections: true
 			<h2 class="subtitle">Thoughts and learnings from my experiments in tech and crypto.</h2>
 			<div class="content">
 				<div class="blog">
-					{% for article in collections.all | reverse %}
+					{% for article in collections.blog | reverse %}
 						<div class="blog__post">
 							<a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
 							<div class="blog__meta">
 								<span class="blog__date">{{ article.date | postDate }}</span>
 								{% for tag in article.data.tags %}
 									{% if tag === "crypto" %}
-										<a class="blog__tag" href="/crypto">{{ tag }}</a>
-									{% elseif tag === "blog" %}
-										<a class="blog__tag" href="/code">{{ tag }}</a>
-									{% else %}
+										<a class="blog__tag" href="/crypto/">{{ tag }}</a>
+									{% elseif tag === "code" %}
+										<a class="blog__tag" href="/code/">{{ tag }}</a>
+									{% elseif tag !== "blog" %}
 										<span class="blog__tag">{{ tag }}</span>
 									{% endif %}
 								{% endfor %}
