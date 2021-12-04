@@ -354,6 +354,41 @@ footer {
 	opacity: 0.8;
 }
 
+.blog__meta {
+	margin: 0.125rem 0 0.5rem;
+	font-size: .875rem;
+}
+
+.article .blog__meta {
+	margin-top: 1.25rem;
+	font-size: .925rem;
+}
+
+.blog__date {
+	margin-right: 0.75rem;
+}
+
+.blog__tag {
+	background: var(--color-background);
+	display: inline-block;
+	padding: 0.07125rem 0.675rem;
+	border-radius: 0.25rem;
+	margin-right: 0.5rem;
+	color: var(--color-secondary-text);
+	text-transform: capitalize;
+	font-weight: 300;
+	transition: color .15s ease-in-out;
+}
+
+.blog__tag--secondary {
+	background: var(--color-accent-1);
+}
+
+.blog__tag:hover,
+.blog__tage:focus-visible {
+	color: var(--color-primary-text);
+}
+
 .blog__title--static:hover {
 	opacity: initial;
 }
@@ -365,7 +400,6 @@ footer {
 
 .read-time {
 	display: block;
-	margin-top: 1rem;
 }
 
 .twitter-tweet {

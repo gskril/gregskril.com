@@ -1,5 +1,6 @@
 ---
 date: 2021-11-26
+tags: [blog, crypto]
 title: Best Web3 Resources - Recommended Bookmarks for Crypto
 subtitle: There are hundreds of websites related to crypto and Web3. these are my favorites.
 description: To avoid phishing scams and allow for easy access to useful tools, I recommend bookmarking these websites in your web browser.

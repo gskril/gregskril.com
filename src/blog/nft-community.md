@@ -1,5 +1,6 @@
 ---
 date: 2021-10-30
+tags: [blog, crypto]
 title: How to Get More Involved in the Crypto and NFT Community
 subtitle: The best way to learn about the space is by fully immersing yourself.
 description: A big part of NFTs are the community. It can be a bit overwhelming at first, but there's a lot to be learned if you know where to look.

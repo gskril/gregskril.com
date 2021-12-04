@@ -1,5 +1,6 @@
 ---
 date: 2021-10-25
+tags: [blog, crypto]
 title: How to Get Started with NFTs and Web3
 subtitle: Learn how to create a crypto wallet, connect to a dApp, and purchase your first NFT.
 description: After reading this post you should have a clear understanding of how to create a crypto wallet and purchase your first NFT.
