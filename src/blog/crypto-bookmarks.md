@@ -17,7 +17,7 @@ In this new Web3 world, [phishing scams](https://www.theverge.com/2021/11/4/2276
 
 To avoid these websites completely, I always recommended creating a bookmarked folder in your web browser called "crypto" that contains all of the websites you plan to access more than once.
 
-## My favorite crypto and Web3 tools
+## My favorite entry-level crypto and Web3 resources
 
 #### [Coinbase](https://coinbase.com/)
 Coinbase is one of the largest cryptocurrency exchanges in the world. An exchange is what you use to buy crypto with fiat money (US dollars, Euros, etc.). More specifically, Coinbase is a centralized exchange which means it is operated by a single company, is regulated by the government, and requires KYC (Know Your Customer, or basically identity verification). I personally use Coinbase, but other centralized exchanges that offer almost the same functionality are [Gemini](gemini.com), [Binance](https://www.binance.com/), [Kraken](https://www.kraken.com/), [FTX](https://ftx.com/), and the list goes on.
@@ -40,8 +40,22 @@ Real Vision is a (mostly) free educational platform with dozens of hours of vide
 #### [Uniswap](https://uniswap.org/)
 Earlier I mentioned Coinbase was a centralized exchange - well Uniswap is a decentralized exchange. This means that you have access to trade all tokens on the ETH network - not just what a single company wants to show you. Once you [start using a non-custodial wallet](/blog/get-started-with-nfts/) like MetaMask, you'll be using decentralized exchanges more frequently than centralized ones.
 
+## Web3 resources for people with more experience
+
+#### [Revoke Cash](https://revoke.cash/)
+When you sign a smart contract transaction with your wallet, sometimes you're giving that contract access to spend your tokens. Often times this signature has no limit - so you're opening yourself up to potential vulnerabilties. This is an easy way to see what your weakpoints might be, and helps you easily revoke access from smart contracts.
+
+#### [DeFi Pulse](https://defipulse.com/)
+DeFi Pulse is a leaderboard of the largest DeFi protocols. It's an easy way to see which protocol has the highest volume, locked value, and more which all help you determine the safest places to invest your tokens overtime.
+
 #### [Lido](https://lido.fi/)
-Lido is most people's first step into staking cryptocurrency. Staking basically means setting aside your assets to be used by somebody else, and getting paid a return for doing that (yield). Lido is one of the largest and most established DeFi staking protocols out there, and works great with assets like Ethereum and Solana. As of writing this, Lido is paying 4.9% APR for staking Ethereum.
+Lido is most people's first step into staking cryptocurrency. Staking basically means setting aside your assets to be used by somebody else, and getting paid a return for doing that (yield). Lido is one of the largest and most established DeFi staking protocols out there, and works great with assets like Ethereum and Solana. Lido is currently the largest Ethereum staking pool with over $6 billion, and pays 4.9% APR to its contributors.
+
+#### [Zapper](https://zapper.fi/)
+Zapper makes it extremely easy to track the value of your non-custodial wallets across multiple blockchains. If you're brand new to the space with a relatively simple portfolio of one or two assets, you won't find this overly insightful. But as you dive deeper into the world of decentralized finance, NFTs, split your holdings across multiple wallets, or generally get into more complex investment strategies, things will become harder to keep track of which is exactly where Zapper comes in handy.
+
+#### [CoinTracker] (https://www.cointracker.io/)
+CoinTracker makes it easy to import multiple crypto wallets from multiple sources and visualize the change in your portfolio overtime (whereas Zapper only shows you the current value). I find it to have some innacuries with complex transactions, but it's fairly straightforward and much more convenient than constantly checking 5 different websites and manually adding up your balance.
 
 ## Other Web3 Resources
 The websites I mentioned above are my most used, and/or favorite tools that I've come across in my few months in this space. That being said, those tools won't be very useful without the knowledge needed to use them.
