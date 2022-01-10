@@ -56,26 +56,41 @@ It's now time to connect your wallet to OpenSea. An important note here is that 
 
 Simply go to the [OpenSea login page](https://opensea.io/login) and select MetaMask. The MetaMask extension should then launch a small window that prompts you to approve the action. In theory this is essentially getting rid of the "Sign in with Google" button you're familiar with, and replacing it with "Sign in with Ethereum".
 
-Once you approve this action you'll be brought to your new OpenSea profile page! By default it is unnamed. You can set a username, but it's not required. The account is completely unique based on your wallet address starting with "0x" that we created earlier. Wasn't that easier than setting up a new account on most websites you normally use?!
+Once you approve this action you'll be brought to your new OpenSea profile page! Wasn't that easier than setting up a new account on most websites you normally use?! 
 
-Congratulations! At this point you will have created an ETH wallet using MetaMask, stored your seed phrase somewhere safe, and connected to your first dApp (OpenSea) all for free. Now it's time to add funds to your wallet and buy your first NFT.
+By default it is unnamed. You can set a username, but it's not required. The account is completely unique based on your wallet address starting with "0x" that we created earlier.
+
+Congratulations! At this point you will have created an Ethereum wallet using MetaMask, stored your seed phrase somewhere safe, and connected to your first dApp (OpenSea) all for free. Now it's time to add funds to your wallet and buy your first NFT.
 
 ## Buying Your First NFT
 
-To buy an NFT, you will need ETH in your MetaMask wallet. You can buy small amounts of ETH via credit card directly in MetaMask, but I'd recommend transferring funds in from crypto exchanges instead (those centralized organizations I mentioned earlier). I won't cover the details here, but you'll have to [buy ETH on Coinbase](https://www.coinbase.com/buy-ethereum) (or another exchange) and then [transfer ETH to your MetaMask address](https://www.youtube.com/watch?v=9NQgCyOXQlY).
+To buy an NFT, you will need ETH in your MetaMask wallet (there are other blockchains where you can buy NFTs with other cryptocurrencies, but we'll ignore that for now). You can buy small amounts of ETH via credit card directly in MetaMask, but I'd recommend transferring funds in from crypto exchanges instead (those centralized organizations I mentioned earlier). I won't cover the details here, but you'll have to [buy ETH on Coinbase](https://www.coinbase.com/buy-ethereum) (or another exchange) and then [transfer ETH to your MetaMask address](https://www.youtube.com/watch?v=9NQgCyOXQlY).
 
-At this point you should have some ETH in MetaMask, and have your wallet connected to OpenSea. From here it's rather simple to buy an NFT, somewhat similar to shopping on eBay. You can place an offer/bid, buy an asset outright, and join auctions. Find an NFT you like (new post coming soon on how to identify good NFT projects), see what sales options is has, then try to purchase it.
+At this point you should have some ETH in MetaMask and have your wallet connected to OpenSea. From here it's rather simple to buy an NFT, somewhat similar to shopping on eBay. You can place an offer/bid, buy an asset outright, and join auctions.
 
 ![Buy an NFT on OpenSea](https://i.ibb.co/WFMmhWW/buy-nft.jpg)
 
+It's important to go into your first purchase without any expection of making money. You should be interested in doing this as a learning experience in new technology, not solely because you want to flip a jpeg for a profit.
+
+Sure, it's possible to make money trading NFTs, but that shouldn't be your primary goal on day one in my opinion. For that reason, I recommend buying a cheap NFT just to get a handle on how this all works. No speculation, no expectations, no serious investment.
+
+If you're looking for a recommendation, [BlankFace](https://opensea.io/collection/blankfaceofficial?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW) may be a decent place to start. They used to be worth 0.1 ETH (a few hundred dollars) but are now basically worthless with plenty of listings under $20 USD or 0.005 ETH.
+
 ## Signing transactions in MetaMask
-Whenever you're completing an action in a dApp, MetaMask will popup prompting you to "approve" or "sign" the transaction. This is essentially writing data to the blockchain, which often incurs a gas fee (post coming soon talking about gas fees). Unfortunately these are sometimes a quite pricey ($50+), and are completely unavoidable on the Ethereum network for now. 
+Whenever you're completing an action in a dApp, such as buying an NFT on OpenSea, MetaMask will popup prompting you to "approve" or "sign" the transaction. This is writing data to the blockchain, which means you'll have to pay a [gas fee](https://www.investopedia.com/terms/g/gas-ethereum.asp). Unfortunately these are sometimes quite pricey ($50+), and are completely unavoidable on the Ethereum network for now.
 
-For some types of transactions you'll have to pay gas every occurence, while some other types of transactions are just one-time account initialization fees. You will see both of these types of fees when buying your first NFT. In all honesty, the barrier to entry here is quite high (gas fees being such a turnoff) and I want to make sure you're getting started with accurate expectations.
+For some types of transactions you'll have to pay gas every occurence, while some other types of transactions are just one-time account initialization fees. You will see both of these types of fees when buying your first NFT. In all honesty, the barrier to entry here is quite high, and is a major point of skepticism from the mainstream which is totally understandable. There are many proposed solutions to this like Layer 2 scaling solutions or Ethereum competitors, but that's for another day.
 
-It's important to know that gas is priced in wei or gwei (basically a very small fraction of ETH), and changes throughout the day based on network activity. It's often cheapest to make transactions at night or early in the morning. To stay on top of when gas is cheap, follow my Twitter account [@ETHGasAlerts](https://twitter.com/ETHGasAlerts), or just check the website [Rarible Analytics](https://raribleanalytics.com) for a nice readable scale.
+While gas on Ethereum will always be higher than you'd like it to be, it's important to know at least a little bit about how gas works.
 
-Now that you know how to create a non-custodial wallet securely, connect to dApps, and buy an NFT, these are a few good follow-up articles to learn more about the whole ecosystem:
+## What is gas and why is it so expensive?
+On the Ethereum network, gas is priced in gwei (a very small fraction of ETH), and changes throughout the day based on network activity. It's often cheapest to make transactions late at night or early in the morning. To stay on top of when gas is cheap, follow my Twitter account [@ETHGasAlerts](https://twitter.com/ETHGasAlerts), or just check the website [Rarible Analytics](https://raribleanalytics.com) for a nice readable scale.
+
+Unless you're in a rush to make a transaction, which you probably shouldn't be when you're just getting used to this ecosystem, it's worth it to wait for gas to drop before making your transaction. There are other ways to get around this, such as setting gas manually, but that's a more advanvced topic for another day.
+
+Now that you know how to create a non-custodial wallet securely, connect to a dApp and buy an NFT, these are a few good follow-up articles to learn more about the whole ecosystem:
+
+[NFT Uses Outside of Digital Art](/blog/nft-uses/)
 
 [Immerse yourself in the NFT community](/blog/nft-community/)
 
@@ -84,5 +99,3 @@ Now that you know how to create a non-custodial wallet securely, connect to dApp
 Learn the slang people use in these communities to communicate like a native (coming soon)
 
 Learn more about gas and understand the costs involved in using dApps on the ETH network (coming soon)
-
-Why you should care about NFTs (coming soon)
