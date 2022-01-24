@@ -13,6 +13,7 @@ In the crypto space, there are hundreds of tools that exist to make your life ea
 Over the last few months, I've established a list of my favorite intro-level tools that I find myself using on an almost daily basis. But before we get into the recommendations, it's important to understand why having these saved as bookmarks is important.
 
 ## Avoid phishing websites that are trying to scam you
+![Crypto phishing scam with Google advertised search results](https://pbs.twimg.com/media/FJulzoRXoAkCyl4?format=jpg&name=medium)
 In this new Web3 world, [phishing scams](https://www.theverge.com/2021/11/4/22763015/cryptocurrency-fake-wallet-phishing-scam-google-ads-phantom-metamask) are unfortunately common. For this reason, googling the website you want to access each time, or typing in the URL by hand is not the best idea. If you click on a sketchy link or make a 1-letter mistake in typing the domain, you can be visiting an unofficial website and signing off the rights to your entire wallet (just visiting a malicious website wouldn't actually drain your wallet, but sometimes it's hard to notice before it's too late).
 
 To avoid these websites completely, I always recommended creating a bookmarked folder in your web browser called "crypto" that contains all of the websites you plan to access more than once.
@@ -54,7 +55,7 @@ Lido is most people's first step into staking cryptocurrency. Staking basically 
 #### [Zapper](https://zapper.fi/)
 Zapper makes it extremely easy to track the value of your non-custodial wallets across multiple blockchains. If you're brand new to the space with a relatively simple portfolio of one or two assets, you won't find this overly insightful. But as you dive deeper into the world of decentralized finance, NFTs, split your holdings across multiple wallets, or generally get into more complex investment strategies, things will become harder to keep track of which is exactly where Zapper comes in handy.
 
-#### [CoinTracker] (https://www.cointracker.io/)
+#### [CoinTracker](https://www.cointracker.io/)
 CoinTracker makes it easy to import multiple crypto wallets from multiple sources and visualize the change in your portfolio overtime (whereas Zapper only shows you the current value). I find it to have some innacuries with complex transactions, but it's fairly straightforward and much more convenient than constantly checking 5 different websites and manually adding up your balance.
 
 ## Other Web3 Resources
