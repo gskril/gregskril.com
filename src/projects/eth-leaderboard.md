@@ -1,7 +1,10 @@
 ---
-title: Crypto Twitter Leaderboard
-date: 2021-08-12
+title: ETH Leaderboard
+date: 2021-12-31
 url: https://ethleaderboard.xyz/
+expanded: true
 ---
 
-Web page showing the most followed Twitter accounts that have a .eth ENS name in real time.
+Website that shows the ~50,000 most followed Twitter accounts with a .eth name to track adoption of the Ethereum ecosystem. Accompanied by a [Twitter bot](https://twitter.com/ethleaderboard) that allows users to add themselves.
+
+Referred to as ["the most important website of 2022 in all of crypto"](https://twitter.com/iamDCinvestor/status/1478462954374901763).

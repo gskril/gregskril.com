@@ -26,7 +26,7 @@
 			<div class="content">
 				<div class="blog">
 				{% for project in collections.project | reverse %}
-					<div class="blog__post">
+					<div class="blog__post {% if project.data.expanded === true %} blog__post--span {% endif %}">
 						<span class="blog__title blog__title--static">{{ project.data.title }}</span>
 						<div class="blog__excerpt">
 							{{ project.templateContent | safe }}

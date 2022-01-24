@@ -438,4 +438,8 @@ footer {
 	.blog__post {
 		padding: 1.5rem;
 	}
+
+	.blog__post--span {
+		grid-column: span 2;
+	}
 }
