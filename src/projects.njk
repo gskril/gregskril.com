@@ -26,15 +26,31 @@
 			<div class="content">
 				<div class="blog">
 				{% for project in collections.project | reverse %}
-					<div class="blog__post {% if project.data.expanded === true %} blog__post--span {% endif %}">
-						<span class="blog__title blog__title--static">{{ project.data.title }}</span>
-						<div class="blog__excerpt">
-							{{ project.templateContent | safe }}
+					{% if project.data.expanded %}
+						<div class="blog__post blog__post--span">
+							<span class="blog__title blog__title--static">{{ project.data.title }}</span>
+							<div class="blog__excerpt">
+								{{ project.templateContent | safe }}
+							</div>
+							{% if project.data.url %}
+								<a class="cta" href="{{ project.data.url | url }}" target="_blank" rel="noopener">See more</a>
+							{% endif %}
 						</div>
-						{% if project.data.url %}
-							<a class="cta" href="{{ project.data.url | url }}" target="_blank" rel="noopener">See more</a>
-						{% endif %}
-					</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for project in collections.project | reverse %}
+					{% if project.data.expanded !== true %}
+						<div class="blog__post">
+							<span class="blog__title blog__title--static">{{ project.data.title }}</span>
+							<div class="blog__excerpt">
+								{{ project.templateContent | safe }}
+							</div>
+							{% if project.data.url %}
+								<a class="cta" href="{{ project.data.url | url }}" target="_blank" rel="noopener">See more</a>
+							{% endif %}
+						</div>
+					{% endif %}
 				{% endfor %}
 			</div>
 			</div>
