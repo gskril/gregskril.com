@@ -1,5 +1,6 @@
 ---
 date: 2021-11-26
+updated: 2022-03-08
 tags: [blog, crypto]
 title: Best Web3 Resources - Recommended Bookmarks for Crypto
 subtitle: There are hundreds of websites related to crypto and Web3. these are my favorites.

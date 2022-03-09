@@ -29,7 +29,10 @@
 			{% endif %}
 			<div class="blog__meta">
 				<span class="read-time">~{{ content | readingTime }}ute read</span>
-				<span class="blog__date">{{ date | postDate }}</span>
+				<span class="blog__date">{% if updated %}Posted {% endif %}{{ date | postDate }}</span>
+				{% if updated %}
+					<span class="blog__date">Updated {{ updated | postDate }}</span>
+				{% endif %}
 			</div>
 			<div class="content">
 				{{ content | safe }}
