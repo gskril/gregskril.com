@@ -6,61 +6,93 @@ subtitle: There are hundreds of websites related to crypto and Web3. these are m
 description: To avoid phishing scams and allow for easy access to useful tools, I recommend bookmarking these websites in your web browser.
 ---
 
-Having a range of tools available to you with easy access will make it easier for you to navigate the Web3 (Web 3.0) world. Web3 is basically an evolved version of the internet as we know it, based around decentralization and blockchain technology.
+Crypto can be overwhelming and confusing at times. Having a range of go-to tools just a click away at all times will make it easier for you to navigate the Web3 ecosystem.
 
-In the crypto space, there are hundreds of tools that exist to make your life easier. Whether it's buying NFTs, staking in DeFi protocols or just looking back at your past transactions - there are tools for each step in the process. It can almost seem overwhelming.
+Whether it's buying NFTs, analyzing the performance of different DeFi protocols, or just understanding your past transactions - there are tools for each step of your journey.
 
-Over the last few months, I've established a list of my favorite intro-level tools that I find myself using on an almost daily basis. But before we get into the recommendations, it's important to understand why having these saved as bookmarks is important.
+Over the last few months, I've curated a list of my favorite tools that I use on a regular basis and want to share those with you. Both for beginner use, and the expanded list for more experienced users. But before we get into the recommendations, it's important to understand why having these saved as bookmarks is important.
 
-## Avoid phishing websites that are trying to scam you
-![Crypto phishing scam with Google advertised search results](https://pbs.twimg.com/media/FJulzoRXoAkCyl4?format=jpg&name=medium)
-In this new Web3 world, [phishing scams](https://www.theverge.com/2021/11/4/22763015/cryptocurrency-fake-wallet-phishing-scam-google-ads-phantom-metamask) are unfortunately common. For this reason, googling the website you want to access each time, or typing in the URL by hand is not the best idea. If you click on a sketchy link or make a 1-letter mistake in typing the domain, you can be visiting an unofficial website and signing off the rights to your entire wallet (just visiting a malicious website wouldn't actually drain your wallet, but sometimes it's hard to notice before it's too late).
+## Avoiding phishing scams in crypto
+![Crypto phishing scam with Google advertised search results](https://i.ibb.co/tMbcRVS/phising.jpg)
+The crypto ecosystem is very financially-focused, which unfortunately brings a ton of scammers. [Phishing scams](https://www.theverge.com/2021/11/4/22763015/cryptocurrency-fake-wallet-phishing-scam-google-ads-phantom-metamask) are one of the most common scams that people encounter when they first join the space. In short, a phishing link is a fake website designed to look like the website you intended to visit, except has malicious intent.
 
-To avoid these websites completely, I always recommended creating a bookmarked folder in your web browser called "crypto" that contains all of the websites you plan to access more than once.
+For this reason, searching the website you want to access each time is not the best idea. If you click on a sketchy link, you can be visiting an unofficial website and signing off the rights to your entire wallet. Just visiting a malicious website wouldn't actually drain your wallet, but sometimes it's hard to notice before it's too late.
+
+To avoid these phishing scams completely, and to provide easier access to helpful tools, I strongly recommended creating a bookmarked folder in your web browser that contains all of the websites you plan to access consistently.
 
 ## My favorite entry-level crypto and Web3 resources
 
-#### [Coinbase](https://coinbase.com/)
-Coinbase is one of the largest cryptocurrency exchanges in the world. An exchange is what you use to buy crypto with fiat money (US dollars, Euros, etc.). More specifically, Coinbase is a centralized exchange which means it is operated by a single company, is regulated by the government, and requires KYC (Know Your Customer, or basically identity verification). I personally use Coinbase, but other centralized exchanges that offer almost the same functionality are [Gemini](gemini.com), [Binance](https://www.binance.com/), [Kraken](https://www.kraken.com/), [FTX](https://ftx.com/), and the list goes on.
+### **[Coinbase](https://coinbase.com/)**
 
-#### [CoinMarketCap](https://coinmarketcap.com/)
+Coinbase is one of the largest cryptocurrency exchanges in the world. An exchange is what you use to buy crypto with fiat money (US dollars, Euros, etc.). More specifically, Coinbase is a centralized exchange which means it is operated by a single company, is regulated by the government, and requires KYC (Know Your Customer, or basically identity verification). I personally use Coinbase, but other centralized exchanges that offer almost the same functionality are [Gemini](http://localhost:8080/blog/crypto-bookmarks/gemini.com), [Binance](https://www.binance.com/), [Kraken](https://www.kraken.com/), [FTX](https://ftx.com/), and the list goes on.
+
+### **[CoinMarketCap](https://coinmarketcap.com/)**
+
 CoinMarketCap is the easiest way to check the live price of almost any cryptocurrency or token. Along with the live price, it has historic graphs, rankings by market cap, recent volume, and more.
 
-#### [Etherscan](https://etherscan.io/)
+### **[Etherscan](https://etherscan.io/)**
+
 Etherscan is a blockchain explorer for the Ethereum network. This means that it can show you almost everything that happens on the Ethererum blockchain. Gas prices, wallet activity, metadata on every single transaction, and more. To find the activity of any Ethereum wallet (or ENS name), simply enter their wallet address into the search bar.
 
-#### [OpenSea](https://opensea.io/)
-OpenSea is the currently largest NFT Marketplace, and accounts for a significant portion of all ETH network transactions. [Learn how to get started with NFTs](/blog/get-started-with-nfts/).
+### **[OpenSea](https://opensea.io/)**
 
-#### [Rarible Analytics](https://raribleanalytics.com/)
-This is my favorite website for checking the live price of gas (post coming soon on what that is). It provides a human-readable scale indicating whether or not it's a good time to make transactions.
+OpenSea is the largest NFT Marketplace, and accounts for a significant portion of all transactions on the Ethereum network. [Learn how to get started with NFTs](http://localhost:8080/blog/get-started-with-nfts/).
 
-#### [Real Vision](https://www.realvision.com/crypto)
-Real Vision is a (mostly) free educational platform with dozens of hours of video content from crypto thought leader [Raoul Pal](https://twitter.com/RaoulGMI) and others.
+### **[Rarible Analytics](https://raribleanalytics.com/)**
 
-#### [Uniswap](https://uniswap.org/)
-Earlier I mentioned Coinbase was a centralized exchange - well Uniswap is a decentralized exchange. This means that you have access to trade all tokens on the ETH network - not just what a single company wants to show you. Once you [start using a non-custodial wallet](/blog/get-started-with-nfts/) like MetaMask, you'll be using decentralized exchanges more frequently than centralized ones.
+This is my favorite website for checking the live price of [gas](https://www.investopedia.com/terms/g/gas-ethereum.asp). It provides a human-readable scale indicating whether or not it's a good time to make transactions.
 
-## Web3 resources for people with more experience
+### **[Uniswap](https://uniswap.org/)**
 
-#### [Revoke Cash](https://revoke.cash/)
-When you sign a smart contract transaction with your wallet, sometimes you're giving that contract access to spend your tokens. Often times this signature has no limit - so you're opening yourself up to potential vulnerabilties. This is an easy way to see what your weakpoints might be, and helps you easily revoke access from smart contracts.
+Earlier I mentioned Coinbase is a centralized exchange - well Uniswap is a decentralized exchange (also called a DEX). This means that you have access to “swap” (trade) all tokens on the Ethereum network, rather than being limited to a rather small subset on a centralized exchange. Once you [start using a non-custodial wallet](http://localhost:8080/blog/get-started-with-nfts/) like MetaMask, you'll be using decentralized exchanges more frequently than centralized ones.
 
-#### [DeFi Pulse](https://defipulse.com/)
-DeFi Pulse is a leaderboard of the largest DeFi protocols. It's an easy way to see which protocol has the highest volume, locked value, and more which all help you determine the safest places to invest your tokens overtime.
+## **Web3 resources for experienced users**
 
-#### [Lido](https://lido.fi/)
-Lido is most people's first step into staking cryptocurrency. Staking basically means setting aside your assets to be used by somebody else, and getting paid a return for doing that (yield). Lido is one of the largest and most established DeFi staking protocols out there, and works great with assets like Ethereum and Solana. Lido is currently the largest Ethereum staking pool with over $6 billion, and pays 4.9% APR to its contributors.
+### [Revoke Cash](https://revoke.cash/)
 
-#### [Zapper](https://zapper.fi/)
+Before you can do anything with a token, whether it be trading an NFT or swapping on Uniswap, you have to allow a smart contract to use those assets, or approve spending in other words. Sometimes times this signature has no limit so you're opening yourself up to potential vulnerabilities, such as giving a malicious developer the ability to spend all of your token. [Revoke.cash](http://Revoke.cash) is an easy way to check what your allowances are based on past approvals, and easily revoke access to smart contracts that should no longer have access to your assets.
+
+
+### [Lido](https://lido.fi/)
+
+Lido is most people's first step into staking cryptocurrency. Staking basically means setting aside your assets to be used by somebody else, and getting paid a return for doing that (yield). Lido is one of the largest and most established DeFi staking protocols out there, and works great with assets like Ethereum and Solana. Lido is currently the largest Ethereum staking pool with over $6 billion, and pays 4.4% APR to its contributors.
+
+### [Zapper](https://zapper.fi/)
+
 Zapper makes it extremely easy to track the value of your non-custodial wallets across multiple blockchains. If you're brand new to the space with a relatively simple portfolio of one or two assets, you won't find this overly insightful. But as you dive deeper into the world of decentralized finance, NFTs, split your holdings across multiple wallets, or generally get into more complex investment strategies, things will become harder to keep track of which is exactly where Zapper comes in handy.
 
-#### [CoinTracker](https://www.cointracker.io/)
-CoinTracker makes it easy to import multiple crypto wallets from multiple sources and visualize the change in your portfolio overtime (whereas Zapper only shows you the current value). I find it to have some innacuries with complex transactions, but it's fairly straightforward and much more convenient than constantly checking 5 different websites and manually adding up your balance.
+### [CoinTracker](https://www.cointracker.io/)
 
-## Other Web3 Resources
+CoinTracker makes it easy to import multiple crypto wallets from multiple sources and visualize the change in your portfolio overtime (whereas Zapper only shows you the current value). CoinTracker also allows you to track change overtime in centralized exchange accounts such as Coinbase, which Zapper does not support. I find it to have some inaccuracies, but it's fairly straightforward to use and much more convenient than constantly checking 5 different websites and manually adding up your balance.
+
+### [DeFi Pulse](https://defipulse.com/)
+
+DeFi Pulse is a leaderboard of the largest DeFi protocols. It's an easy way to see which protocol has the highest volume, locked value and more, all of which all help you determine the safest places to invest your tokens overtime.
+
+### [Flips Finance](https://www.flips.finance/)
+
+Great charts and lists that help you get a pulse of the NFT market at any time.
+
+### [Disperse](https://disperse.app/)
+
+Disperse is the easiest way I’ve found to transfer Ethereum tokens in bulk. This likely isn’t something that you’ll use very often, but handy to have around when you need it.
+
+### [Tornado Cash](https://tornado.cash/)
+
+Tornado Cash has gotten a bad rep lately, since many hackers use it to anonymously transfer ETH between wallets, but there are times when it comes in handy for everyday people as well. I’ll paint a you picture.
+
+Imagine I get paid for a job in crypto, and want to add that sum of money to a wallet that isn’t publicly associated with my name for obvious reasons (web2 translation: I don’t want my entire bank account to be public, but having Venmo transactions public is perfectly fine). If I told the payer my private wallet address, then it would no longer be private. So I would have them send the funds to a public wallet, then use Tornado Cash to transfer those funds to my private wallet, therefore removing the link between the sender and the receiver.
+
+### Reading Lists
+
+Gaby Goldberg, a web3 investor, keeps a [list of what she reads](https://www.notion.so/f7050e62461143d49345e7b46eb5576b) to stay up to date in crypto. Dan Romero, a crypto OG, has a [similar list](https://danromero.org/crypto-reading/).
+
+## **Other Web3 Resources**
+
 The websites I mentioned above are my most used, and/or favorite tools that I've come across in my few months in this space. That being said, those tools won't be very useful without the knowledge needed to use them.
 
 The place I've learned the most about Web3 is undoubtedly Twitter. There's a little niche that people call crypto Twitter - once you're on it, you'll see people post about interesting topics all the time. But getting on to crypto Twitter in the first place is the hard part since you probably don't know who to follow.
 
-To get you started on crypto Twitter, I came up with a list of my favorite thought leaders in the space. You can find that list in my post, [How to Get More Involved in the Crypto and NFT Community](/blog/nft-community/).
+To get you started on crypto Twitter, I came up with a list of my favorite thought leaders in the space. You can find that list in my post, [How to Get More Involved in the Crypto and NFT Community](http://localhost:8080/blog/nft-community/).
+
+For an extended list of trusted people/websites in the space, I recommend scrolling through (and bookmarking with the rest of this list) [0x.supply](https://0x.supply/).
