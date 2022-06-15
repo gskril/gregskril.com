@@ -1,7 +1,8 @@
 ---
 title: ETH Gas Alerts
 date: 2021-09-10
-url: https://twitter.com/ethgasalerts
+url: https://ethgasalerts.xyz/
+expanded: true
 ---
 
-Twitter bot that tweets when gas is low on the ETH network.
+A suite of tools that helps people save significant money on Ethereum transaction fees. Includes gas price predictions, transaction fee estimates, and low gas alerts.
