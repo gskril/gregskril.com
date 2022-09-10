@@ -14,6 +14,7 @@ Whether it's buying NFTs, analyzing the performance of different DeFi protocols,
 Over the last few months, I've curated a list of my favorite tools that I use on a regular basis and want to share those with you. Both for beginner use, and the expanded list for more experienced users. But before we get into the recommendations, it's important to understand why having these saved as bookmarks is important.
 
 ## Avoiding phishing scams in crypto
+
 ![Crypto phishing scam with Google advertised search results](https://i.ibb.co/tMbcRVS/phising.jpg)
 The crypto ecosystem is very financially-focused, which unfortunately brings a ton of scammers. [Phishing scams](https://www.theverge.com/2021/11/4/22763015/cryptocurrency-fake-wallet-phishing-scam-google-ads-phantom-metamask) are one of the most common scams that people encounter when they first join the space. In short, a phishing link is a fake website designed to look like the website you intended to visit, except has malicious intent.
 
@@ -52,7 +53,6 @@ Earlier I mentioned Coinbase is a centralized exchange - well Uniswap is a decen
 ### [Revoke Cash](https://revoke.cash/)
 
 Before you can do anything with a token, whether it be trading an NFT or swapping on Uniswap, you have to allow a smart contract to use those assets, or approve spending in other words. Sometimes times this signature has no limit so you're opening yourself up to potential vulnerabilities, such as giving a malicious developer the ability to spend all of your token. [Revoke.cash](http://Revoke.cash) is an easy way to check what your allowances are based on past approvals, and easily revoke access to smart contracts that should no longer have access to your assets.
-
 
 ### [Lido](https://lido.fi/)
 

@@ -2,66 +2,68 @@
 *,
 ::after,
 ::before {
-	box-sizing: border-box
+  box-sizing: border-box;
 }
 
 html {
-	-moz-tab-size: 4;
-	tab-size: 4;
-	line-height: 1.15;
-	-webkit-text-size-adjust: 100%
+  -moz-tab-size: 4;
+  tab-size: 4;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-	margin: 0;
-	font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
 hr {
-	height: 0;
-	color: inherit
+  height: 0;
+  color: inherit;
 }
 
 abbr[title] {
-	text-decoration: underline dotted
+  text-decoration: underline dotted;
 }
 
 b,
 strong {
-	font-weight: bolder
+  font-weight: bolder;
 }
 
 code,
 kbd,
 pre,
 samp {
-	font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
-	font-size: 1em
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo,
+    monospace;
+  font-size: 1em;
 }
 
 small {
-	font-size: 87.5%
+  font-size: 87.5%;
 }
 
 sub,
 sup {
-	font-size: 75%;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 }
 
 sub {
-	bottom: -.25em
+  bottom: -0.25em;
 }
 
 sup {
-	top: -.5em
+  top: -0.5em;
 }
 
 table {
-	text-indent: 0;
-	border-color: inherit
+  text-indent: 0;
+  border-color: inherit;
 }
 
 button,
@@ -69,80 +71,80 @@ input,
 optgroup,
 select,
 textarea {
-	font-family: inherit;
-	font-size: 100%;
-	line-height: 1.15;
-	margin: 0
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
 }
 
 button,
 select {
-	text-transform: none
+  text-transform: none;
 }
 
-[type=button],
-[type=reset],
-[type=submit],
+[type='button'],
+[type='reset'],
+[type='submit'],
 button {
-	-webkit-appearance: button
+  -webkit-appearance: button;
 }
 
 ::-moz-focus-inner {
-	border-style: none;
-	padding: 0
+  border-style: none;
+  padding: 0;
 }
 
 :-moz-focusring {
-	outline: 1px dotted ButtonText
+  outline: 1px dotted ButtonText;
 }
 
 :-moz-ui-invalid {
-	box-shadow: none
+  box-shadow: none;
 }
 
 legend {
-	padding: 0
+  padding: 0;
 }
 
 progress {
-	vertical-align: baseline
+  vertical-align: baseline;
 }
 
 ::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button {
-	height: auto
+  height: auto;
 }
 
-[type=search] {
-	-webkit-appearance: textfield;
-	outline-offset: -2px
+[type='search'] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
 }
 
 ::-webkit-search-decoration {
-	-webkit-appearance: none
+  -webkit-appearance: none;
 }
 
 ::-webkit-file-upload-button {
-	-webkit-appearance: button;
-	font: inherit
+  -webkit-appearance: button;
+  font: inherit;
 }
 
 summary {
-	display: list-item
+  display: list-item;
 }
 
 /*! https://tailwindcss.com/docs/preflight | Modified */
 textarea {
-	resize: vertical
+  resize: vertical;
 }
 
-[role=button],
+[role='button'],
 button {
-	cursor: pointer
+  cursor: pointer;
 }
 
 table {
-	border-collapse: collapse
+  border-collapse: collapse;
 }
 
 h1,
@@ -151,13 +153,13 @@ h3,
 h4,
 h5,
 h6 {
-	font-size: inherit;
-	font-weight: inherit
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 a {
-	color: inherit;
-	text-decoration: inherit
+  color: inherit;
+  text-decoration: inherit;
 }
 
 button,
@@ -165,9 +167,9 @@ input,
 optgroup,
 select,
 textarea {
-	padding: 0;
-	line-height: inherit;
-	color: inherit
+  padding: 0;
+  line-height: inherit;
+  color: inherit;
 }
 
 audio,
@@ -179,14 +181,14 @@ picture,
 object,
 svg,
 video {
-	display: block;
+  display: block;
 }
 
 img,
 picture,
 video {
-	max-width: 100%;
-	height: auto
+  max-width: 100%;
+  height: auto;
 }
 
 /*! https://piccalil.li/blog/a-modern-css-reset | Modified */
@@ -200,40 +202,40 @@ h2,
 h3,
 h4,
 p {
-	margin: 0
+  margin: 0;
 }
 
 html:focus-within {
-	scroll-behavior: smooth
+  scroll-behavior: smooth;
 }
 
 body {
-	text-rendering: optimizeSpeed;
-	line-height: 1.4
+  text-rendering: optimizeSpeed;
+  line-height: 1.4;
 }
 
 a:not([class]) {
-	text-decoration-skip-ink: auto
+  text-decoration-skip-ink: auto;
 }
 
 button,
 input,
 select,
 textarea {
-	font: inherit
+  font: inherit;
 }
 
-@media (prefers-reduced-motion:reduce) {
-	html:focus-within {
-		scroll-behavior: auto
-	}
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
 
-	*,
-	::after,
-	::before {
-		animation-duration: 0s !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0s !important;
-		scroll-behavior: auto !important
-	}
+  *,
+  ::after,
+  ::before {
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
 }

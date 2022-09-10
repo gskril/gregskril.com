@@ -16,6 +16,7 @@ This is a good example for what a large part of "crypto Twitter" looks like:
 Even though you have no idea who you’re talking to, people tend to be surprisingly nice. It truly does fee like a community. Be active in a few Discord servers from NFT projects you like (I explain how to find these below) and you’ll feel this pretty quickly.
 
 ## Crypto Twitter accounts to follow
+
 Finding interesting people who talk about crypto and NFTs is a bit tricky to start, but once you do, more interesting people will just start showing up in your feed naturally. To get you started, here are some of my favorites:
 
 - [Alexis Ohanian](https://twitter.com/alexisohanian) - Reddit founder, VC investor
@@ -27,7 +28,6 @@ Finding interesting people who talk about crypto and NFTs is a bit tricky to sta
 - [TZ](https://twitter.com/TZhongg) - Cool insights, building a social NFT community platform
 - [3Lau](https://twitter.com/3lau) - DJ and founder of [royal](https://twitter.com/join_royal), a way for fans to own parts of their favorite songs as NFTs
 
-
 ## Discord's role in NFTs
 
 While Twitter is the best place to learn about crypto and NFT news in general, Discord communities are more focused on specific projects.
@@ -38,6 +38,6 @@ On the top right corner of OpenSea collections, you'll almost always see icons f
 
 I suggest joining a handful of Discord communities to observe how people communicate in there, see how things are organized, and get a feel for how this all works. One community I really enjoy and can strongly recommend joining is the [Bull Market Girlfriends Discord](https://discord.gg/5HaGKSEaQy). I'm on the team and very active in there.
 
-You'll find that there's a lot of crypto-specific slang used here which might be confusing at first. I'll be writing a post about this soon, but for now I recommend reading this [Twitter thread about NFT slang](https://twitter.com/punk6529/status/1433002033242595338). It's quite funny when you get the hang of it. 
+You'll find that there's a lot of crypto-specific slang used here which might be confusing at first. I'll be writing a post about this soon, but for now I recommend reading this [Twitter thread about NFT slang](https://twitter.com/punk6529/status/1433002033242595338). It's quite funny when you get the hang of it.
 
 The NFT space would be nothing without it's incredibly strong community, and in my opinion, it's what makes the space so fun.
