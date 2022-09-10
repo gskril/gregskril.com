@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-	<link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png">
 
-	<title>Projects - Greg Skriloff</title>
-	<meta name="description" content="Small weekend projects and new ideas.">
-	<meta property="og:title" content="Projects - Greg Skriloff">
+  <title>Projects - Greg Skriloff</title>
+  <meta name="description" content="Small weekend projects and new ideas.">
+  <meta property="og:title" content="Projects - Greg Skriloff">
     <meta property="og:description" content="Small weekend projects and new ideas.">
     <meta property="og:image" content="https://banners.beyondco.de/Projects.png?theme=dark&style=style_2&pattern=texture&description=Greg%20Skriloff&md=0&showWatermark=0&fontSize=100px&images=x&widths=0&heights=0">
-	<link rel="canonical" href="https://gregskril.com/{{page.fileSlug}}/">
+  <link rel="canonical" href="https://gregskril.com/{{page.fileSlug}}/">
 
-	{% include "./_includes/partials/head.njk" %}
+  {% include "./_includes/partials/head.njk" %}
 </head>
 <body>
-	{% include "./_includes/partials/header.njk" %}
+  {% include "./_includes/partials/header.njk" %}
 
-	<main class="container">
-		<div class="section">
-			<div class="title-with-icon">
-				<h1>Projects</h1>
-			</div>
-			<h2 class="subtitle">Weekend experiments that occasionally stick</h2>
-			<div class="content">
-				<div class="blog">
-				{% for project in collections.project | reverse %}
-					{% if project.data.expanded %}
-						<div class="blog__post blog__post--span">
-							<span class="blog__title blog__title--static">{{ project.data.title }}</span>
-							<div class="blog__excerpt">
-								{{ project.templateContent | safe }}
-							</div>
-							{% if project.data.url %}
-								<a class="cta" href="{{ project.data.url | url }}" target="_blank" rel="noopener">See more</a>
-							{% endif %}
-						</div>
-					{% endif %}
-				{% endfor %}
+  <main class="container">
+    <div class="section">
+      <div class="title-with-icon">
+        <h1>Projects</h1>
+      </div>
+      <h2 class="subtitle">Weekend experiments that occasionally stick</h2>
+      <div class="content">
+        <div class="blog">
+        {% for project in collections.project | reverse %}
+          {% if project.data.expanded %}
+            <div class="blog__post blog__post--span">
+              <span class="blog__title blog__title--static">{{ project.data.title }}</span>
+              <div class="blog__excerpt">
+                {{ project.templateContent | safe }}
+              </div>
+              {% if project.data.url %}
+                <a class="cta" href="{{ project.data.url | url }}" target="_blank" rel="noopener">See more</a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
 
-				{% for project in collections.project | reverse %}
-					{% if project.data.expanded !== true %}
-						<div class="blog__post">
-							<span class="blog__title blog__title--static">{{ project.data.title }}</span>
-							<div class="blog__excerpt">
-								{{ project.templateContent | safe }}
-							</div>
-							{% if project.data.url %}
-								<a class="cta" href="{{ project.data.url | url }}" target="_blank" rel="noopener">See more</a>
-							{% endif %}
-						</div>
-					{% endif %}
-				{% endfor %}
-			</div>
-			</div>
-		</div>
+        {% for project in collections.project | reverse %}
+          {% if project.data.expanded !== true %}
+            <div class="blog__post">
+              <span class="blog__title blog__title--static">{{ project.data.title }}</span>
+              <div class="blog__excerpt">
+                {{ project.templateContent | safe }}
+              </div>
+              {% if project.data.url %}
+                <a class="cta" href="{{ project.data.url | url }}" target="_blank" rel="noopener">See more</a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      </div>
+    </div>
 
-		{% include "./_includes/partials/socials.njk" %}
-	</main>
+    {% include "./_includes/partials/socials.njk" %}
+  </main>
 
-	{% include "./_includes/partials/footer.njk" %}
-	
+  {% include "./_includes/partials/footer.njk" %}
+  
 </body>
 </html>

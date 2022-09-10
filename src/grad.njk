@@ -3,36 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-	<link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png">
   
   <title>Countdown to Greg Graduation</title>
   {% include "./_includes/partials/head.njk" %}
 
-	<style>
-		.container {
-			display: flex;
+  <style>
+    .container {
+      display: flex;
       flex-direction: column;
-			justify-content: center;
-			align-items: center;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-			height: 82vh;
-		}
+      height: 82vh;
+    }
     h1 { font-size: 2.5rem; }
-		@media screen and (min-width: 45em) {
-			.container { height: 95vh; }
-		}
-	</style>
+    @media screen and (min-width: 45em) {
+      .container { height: 95vh; }
+    }
+  </style>
 </head>
 <body>
-	<div class="container">
+  <div class="container">
     <h1 id="countdown">Loading...</h1>
     <span></span>
   </div>
 
-	<script>
+  <script>
     const countDownDate = new Date(2022, 5, 9, 18, 0, 0, 0);
 
     // Update the count down every 1 second
@@ -66,6 +66,6 @@
         document.querySelector("span").innerHTML = "UNTIL GRADUATION!";
       }
     }, 1000);
-	</script>
+  </script>
 </body>
 </html>

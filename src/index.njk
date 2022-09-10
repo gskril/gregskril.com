@@ -5,51 +5,51 @@ eleventyExcludeFromCollections: true
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-	<link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png">
 
-	<title>Greg Skriloff</title>
-	<meta name="description" content="I'm Greg - a developer and photographer living between New York and Philadelphia.">
+  <title>Greg Skriloff</title>
+  <meta name="description" content="I'm Greg - a developer and photographer living between New York and Philadelphia.">
     <meta property="og:title" content="Greg Skriloff">
     <meta property="og:description" content="Creating stuff on the internet.">
     <meta property="og:image" content="https://banners.beyondco.de/Greg%20Skriloff.png?theme=dark&style=style_2&pattern=texture&description=Just%20trying%20to%20make%20cool%20things.&md=0&showWatermark=0&fontSize=100px&images=x&widths=0&heights=0">
-	<link rel="canonical" href="https://gregskril.com">
+  <link rel="canonical" href="https://gregskril.com">
 
-	{% include "./_includes/partials/head.njk" %}
+  {% include "./_includes/partials/head.njk" %}
 </head>
 <body>
-	{% include "./_includes/partials/header.njk" %}
+  {% include "./_includes/partials/header.njk" %}
 
-	<main class="container">
-		<div class="section">
-			<h3>About Me</h3>
-			<p>I grew up in New York, recently graduated college in Philadelphia, and now planning to travel while working remotely in web3.</p>
-			<a class="cta" href="/about/">Read more</a>
-		</div>
+  <main class="container">
+    <div class="section">
+      <h3>About Me</h3>
+      <p>I grew up in New York, recently graduated college in Philadelphia, and now planning to travel while working remotely in web3.</p>
+      <a class="cta" href="/about/">Read more</a>
+    </div>
 
-		<div class="section">
-			<h3>Recent Posts</h3>
-			<div class="blog">
-				{% for article in collections.blog | reverse | limit(2) %}
-					<div class="blog__post">
-						<a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
-						<div class="blog__meta">
-							<span class="blog__date">{{ article.date | postDate }}</span>
-						</div>
-						<span class="blog__excerpt">{{ article.data.description }}</span>
-						<a class="cta" href="{{ article.url | url }}">Read</a>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
+    <div class="section">
+      <h3>Recent Posts</h3>
+      <div class="blog">
+        {% for article in collections.blog | reverse | limit(2) %}
+          <div class="blog__post">
+            <a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
+            <div class="blog__meta">
+              <span class="blog__date">{{ article.date | postDate }}</span>
+            </div>
+            <span class="blog__excerpt">{{ article.data.description }}</span>
+            <a class="cta" href="{{ article.url | url }}">Read</a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
 
-		{% include "./_includes/partials/socials.njk" %}
-	</main>
+    {% include "./_includes/partials/socials.njk" %}
+  </main>
 
-	{% include "./_includes/partials/footer.njk" %}
-	
+  {% include "./_includes/partials/footer.njk" %}
+  
 </body>
 </html>
