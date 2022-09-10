@@ -85,7 +85,7 @@ For some types of transactions you'll have to pay gas every occurence, while som
 While gas on Ethereum will always be higher than you'd like it to be, it's important to know at least a little bit about how gas works.
 
 ## What is gas and why is it so expensive?
-On the Ethereum network, gas is priced in gwei (a very small fraction of ETH), and changes throughout the day based on network activity. It's often cheapest to make transactions late at night or early in the morning. To stay on top of when gas is cheap, follow my Twitter account [@ETHGasAlerts](https://twitter.com/ETHGasAlerts), or just check the website [Rarible Analytics](https://raribleanalytics.com) for a nice readable scale.
+On the Ethereum network, gas is priced in gwei (a very small fraction of ETH), and changes throughout the day based on network activity. It's often cheapest to make transactions late at night or early in the morning. To stay on top of when gas is cheap, follow my Twitter account [@ETHGasAlerts](https://twitter.com/ETHGasAlerts), or just check the website [ethgasalerts.xyz](https://ethgasalerts.xyz) for a nice readable scale.
 
 Unless you're in a rush to make a transaction, which you probably shouldn't be when you're just getting used to this ecosystem, it's worth it to wait for gas to drop before making your transaction. There are other ways to get around this, such as setting gas manually, but that's a more advanvced topic for another day.
 
