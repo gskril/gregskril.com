@@ -26,30 +26,35 @@ eleventyExcludeFromCollections: true
   <main class="container">
     <div class="section">
       <h3>About Me</h3>
-      <p>I grew up in New York, recently graduated college in Philadelphia, and now planning to travel while working remotely in web3.</p>
+      <p>I grew up in New York, recently graduated college in Philadelphia, and now traveling while working remotely in web3.</p>
       <a class="cta" href="/about/">Read more</a>
     </div>
 
     <div class="section">
-      <h3>Recent Posts</h3>
-      <div class="blog">
-        {% for article in collections.blog | reverse | limit(2) %}
-          <div class="blog__post">
-            <a href="{{ article.url | url }}" class="blog__title">{{ article.data.title }}</a>
-            <div class="blog__meta">
-              <span class="blog__date">{{ article.date | postDate }}</span>
-            </div>
-            <span class="blog__excerpt">{{ article.data.description }}</span>
-            <a class="cta" href="{{ article.url | url }}">Read</a>
-          </div>
+      <h3>Recent Projects</h3>
+      <ul>
+        {% for project in collections.project | reverse | limit(6) %}
+        <li>
+          <a href="{{project.data.url | url}}" target="_blank" rel="noopener">{{project.data.title}}</a>
+        </li>
         {% endfor %}
-      </div>
+      </ul>
+      <a class="cta" href="/projects/">See more</a>
+    </div>
+
+    <div class="section">
+      <h3>Posts</h3>
+      <ul>
+        {% for article in collections.blog | reverse | limit(6) %}
+        <li>
+          <a href="{{article.url | url}}">{{article.data.title}}</a>
+        </li>
+        {% endfor %}
+      </ul>
     </div>
 
     {% include "./_includes/partials/socials.njk" %}
   </main>
 
-  {% include "./_includes/partials/footer.njk" %}
-  
 </body>
 </html>

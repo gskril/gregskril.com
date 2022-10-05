@@ -26,7 +26,6 @@ eleventyExcludeFromCollections: true
   <main class="container">
     <div class="section">
       <h1>Blog</h1>
-      <h2 class="subtitle">Thoughts and learnings from my experiments in tech and crypto.</h2>
       <div class="content">
         <div class="blog">
           {% for article in collections.blog | reverse %}
@@ -43,8 +42,6 @@ eleventyExcludeFromCollections: true
       </div>
     </div>
   </main>
-
-  {% include "./_includes/partials/footer.njk" %}
 
 </body>
 </html>

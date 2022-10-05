@@ -14,7 +14,7 @@
     --color-secondary-text: #1a1a1d;
     --color-primary-text: #1d1e20;
     --color-accent-1: #e2eaf7;
-    --color-accent-2: #4b6f98;
+    --color-accent-2: #5f94d1;
     --color-gradient: linear-gradient(90deg, #4881c2, #9dadc0);
   }
 }
@@ -39,7 +39,6 @@ h4 {
 
 h1 {
   font-size: 1.75rem;
-  margin-bottom: 1rem;
 }
 
 h2 {
@@ -61,6 +60,15 @@ p:last-of-type {
 
 p + ul {
   margin-top: -1rem;
+}
+
+ul {
+  margin-block-start: 0;
+  padding-inline-start: 1.75em;
+}
+
+li:not(:last-of-type) {
+  margin-bottom: 0.25rem;
 }
 
 strong {
@@ -97,6 +105,7 @@ footer {
   padding-right: 1.5rem;
   max-width: 62.5rem;
   margin: 0 auto;
+  max-width: 65ch;
 }
 
 .container--small {
@@ -111,10 +120,6 @@ footer {
   font-weight: 500;
   margin-top: 0;
   transition: padding 0.15s ease-in-out;
-  background: var(--color-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .cta:hover {
@@ -132,10 +137,7 @@ footer {
   font-weight: 500;
   line-height: 1.45;
   color: var(--color-primary-text);
-  background: var(--color-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  opacity: 0.8;
 }
 
 .subtitle--large {
@@ -154,7 +156,7 @@ footer {
 }
 
 .content {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .content h2 {
@@ -167,6 +169,11 @@ footer {
 
 .title-with-icon {
   display: flex;
+  align-items: center;
+}
+
+.title-with-icon > h2 {
+  margin: 0;
 }
 
 .title-with-icon > img {
@@ -175,7 +182,6 @@ footer {
   object-fit: fill;
   width: 3.5rem;
   height: 100%;
-  transform: translateY(-0.5rem);
 }
 
 @media screen and (min-width: 45em) {
@@ -198,6 +204,7 @@ footer {
 
   .subtitle {
     font-size: 1.125rem;
+    margin-bottom: 0.5rem;
   }
 
   .subtitle--large {
@@ -438,15 +445,7 @@ footer {
 }
 
 @media screen and (min-width: 45em) {
-  .blog {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .blog__post {
     padding: 1.5rem;
-  }
-
-  .blog__post--span {
-    grid-column: span 2;
   }
 }
