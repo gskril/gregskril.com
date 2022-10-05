@@ -1,9 +1,7 @@
 ---
 date: 2021-11-26
-updated: 2022-03-08
 tags: [blog, crypto]
 title: Best Web3 Resources - Recommended Bookmarks for Crypto
-subtitle: There are hundreds of websites related to crypto and Web3. these are my favorites.
 description: To avoid phishing scams and allow for easy access to useful tools, I recommend bookmarking these websites in your web browser.
 ---
 
@@ -70,19 +68,9 @@ CoinTracker makes it easy to import multiple crypto wallets from multiple source
 
 DeFi Pulse is a leaderboard of the largest DeFi protocols. It's an easy way to see which protocol has the highest volume, locked value and more, all of which all help you determine the safest places to invest your tokens overtime.
 
-### [Flips Finance](https://www.flips.finance/)
-
-Great charts and lists that help you get a pulse of the NFT market at any time.
-
 ### [Disperse](https://disperse.app/)
 
 Disperse is the easiest way I’ve found to transfer Ethereum tokens in bulk. This likely isn’t something that you’ll use very often, but handy to have around when you need it.
-
-### [Tornado Cash](https://tornado.cash/)
-
-Tornado Cash has gotten a bad rep lately, since many hackers use it to anonymously transfer ETH between wallets, but there are times when it comes in handy for everyday people as well. I’ll paint a you picture.
-
-Imagine I get paid for a job in crypto, and want to add that sum of money to a wallet that isn’t publicly associated with my name for obvious reasons (web2 translation: I don’t want my entire bank account to be public, but having Venmo transactions public is perfectly fine). If I told the payer my private wallet address, then it would no longer be private. So I would have them send the funds to a public wallet, then use Tornado Cash to transfer those funds to my private wallet, therefore removing the link between the sender and the receiver.
 
 ### Reading Lists
 
