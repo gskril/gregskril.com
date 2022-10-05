@@ -61,13 +61,24 @@ This means that NFTs are a a great way to prove ownership of basically anything.
 
 The example that I use to explain the future of NFTs to friends is concert tickets.
 
-### Why NFTs should be used as tickets to live events
+## Why NFTs should be used as tickets to live events
 
 Imagine the current process of buying a ticket for a concert from your favorite band. You buy the ticket, use it to get into the event, then it loses 100% of its value. The lifespan of that ticket is just 1 day.
 
-But what if the band wants to create a community chat of everybody who attended the event? Or what if they want to reward fans who have been to 5+ concerts? Or what if they want to do a giveaway amongst the people who attended a certain concert? Or what if they want to give everybody at the concert a digital collectible that represents they attended a special event?
+But what if:
 
-With NFTs, that is all made possible and very easy.
+- the band wants to create a community chat of everybody who attended the event?
+- they want to reward fans who have been to 5+ concerts?
+- they want to do a giveaway amongst the people who attended a certain concert?
+- they want to give everybody at the concert a digital collectible that represents they attended a special event?
+
+With NFTs, that is all made easier while also not locking operations down to a single platform. You can imagine how this might work without NFTs — a startup appears that wants to facilitate conversations between fans and artists. A few bands sign up for the platform and start onboarding their fans, then the startup goes out of business. What now? The band has to start over from scratch.
+
+**NFTs abstract ownership in a decentralized way — they are not controlled by any company, but rather companies can use them to provide functionality.**
+
+So using the same example — if a messaging startup goes out of business, the NFTs don't leave the fans possession, and can easily be brought over to any other messaging app that the band decides to use. This portability is part of what makes NFTs so powerful.
+
+### What does this actually look like?
 
 A band can create and list a set of NFTs for sale, and their fans can buy them as tickets. If a fan realizes they can no longer make it to the event, they can sell their ticket on a secondary marketplace. Heading to the event, attendees can verify their NFT ownership as a way to get into the venue. Up to this point, its the same process as a traditional online ticket.
 
@@ -75,9 +86,9 @@ After the event, ticket holders are invited to join a token-gated community. Thi
 
 Also, people who own 5+ tickets get access to another, even more exclusive chat with VIP fans. This is where you'll be able to interact with the band themselves most easily.
 
-It's important to realize here that since these tickets are NFTs, they're also tradeable at any point. So if I want to get the benefits of a VIP fan but have only been to once concert, I'll have to buy 4 more of the ticket NFTs on the secondary market. And when you think about it, Secondary market sales are good for all parties.
+It's important to realize here that since these tickets are NFTs, they're also tradeable at any point. So if I want to get the benefits of a VIP fan but have only been to once concert, I'll have to buy 4 more of the ticket NFTs on the secondary market. And when you think about it, secondary market sales are good for all parties.
 
-NFTs have everlasting royalties, meaning if I buy an NFT for $100 from the band and then sell it to a friend for $200, the band gets a percentage of that $200. This incentivizes the band to reward their fans, because it promotes secondary sales which makes them money. This is also good for fans, because they have an opportunity to sell their tickets after a concert if they'd rather recoup some of their ticket cost rather than get exclusive long-term benefits.
+NFTs usually have royalties, meaning if I buy an NFT for $100 from the band and then sell it to a friend for $200, the band gets a percentage of that $200. This incentivizes the band to reward their fans, because it promotes secondary sales which makes them money. This is also good for fans, because they have an opportunity to sell their tickets after a concert if they'd rather recoup some of their ticket cost rather than get exclusive long-term benefits.
 
 Happy band, happy fan, happy collector.
 
@@ -93,7 +104,7 @@ The largest brand to adopt POAP as of the time of writing is Adidas with their [
 
 > "This digital collectible is our way of rewarding you for following your curiosity....this token proves you were here from the beginning of this journey. Keep it safe — it may come in handy."
 
-It's become very clear that Adidas is heavily investing in this space, so people feel as if this ticket will be extremely valuable in the future.
+It's become very clear that Adidas is heavily investing in this space, so people feel as if this ticket may be valuable in the future.
 
 ### Token gating a Discord community
 
@@ -101,13 +112,16 @@ As you might have read in my post "[How to Get More Involved in the Crypto and N
 
 The way most NFT projects utilize Discord is there will be some channels that are open to everyone - you don't need to own anything in order to participate in the conversation. Alongside those, some channels will be for NFT owners only. So you must own an NFT from a specific collection in order to see that channel.
 
-There are multiple tools that allow token gating in Discord, but the most popular amongst NFT projects is [Collab.Land](https://collab.land/). This works for almost any NFT collection, including POAPs.
+There are multiple tools that allow token gating in Discord. The most popular amongst NFT projects is [Collab.Land](https://collab.land/), but it's important to reiterate that **anybody can go and build a similar product without having to get permission from a company**. Collab.Land doesn't own or control the NFTs, they just create tools that add functionality to already existing NFTs.
 
 ### Discord alternatives for token-gated chats
 
-[Ourspaces.xyz](http://Ourspaces.xyz) is the easiest way I've seen to create a token-gated group chat by far. You simply enter the contract address for the NFT, enter how many the person must own, and press create!
+[Ourspaces.xyz](http://Ourspaces.xyz) is one of the easiest ways I've seen to create a token-gated group chat. You simply enter the contract address for the NFT, enter how many the person must own, and press create!
 
 ![Ourspaces token gated community](https://i.ibb.co/N7QRbTt/ourspaces.gif)
+
+Another great option is [nfty chat](https://nftychat.xyz/).
+![Nfty Chat](https://res.cloudinary.com/hcmaricqf/image/upload/v1662139657/ymduci4dmpo5vvmc23pa.webp)
 
 ## Wrapping up
 
@@ -115,4 +129,4 @@ Hopefully now you have a better idea of what NFTs can be used for beyond just tr
 
 If you want to dip your toes into the world of NFTs, I suggest reading [How to Get Started with NFTs and Web3](/blog/get-started-with-nfts/).
 
-Have any questions or want to jam on ideas? Feel free to [send me message on Twitter](https://twitter.com/gregskril). I'll try to get back to you quickly :)
+Have any questions or want to jam on ideas? Feel free to [send me message on Twitter](https://twitter.com/gregskril).
