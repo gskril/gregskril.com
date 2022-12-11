@@ -8,15 +8,13 @@ description: After reading this post you should have a clear understanding of ho
 
 The world of NFTs (non-fungible tokens) can be overwhelming. It can seem very technical and expensive at times. My hope is that after reading this post you will have a clear understanding of how to navigate the Ethererum-powered web3 ecosystem.
 
-From my perspective, web3 is an extension of the internet in which important information is stored in a decentralized way. As [Forbes](https://www.forbes.com/sites/forbestechcouncil/2020/01/06/what-is-web-3-0/) puts it:
-
-> "Web 3.0 will bring us a fairer internet by enabling the individual to be a sovereign."
+From my perspective, web3 is an extension of the internet in which important information is stored in a decentralized way.
 
 ## Custodial vs non-custodial wallets
 
-Cryptocurrency exchanges like [Coinbase](https://coinbase.com/) and [Gemini](https://www.gemini.com/) are centralized organizations that help people dip their toes in crypto but don't complete the full picture. By purchasing a cryptocurrency from an exchange, you don't technically own that asset. The exchange is holding it on your behalf. This is called a custodial relationship. True decentralization, and the way people utilize web3, is when you are the sole owner of your wallet containing all of your digital assets.
+Cryptocurrency exchanges like [Coinbase](https://coinbase.com/) and [Gemini](https://www.gemini.com/) are centralized organizations that help people dip their toes in crypto but don't complete the full picture. By purchasing cryptocurrency from an exchange, you don't technically own that asset. The exchange is holding it on your behalf. This is called a custodial relationship.
 
-The real starting point for web3 is a non-custodial wallet, or decentralized wallet. This means that you are the only person in the world with access to your assets, and you accept the responsibility that comes along with that. If you lose access to your wallet for one reason or another, there is no company or organization to call and get help. It might sound intimidating at first, but for many people this is what gets them most excited about crypto — the ethos of true ownership and independence.
+The real starting point for web3 is a non-custodial wallet. This means that you are the only person in the world with access to your assets, and you accept the responsibility that comes along with that. If you lose access to your wallet for one reason or another, there is no company or organization to call and get help. It might sound intimidating at first, but for many people this is what gets them most excited about crypto — the ethos of true ownership and independence.
 
 The easiest and most popular way to create a non-custodial wallet on the Ethereum (ETH) blockchain is with [MetaMask](https://metamask.io/). MetaMask is 100% free, and acts as your key to the web3 world.
 
@@ -42,7 +40,9 @@ Once you've finished creating your wallet in MetaMask, you will see a 42 charact
 
 You should store your seed phrase totally offline - away from any internet connected device that hackers might be able to access. Don't save it in a note in the cloud, a text file on your computer, or anything like that. Write these 12 words down on an old fashion piece of paper and store it somewhere safe. Many people store this in a bank safety deposit box, and/or engrave it in a fireproof enclosure such as this [Keystone steel enclosure](https://amzn.to/3Em1tM4).
 
-Almost all crypto hacks you hear about are not due to security breaches into blockchains themselves. Instead, most hacks are simply people pretending to be support agents at crypto websites to get access to your seed phrase, or viruses on your computer that give somebody access to the MetaMask extension.
+Almost all crypto hacks you hear about are not due to security breaches into blockchains themselves. Instead, most hacks are simply social enginerring; people pretend to be support agents and trick you to hand over access to your seed phrase, or send you to a fake website that prompts you to approve a malicious transaction.
+
+In order to help prevent yourself from approving malicious transactions, [I recommend installing Stelo](https://stelolabs.com/). It's a Chrome extension that sits in front of MetaMask and provides extra context around important actions.
 
 **Nobody should ever ask you for your seed phrase. If they do, it's a scam.**
 
@@ -68,7 +68,7 @@ Congratulations! At this point you will have created an Ethereum wallet using Me
 
 ## Buying Your First NFT
 
-To buy an NFT, you will need ETH in your MetaMask wallet (there are other blockchains where you can buy NFTs with other cryptocurrencies, but we'll ignore that for now). You can buy small amounts of ETH via credit card directly in MetaMask, but I'd recommend transferring funds in from crypto exchanges instead (those centralized organizations I mentioned earlier). I won't cover the details here, but you'll have to [buy ETH on Coinbase](https://www.coinbase.com/buy-ethereum) (or another exchange) and then [transfer ETH to your MetaMask address](https://www.youtube.com/watch?v=9NQgCyOXQlY).
+To buy an NFT, you will need ether (ETH) in your MetaMask wallet (there are other blockchains where you can buy NFTs with other cryptocurrencies, but we'll ignore that for now). You can buy small amounts of ETH via credit card directly in MetaMask, but I'd recommend transferring funds in from crypto exchanges instead. I won't cover the details here, but you'll have to [buy ETH on Coinbase](https://www.coinbase.com/buy-ethereum) (or another exchange) and then [transfer ETH to your MetaMask address](https://www.youtube.com/watch?v=9NQgCyOXQlY).
 
 At this point you should have some ETH in MetaMask and have your wallet connected to OpenSea. From here it's rather simple to buy an NFT, somewhat similar to shopping on eBay. You can place an offer/bid, buy an asset outright, and join auctions.
 
@@ -78,7 +78,7 @@ It's important to go into your first purchase without any expectation of making 
 
 Sure, it's possible to make money trading NFTs, but that shouldn't be your primary goal on day one. For that reason, I recommend buying a cheap NFT just to get a handle on how this all works. No speculation, no expectations, no serious investment.
 
-If you're looking for a recommendation, [BlankFace](https://opensea.io/collection/blankfaceofficial?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW) may be a decent place to start simply because they are cheap. They are worth only a few dollars.
+If you're looking for a recommendation, [BlankFace](https://opensea.io/collection/blankfaceofficial?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW) may be a decent place to start simply because they are cheap. They are worth only a few dollars (and I'm confident won't increase in the future).
 
 ## Signing transactions in MetaMask
 
@@ -90,12 +90,10 @@ While gas on Ethereum is usually higher than you'd like it to be, it's important
 
 On the Ethereum network, gas is priced in gwei (a very small fraction of ETH), and changes throughout the day based on network activity. It's often cheapest to make transactions late at night or early in the morning. To stay on top of when gas is cheap, follow my Twitter account [@ETHGasAlerts](https://twitter.com/ETHGasAlerts), or just check the website [ethgasalerts.xyz](https://ethgasalerts.xyz) for a nice readable scale.
 
-Unless you're in a rush to make a transaction, which you probably shouldn't be when you're just getting used to this ecosystem, it's worth it to wait for gas to drop before making your transaction. There are other ways to get around this, such as setting gas manually, but that's a more advanvced topic for another day.
+Unless you're in a rush to make a transaction, it's worth waiting for gas to drop (if [ethgasalerts.xyz](https://ethgasalerts.xyz) says that it's expected to). There are ways to schedule this so that transactions will go through automatically when the fee decreases, but that's a more advanvced topic for another day.
 
 Now that you know how to create a non-custodial wallet securely, connect to a dApp and buy an NFT, these are a few good follow-up articles to learn more about the whole ecosystem:
 
 [NFT Uses Outside of Digital Art](/blog/nft-uses/)
-
-[Immerse yourself in the NFT community](/blog/nft-community/)
 
 [Best web3 Resources - Recommended Bookmarks for Crypto](/blog/crypto-bookmarks/)
