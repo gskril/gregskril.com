@@ -42,17 +42,6 @@ eleventyExcludeFromCollections: true
       <a class="cta" href="/projects/">See more</a>
     </div>
 
-    <div class="section">
-      <h3>Posts</h3>
-      <ul>
-        {% for article in collections.blog | reverse | limit(6) %}
-        <li>
-          <a href="{{article.url | url}}">{{article.data.title}}</a>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-
     {% include "./_includes/partials/socials.njk" %}
   </main>
 
