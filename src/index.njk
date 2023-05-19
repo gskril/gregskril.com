@@ -22,22 +22,34 @@ eleventyExcludeFromCollections: true
 </head>
 <body>
   <main class="container">
-    <div class="section">
-      <h3>About Me</h3>
-      <p>I grew up in New York, recently graduated college in Philadelphia, and now traveling while working remotely in web3.</p>
-      <a class="cta" href="/about/">Read more</a>
+    <div class="section" style="margin-top: 4.5rem; margin-bottom: -1.5rem;">
+      <div class="profile-header">
+        <img class="profile-header__pfp" src="/img/profile.jpg" width="76" height="76" alt="gregskril profile picture">
+        <div class="profile-header__text-wrapper">
+          <h2 class="profile-header__name">Greg</h2>
+          <span class="profile-header__location">New York</span>
+        </div>
+      </div>
     </div>
 
     <div class="section">
-      <h3>Recent Projects</h3>
-      <ul>
-        {% for project in collections.project | reverse | limit(6) %}
-        <li>
-          <a href="{{project.data.url | url}}" target="_blank" rel="noopener">{{project.data.title}}</a>
-        </li>
+      <h3 class="section__title">About</h3>
+      <p>I grew up in New York, recently graduated college in Philadelphia, and am now traveling while working remotely in web3.</p>
+    </div>
+
+    <div class="section">
+      <h3 class="section__title section__title--mb">Projects</h3>
+      <div class="connect connect--spacing">
+        {% for project in collections.project | reverse %}
+        <div class="connect__item">
+          <span>{{project.data.date | projectDate}}</span>
+          <div class="project">
+            <a class="connect__link" href="{{project.data.url | url}}" target="_blank" rel="noopener">{{project.data.title}}</a>
+            {{ project.templateContent | safe }}
+          </div>
+        </div>
         {% endfor %}
-      </ul>
-      <a class="cta" href="/projects/">See more</a>
+      </div>
     </div>
 
     {% include "./_includes/partials/socials.njk" %}

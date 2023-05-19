@@ -22,6 +22,13 @@ module.exports = function (eleventyConfig) {
       .toLocaleString(DateTime.DATE_MED)
   })
 
+  // add a filter that returns the month and year like "sept 2020"
+  eleventyConfig.addFilter('projectDate', (dateObj) => {
+    return DateTime.fromJSDate(dateObj, { zone: 'America/New_York' })
+      .plus({ days: 1 })
+      .toLocaleString({ month: 'short', year: 'numeric' })
+  })
+
   // Optimize generated HTML links
   const markdownItOptions = {
     html: true,
