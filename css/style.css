@@ -239,6 +239,7 @@ footer {
 }
 
 .profile-header__location {
+  color: var(--color-secondary-text);
   font-size: 0.875rem;
   font-weight: 300;
   margin: 0;
