@@ -11,8 +11,8 @@
   <title>Projects - Greg Skriloff</title>
   <meta name="description" content="Small weekend projects and new ideas.">
   <meta property="og:title" content="Projects - Greg Skriloff">
-    <meta property="og:description" content="Small weekend projects and new ideas.">
-    <meta property="og:image" content="https://banners.beyondco.de/Projects.png?theme=dark&style=style_2&pattern=texture&description=Greg%20Skriloff&md=0&showWatermark=0&fontSize=100px&images=x&widths=0&heights=0">
+  <meta property="og:description" content="Small weekend projects and new ideas.">
+  <meta property="og:image" content="https://banners.beyondco.de/Projects.png?theme=dark&style=style_2&pattern=texture&description=&md=0&showWatermark=0&fontSize=100px&images=x&widths=0&heights=0">
   <link rel="canonical" href="https://gregskril.com/{{page.fileSlug}}/">
 
   {% include "./_includes/partials/head.njk" %}
@@ -20,25 +20,19 @@
 <body>
   <main class="container">
     <div class="section">
-        <h1>Projects</h1>
-      <div class="content">
-        <div class="blog">
+      <h1 class="section__title section__title--mb">Projects</h1>
+      <div class="connect connect--spacing">
         {% for project in collections.project | reverse %}
-          <div class="blog__post">
-            <span class="blog__title blog__title--static">{{ project.data.title }}</span>
-            <div class="blog__excerpt">
-              {{ project.templateContent | safe }}
-            </div>
-            {% if project.data.url %}
-              <a class="cta" href="{{ project.data.url | url }}" target="_blank" rel="noopener">See more</a>
-            {% endif %}
+        <div class="connect__item">
+          <span>{{project.data.date | projectDate}}</span>
+          <div class="project">
+            <a class="connect__link" href="{{project.data.url | url}}" target="_blank" rel="noopener">{{project.data.title}}</a>
+            {{ project.templateContent | safe }}
           </div>
+        </div>
         {% endfor %}
       </div>
-      </div>
     </div>
-
-    {% include "./_includes/partials/socials.njk" %}
   </main>
 
 </body>
