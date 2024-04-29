@@ -1,13 +1,10 @@
-# Greg Skriloff Personal Website
+# gregskril.com
 
-Built with HTML, CSS, and [Eleventy](https://www.11ty.dev/) as a nunjucks-based static site generator.
+Built with HTML, CSS, and [Eleventy](https://www.11ty.dev/).
 
-## Download
+## Run locally
 
 1. Clone repo
-2. Install eleventy with `npm install`
-3. Run `npm run build` to build the project locally
-
-## Production
-
-Automatically deploys to Netlify from Git
+2. Install dependencies with `npm install`
+3. Start the development server with `npm run dev`
+4. Open http://localhost:8080 in your browser to see the result
