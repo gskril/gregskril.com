@@ -4,61 +4,56 @@ eleventyExcludeFromCollections: true
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png">
-  <link rel="icon" type="image/png" sizes="128x128" href="/img/favicon-128.png">
-
-  <title>Farcaster Projects | Greg Skriloff</title>
-  <meta name="description" content="Building apps on web3 protocols.">
-  <meta property="og:title" content="Farcaster Projects | Greg Skriloff">
-  <meta property="og:description" content="I like building apps on web3 protocols">
-  <meta property="og:image" content="https://gregskril.com/img/banner.jpg">
-  <link rel="canonical" href="https://gregskril.com">
-
-  {% include "./_includes/partials/head.njk" %}
-</head>
-<body>
-  <main class="container">
-    <div class="section" style="margin-top: 4.5rem; margin-bottom: -1.5rem;">
-      <div class="profile-header">
-        <img class="profile-header__pfp" src="/img/profile.jpg" width="76" height="76" alt="gregskril profile picture">
-        <div class="profile-header__text-wrapper">
-          <h2 class="profile-header__name">Greg</h2>
-          <span class="profile-header__location">New York</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h3 class="section__title">About</h3>
-      <p>
-        I grew up in New York, went to school in Philadelphia, and now build apps on web3 protocols like 
-        <a href="https://ens.domains/" target="_blank">ENS</a> and 
-        <a href="https://farcaster.xyz/" target="_blank">Farcaster</a>.
-      </p>
-    </div>
-
-    <div class="section">
-      <h3 class="section__title section__title--mb">Farcaster Projects</h3>
-      <div class="connect connect--spacing">
-        {% for project in collections.farcaster | reverse %}
-        <div class="connect__item">
-          <span>{{project.data.date | projectDate}}</span>
-          <div class="project">
-            <a class="connect__link" href="{{project.data.url | url}}" target="_blank" rel="noopener">{{project.data.title}}</a>
-            {{ project.templateContent | safe }}
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="/img/favicon-128.png">
+    <title>Farcaster Projects | Greg Skriloff</title>
+    <meta name="description" content="Building apps on web3 protocols.">
+    <meta property="og:title" content="Farcaster Projects | Greg Skriloff">
+    <meta property="og:description" content="I like baking and building apps on web3 protocols">
+    <meta property="og:image" content="https://gregskril.com/img/banner.jpg">
+    <link rel="canonical" href="https://gregskril.com">
+    {% include "./_includes/partials/head.njk" %}
+  </head>
+  <body>
+    <main class="container">
+      <div class="section" style="margin-top: 4.5rem; margin-bottom: -1.5rem;">
+        <div class="profile-header">
+          <img class="profile-header__pfp" src="/img/profile.jpg" width="76" height="76" alt="gregskril profile picture">
+          <div class="profile-header__text-wrapper">
+            <h2 class="profile-header__name">Greg</h2>
+            <span class="profile-header__location">New York</span>
           </div>
         </div>
-        {% endfor %}
       </div>
-    </div>
-
-    {% include "./_includes/partials/socials.njk" %}
-  </main>
-
-</body>
+      <div class="section">
+        <h3 class="section__title">About</h3>
+        <p>
+          I grew up in New York, went to school in Philadelphia, and now build apps on web3 protocols like
+          <a href="https://ens.domains/" target="_blank">ENS</a>
+          and
+          <a href="https://farcaster.xyz/" target="_blank">Farcaster</a>.
+        </p>
+      </div>
+      <div class="section">
+        <h3 class="section__title section__title--mb">Farcaster Projects</h3>
+        <div class="connect connect--spacing">
+          {% for project in collections.farcaster | reverse %}
+            <div class="connect__item">
+              <span>{{ project.data.date | projectDate }}</span>
+              <div class="project">
+                <a class="connect__link" href="{{ project.data.url | url }}" target="_blank" rel="noopener">{{ project.data.title }}</a>
+                {{ project.templateContent | safe }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% include "./_includes/partials/socials.njk" %}
+    </main>
+  </body>
 </html>
