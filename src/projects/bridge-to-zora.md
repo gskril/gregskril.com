@@ -1,7 +1,7 @@
 ---
 title: Bridge to Zora
 date: 2023-05-28
-url: https://bridgetozora.world/
+url: https://github.com/gskril/zora-bridge
 ---
 
-Easy way to bridge ETH from Goerli to [Zora's L2 testnet](https://zora.energy/testnet).
+The first bridge UI to get ETH on [Zora's L2 network](https://zora.energy).
