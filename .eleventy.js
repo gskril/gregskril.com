@@ -3,6 +3,7 @@ const markdownIt = require('markdown-it')
 const mila = require('markdown-it-link-attributes')
 const readingTime = require('eleventy-plugin-reading-time')
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
+const pluginRss = require('@11ty/eleventy-plugin-rss')
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('img')
@@ -47,6 +48,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('limit', function (arr, limit) {
     return arr.slice(0, limit)
   })
+
+  // Add RSS feed plugin
+  eleventyConfig.addPlugin(pluginRss)
 
   return {
     dir: {
