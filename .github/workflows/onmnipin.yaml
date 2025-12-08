@@ -1,0 +1,24 @@
+name: Deploy with Omnipin
+
+on:
+  push:
+    branches: omnipin
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: 'npm'
+      - name: Install Omnipin
+        run: npm install -g omnipin@1.6.2
+      - name: Build website
+        run: npm install && npm run build
+      - name: Deploy the site
+        run: omnipin deploy _site
+        env:
+          OMNIPIN_SIMPLEPAGE_TOKEN: ${{ secrets.OMNIPIN_SIMPLEPAGE_TOKEN }}
+          OMNIPIN_LIGHTHOUSE_TOKEN: ${{ secrets.OMNIPIN_LIGHTHOUSE_TOKEN }}
