@@ -10,6 +10,7 @@ const { title, description, image, article = false } = Astro.props
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} image={image} />
+    <slot name="head" />
   </head>
   <body class={article ? 'article' : ''}>
     <slot />

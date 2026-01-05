@@ -10,6 +10,13 @@ projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 ---
 
 <Layout title="Greg Skriloff" description="Building apps on web3 protocols.">
+  <link
+    slot="head"
+    rel="alternate"
+    type="application/rss+xml"
+    title="RSS"
+    href="/rss.xml"
+  />
   <main class="container">
     <div class="section" style="margin-top: 4.5rem; margin-bottom: -1.5rem;">
       <ProfileHeader />
