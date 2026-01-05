@@ -11,9 +11,7 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.14",
-    "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.16.6",
-    "tailwindcss": "^4.1.18"
+    "astro": "^5.16.6"
   },
   "devDependencies": {
     "prettier": "^3.7.4",
