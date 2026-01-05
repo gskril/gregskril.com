@@ -1,6 +1,7 @@
 ---
-import { getCollection, render } from 'astro:content'
+import { getCollection } from 'astro:content'
 import Layout from '../layouts/Layout.astro'
+import ProjectFeed from '../components/ProjectFeed.astro'
 import ProfileHeader from '../components/ProfileHeader.astro'
 import Socials from '../components/Socials.astro'
 
@@ -24,35 +25,7 @@ projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
     </div>
     <div class="section">
       <h3 class="section__title section__title--mb" id="projects">Side Projects</h3>
-      <div class="connect connect--spacing">
-        {
-          projects.map(async (project) => {
-            const { Content } = await render(project)
-
-            return (
-              <div class="connect__item">
-                <span>
-                  {new Intl.DateTimeFormat('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                  }).format(new Date(project.data.date))}
-                </span>
-                <div class="project">
-                  <a
-                    class="connect__link"
-                    href={project.data.url}
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    {project.data.title}
-                  </a>
-                  <Content />
-                </div>
-              </div>
-            )
-          })
-        }
-      </div>
+      <ProjectFeed projects={projects} />
     </div>
     <Socials />
   </main>

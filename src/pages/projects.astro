@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../layouts/Layout.astro'
+import ProjectFeed from '../components/ProjectFeed.astro'
+
+const projects = await getCollection('projects')
+projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+---
+
+<Layout
+  title="Projects - Greg Skriloff"
+  description="Small weekend projects and new ideas."
+>
+  <main class="container">
+    <div class="section">
+      <h1 class="section__title section__title--mb">Projects</h1>
+      <ProjectFeed projects={projects} />
+    </div>
+  </main>
+</Layout>
