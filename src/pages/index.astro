@@ -1,0 +1,70 @@
+---
+import { getCollection, render } from 'astro:content'
+import Layout from '../layouts/Layout.astro'
+import Socials from '../components/Socials.astro'
+
+const projects = await getCollection('projects')
+projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+---
+
+<Layout title="Greg Skriloff" description="Building apps on web3 protocols.">
+  <main class="container">
+    <div class="section" style="margin-top: 4.5rem; margin-bottom: -1.5rem;">
+      <div class="profile-header">
+        <img
+          class="profile-header__pfp"
+          src="/img/profile.jpg"
+          width="76"
+          height="76"
+          alt="gregskril profile picture"
+        />
+        <div class="profile-header__text-wrapper">
+          <h2 class="profile-header__name">Greg</h2>
+          <span class="profile-header__location">New York</span>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <h3 class="section__title">About</h3>
+      <p>
+        I like
+        <a href="https://goodbread.nyc/?ref=gregskril.com" target="_blank">baking</a>
+        and building apps on web3 protocols. I work as a Developer Relations Engineer at
+        <a href="https://ens.domains/" target="_blank">ENS</a>.
+      </p>
+    </div>
+    <div class="section">
+      <h3 class="section__title section__title--mb" id="projects">Side Projects</h3>
+      <div class="connect connect--spacing">
+        {
+          projects.map(async (project) => {
+            const { Content } = await render(project)
+
+            return (
+              <div class="connect__item">
+                <span>
+                  {new Intl.DateTimeFormat('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                  }).format(new Date(project.data.date))}
+                </span>
+                <div class="project">
+                  <a
+                    class="connect__link"
+                    href={project.data.url}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    {project.data.title}
+                  </a>
+                  <Content />
+                </div>
+              </div>
+            )
+          })
+        }
+      </div>
+    </div>
+    <Socials />
+  </main>
+</Layout>

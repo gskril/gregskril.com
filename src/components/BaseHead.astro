@@ -1,0 +1,48 @@
+---
+const { title, description, image = 'https://gregskril.com/img/banner.jpg' } = Astro.props
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png" />
+<link rel="icon" type="image/png" sizes="128x128" href="/img/favicon-128.png" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Greg Skriloff" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script
+  is:inline
+  async="async"
+  src="https://www.googletagmanager.com/gtag/js?id=G-F8TTRSZVTJ"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag('js', new Date())
+  gtag('config', 'G-F8TTRSZVTJ')
+</script>
+
+<!-- Plausible Analytics -->
+<script
+  is:inline
+  defer="defer"
+  data-domain="gregskril.com"
+  src="https://plausible.io/js/script.outbound-links.js"></script>
+<script is:inline>
+  window.plausible =
+    window.plausible ||
+    function () {
+      ;(window.plausible.q = window.plausible.q || []).push(arguments)
+    }
+</script>
