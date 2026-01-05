@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content'
+import Layout from '../layouts/Layout.astro'
+
+const articles = await getCollection('articles')
+articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+---
+
+<Layout
+  title="Blog - Greg Skriloff"
+  description="Thoughts and tutorials on tech and crypto."
+>
+  <main class="container">
+    <div class="section">
+      <h1>Blog</h1>
+      <div class="content">
+        <div class="blog">
+          {
+            articles.map(async (article) => {
+              const { Content } = await render(article)
+
+              return (
+                <div class="blog__post">
+                  <a href={`/blog/${article.id}`} class="blog__title">
+                    {article.data.title}
+                  </a>
+                  <div class="blog__meta">
+                    <span class="blog__date">
+                      {new Intl.DateTimeFormat('en-US', {
+                        year: 'numeric',
+                        day: 'numeric',
+                        month: 'short',
+                      }).format(new Date(article.data.date))}
+                    </span>
+                  </div>
+                  <span class="blog__excerpt">{article.data.description}</span>
+                  <a class="cta" href={`/blog/${article.filePath}`}>
+                    Read
+                  </a>
+                </div>
+              )
+            })
+          }
+          <a href="/">Home</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

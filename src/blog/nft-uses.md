@@ -2,7 +2,6 @@
 date: 2021-12-03
 tags: [blog, crypto]
 title: What Can NFTs Be Used for Other Than Selling Digital Art?
-subtitle:
 description: The state of NFTs is rudimentary and I understand why people are skeptical. In most cases, they just don't know what NFTs are and what they can be used for.
 ---
 

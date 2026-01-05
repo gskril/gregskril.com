@@ -1,0 +1,67 @@
+---
+import { getCollection, render } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import Footer from '../../components/Footer.astro'
+
+// 1. Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const articles = await getCollection('articles')
+  return articles.map((article) => ({
+    params: { id: article.id },
+    props: { article },
+  }))
+}
+
+// 2. For your template, you can get the entry directly from the prop
+const { article } = Astro.props
+const { Content } = await render(article)
+---
+
+<Layout article={true} title={article.data.title} description={article.data.description}>
+  <main class="container">
+    <div class="section">
+      <h1>{article.data.title}</h1>
+      {
+        article.data.subtitle && (
+          <span class="subtitle subtitle--large">{article.data.subtitle}</span>
+        )
+      }
+
+      <div class="blog__meta">
+        <span class="blog__date">
+          {
+            new Intl.DateTimeFormat('en-US', {
+              year: 'numeric',
+              day: 'numeric',
+              month: 'short',
+            }).format(new Date(article.data.date))
+          }
+        </span>
+      </div>
+
+      <div class="content">
+        <Content />
+      </div>
+
+      <div class="post-end">
+        <div class="author">
+          <img
+            src="/img/profile.jpg"
+            class="author__img"
+            width="42"
+            height="42"
+            alt="Greg Skriloff"
+          />
+          <a class="author__name" href="/about/">Greg Skriloff</a>
+        </div>
+        <h4>Like this post or find it helpful?</h4>
+        <p>I talk about this type of stuff much more often on Twitter!</p>
+        <a class="cta" href="https://twitter.com/gregskril" target="_blank" rel="noopener"
+          >Follow me on Twitter</a
+        >
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

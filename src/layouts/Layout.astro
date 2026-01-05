@@ -3,7 +3,7 @@ import '../styles/normalize.css'
 import '../styles/style.css'
 import BaseHead from '../components/BaseHead.astro'
 
-const { title, description, image } = Astro.props
+const { title, description, image, article = false } = Astro.props
 ---
 
 <!doctype html>
@@ -11,7 +11,7 @@ const { title, description, image } = Astro.props
   <head>
     <BaseHead title={title} description={description} image={image} />
   </head>
-  <body>
+  <body class={article ? 'article' : ''}>
     <slot />
   </body>
 </html>
