@@ -14,3 +14,7 @@
 _site
 ignore
 node_modules
+
+# Astro
+.astro/
+dist/

@@ -1,0 +1,18 @@
+---
+import '../styles/normalize.css'
+import '../styles/style.css'
+import BaseHead from '../components/BaseHead.astro'
+
+const { title, description, image, article = false } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+    <slot name="head" />
+  </head>
+  <body class={article ? 'article' : ''}>
+    <slot />
+  </body>
+</html>

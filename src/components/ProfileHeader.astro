@@ -1,0 +1,32 @@
+---
+const path = Astro.url.pathname
+const isHome = path === '/'
+---
+
+<div class="profile-header">
+  {
+    isHome ? (
+      <img
+        class="profile-header__pfp"
+        src="/img/profile.jpg"
+        width={76}
+        height={76}
+        alt="gregskril profile picture"
+      />
+    ) : (
+      <a href="/">
+        <img
+          class="profile-header__pfp"
+          src="/img/profile.jpg"
+          width={76}
+          height={76}
+          alt="gregskril profile picture"
+        />
+      </a>
+    )
+  }
+  <div class="profile-header__text-wrapper">
+    <h2 class="profile-header__name">Greg</h2>
+    <span class="profile-header__location">New York</span>
+  </div>
+</div>
