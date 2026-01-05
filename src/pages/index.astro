@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
 import Layout from '../layouts/Layout.astro'
+import ProfileHeader from '../components/ProfileHeader.astro'
 import Socials from '../components/Socials.astro'
 
 const projects = await getCollection('projects')
@@ -10,19 +11,7 @@ projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 <Layout title="Greg Skriloff" description="Building apps on web3 protocols.">
   <main class="container">
     <div class="section" style="margin-top: 4.5rem; margin-bottom: -1.5rem;">
-      <div class="profile-header">
-        <img
-          class="profile-header__pfp"
-          src="/img/profile.jpg"
-          width="76"
-          height="76"
-          alt="gregskril profile picture"
-        />
-        <div class="profile-header__text-wrapper">
-          <h2 class="profile-header__name">Greg</h2>
-          <span class="profile-header__location">New York</span>
-        </div>
-      </div>
+      <ProfileHeader />
     </div>
     <div class="section">
       <h3 class="section__title">About</h3>

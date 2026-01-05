@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Socials from '../components/Socials.astro'
+import ProfileHeader from '../components/ProfileHeader.astro'
+---
+
+<Layout
+  title="About - Greg Skriloff"
+  description="I grew up in New York, went to school in Philadelphia, and now build apps on web3 protocols."
+>
+  <main class="container">
+    <div class="section" style="margin-top: 4.5rem;">
+      <ProfileHeader />
+      <div class="content">
+        <p>
+          I like
+          <a href="https://goodbread.nyc/?ref=gregskril.com" target="_blank">baking</a>
+          and building apps on web3 protocols. I work as a Developer Relations Engineer at
+          <a href="https://ens.domains/" target="_blank">ENS</a>.
+        </p>
+        <p>
+          I've been interested in technology for as long as I can remember, but didn't
+          dive deep into coding until May of 2021. My first "real" coding project was a
+          <a href="https://doge.gregskril.com/">cryptocurrency trading bot</a>. This led
+          me down the path of exploring web3/crypto in more detail until I really started
+          spending all my time in the space by August of 2021.
+        </p>
+        <p>
+          I like to
+          <a href="/#projects">learn by building</a>.
+        </p>
+      </div>
+    </div>
+    <Socials />
+  </main>
+</Layout>
