@@ -10,6 +10,7 @@
     "beautify": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md,astro}\" --ignore-path .gitignore"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.14",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.6",
     "tailwindcss": "^4.1.18"
