@@ -27,4 +27,4 @@ photos:
 
 ## Notes
 
-Much better fermentation from waiting the extra hour! Should go even 30 mins longer next time.
+Much better fermentation from waiting an extra hour! Should go even 30 mins longer next time.

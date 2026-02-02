@@ -20,4 +20,4 @@ date: 2026-01-20
 
 ## Notes
 
-Tasted very wheaty. Uneven and more dense crumb than normal.
+First time using whole wheat flour - I think I started with too much. Tasted very wheaty. Uneven and more dense crumb than normal. Not sure if this is due do the flour or normal fermentation stuff. It's very cold outside.
