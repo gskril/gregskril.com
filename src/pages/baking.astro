@@ -13,6 +13,7 @@ bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 
   <main class="container">
     <div class="section">
+      <a class="bake-back" href="/">← Home</a>
       <h1>Baking Log</h1>
       <div class="content">
         <ul>
@@ -34,7 +35,12 @@ bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
             })
           }
         </ul>
-        <a href="/">Home</a>
+        <p style="color: var(--color-secondary-text); font-size: 0.875rem;">
+          ...and dozens of other loaves before I started this log. See some on <a
+            href="https://goodbread.nyc/?ref=gregskril.com"
+            target="_blank"
+            rel="noopener">goodbread.nyc</a>
+        </p>
       </div>
     </div>
   </main>

@@ -25,4 +25,4 @@ photos:
 
 ## Notes
 
-Much better than the [previous loaf](/baking/2026-01-16). Still somewhat inconsistent crumb. The issue was definitely at least somewhat fermentation related.
+Much better than the previous loaf. Still somewhat inconsistent crumb. The issue was definitely at least somewhat fermentation related.
