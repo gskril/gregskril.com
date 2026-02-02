@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from 'astro:content'
+import { Image } from 'astro:assets'
+import Layout from '../../layouts/Layout.astro'
+import Footer from '../../components/Footer.astro'
+
+export async function getStaticPaths() {
+  const bakes = await getCollection('bakes')
+  bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+
+  return bakes.map((bake, i) => ({
+    params: { id: bake.id.replace(/\/index\.md$/, '') },
+    props: {
+      bake,
+      prev: bakes[i + 1] || null,
+      next: bakes[i - 1] || null,
+    },
+  }))
+}
+
+const { bake, prev, next } = Astro.props
+const { Content } = await render(bake)
+
+const fmt = (date: Date) =>
+  new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    day: 'numeric',
+    month: 'short',
+  }).format(date)
+
+const formatted = fmt(bake.data.date)
+const slug = (b: typeof bake) => `/baking/${b.id.replace(/\/index\.md$/, '')}`
+---
+
+<Layout
+  article={true}
+  title={`${bake.data.title || formatted} - Baking Log`}
+  description={`Bake from ${formatted}`}
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <main class="container">
+    <div class="section">
+      <a class="bake-back" href="/baking">← All bakes</a>
+
+      <h1>{bake.data.title || 'Bake Log'}</h1>
+      <div class="blog__meta">
+        <span class="blog__date">{formatted}</span>
+      </div>
+
+      <div class="content">
+        <Content />
+
+        {
+          bake.data.photos && bake.data.photos.length > 0 && (
+            <div class="bake-photos">
+              {bake.data.photos.map((photo) => (
+                <Image src={photo} alt={`Bake from ${formatted}`} width={600} />
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <nav class="bake-nav">
+        {prev ? (
+          <a href={slug(prev)}>← {prev.data.title || fmt(prev.data.date)}</a>
+        ) : <span />}
+        {next ? (
+          <a href={slug(next)}>{next.data.title || fmt(next.data.date)} →</a>
+        ) : <span />}
+      </nav>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

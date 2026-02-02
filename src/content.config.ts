@@ -21,4 +21,14 @@ const articles = defineCollection({
   }),
 })
 
-export const collections = { projects, articles }
+const bakes = defineCollection({
+  loader: glob({ pattern: '**/index.md', base: 'src/content/bakes' }),
+  schema: ({ image }) =>
+    z.object({
+      date: z.coerce.date(),
+      title: z.string().optional(),
+      photos: z.array(image()).optional(),
+    }),
+})
+
+export const collections = { projects, articles, bakes }

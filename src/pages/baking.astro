@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../layouts/Layout.astro'
+
+const bakes = await getCollection('bakes')
+bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+---
+
+<Layout title="Baking Log - Greg Skriloff" description="A personal sourdough baking log.">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <main class="container">
+    <div class="section">
+      <h1>Baking Log</h1>
+      <div class="content">
+        <ul>
+          {
+            bakes.map((bake) => {
+              const formatted = new Intl.DateTimeFormat('en-US', {
+                year: 'numeric',
+                day: 'numeric',
+                month: 'short',
+              }).format(bake.data.date)
+
+              return (
+                <li>
+                  <a href={`/baking/${bake.id.replace(/\/index\.md$/, '')}`}>
+                    {bake.data.title || formatted}
+                  </a>
+                </li>
+              )
+            })
+          }
+        </ul>
+        <a href="/">Home</a>
+      </div>
+    </div>
+  </main>
+</Layout>

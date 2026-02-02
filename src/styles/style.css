@@ -388,3 +388,49 @@ footer {
     padding: 1.25rem;
   }
 }
+
+/* ----- BAKING ----- */
+.bake-photos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+@media screen and (min-width: 45em) {
+  .bake-photos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.bake-photos img {
+  border-radius: 0.5rem;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.bake-back {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--color-secondary-text);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
+
+.bake-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  font-size: 0.875rem;
+}
+
+.bake-nav a {
+  color: var(--color-secondary-text);
+  text-decoration: none;
+}
+
+.bake-nav a:last-child {
+  text-align: right;
+}
