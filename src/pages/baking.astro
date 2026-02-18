@@ -28,9 +28,7 @@ bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 
               return (
                 <li>
-                  <a href={`/baking/${bake.id}`}>
-                    {bake.data.title ? `${formatted} — ${bake.data.title}` : formatted}
-                  </a>
+                  <a href={`/baking/${bake.id}`}>{formatted}</a>
                 </li>
               )
             })
