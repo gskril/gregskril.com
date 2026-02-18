@@ -57,7 +57,7 @@ const schedule = data.schedule.toSorted((a, b) => a.sort_order - b.sort_order)
           {
             ingredients.map((ing) => (
               <li>
-                {ing.amount} {ing.name}
+                {ing.amount.replace(/\s+(?=[a-zA-Z%]+$)/, '')} {ing.name}
                 {ing.note && <span> — {ing.note}</span>}
               </li>
             ))
