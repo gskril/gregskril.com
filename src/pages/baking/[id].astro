@@ -31,14 +31,14 @@ const { data } = bake
 const formatted = fmt(data.bake_date)
 const ingredients = data.ingredients.toSorted((a, b) => a.sort_order - b.sort_order)
 const schedule = data.schedule.toSorted((a, b) => a.sort_order - b.sort_order)
-const ogImage = data.photos.length > 0 ? `${WORKER_BASE}${data.photos[0].url}` : undefined
+const ogImages = data.photos.length > 0 ? data.photos.map((p) => `${WORKER_BASE}${p.url}`) : undefined
 ---
 
 <Layout
   article={true}
   title={`${data.title || formatted} - Baking Log`}
   description={`Bake from ${formatted}`}
-  image={ogImage}
+  image={ogImages}
 >
 
   <main class="container">

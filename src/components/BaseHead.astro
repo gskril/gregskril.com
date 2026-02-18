@@ -1,5 +1,7 @@
 ---
-const { title, description, image = 'https://gregskril.com/img/banner.jpg' } = Astro.props
+const { title, description, image } = Astro.props
+const defaultImage = 'https://gregskril.com/img/banner.jpg'
+const images = Array.isArray(image) ? image : [image || defaultImage]
 ---
 
 <meta charset="utf-8" />
@@ -13,7 +15,7 @@ const { title, description, image = 'https://gregskril.com/img/banner.jpg' } = A
 <meta name="description" content={description} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={image} />
+{images.map((img) => <meta property="og:image" content={img} />)}
 
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_US" />
