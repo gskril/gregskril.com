@@ -1,8 +1,9 @@
 ---
+import { formatBakes } from '../utils'
 import { getCollection } from 'astro:content'
 import Layout from '../layouts/Layout.astro'
 
-const bakes = await getCollection('bakes')
+const bakes = formatBakes(await getCollection('bakes'))
 bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 ---
 
@@ -27,8 +28,8 @@ bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 
               return (
                 <li>
-                  <a href={`/baking/${bake.id.replace(/\/index\.md$/, '')}`}>
-                    {bake.data.title || formatted}
+                  <a href={`/baking/${bake.id}`}>
+                    {bake.data.title ? `${formatted} — ${bake.data.title}` : formatted}
                   </a>
                 </li>
               )
@@ -39,7 +40,8 @@ bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
           ...and dozens of other loaves before I started this log. See some on <a
             href="https://goodbread.nyc/?ref=gregskril.com"
             target="_blank"
-            rel="noopener">goodbread.nyc</a>
+            rel="noopener">goodbread.nyc</a
+          >
         </p>
       </div>
     </div>
