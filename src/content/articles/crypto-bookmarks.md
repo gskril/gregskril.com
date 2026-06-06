@@ -24,7 +24,7 @@ To avoid these phishing scams completely, and to provide easier access to helpfu
 
 ### **[Coinbase](https://coinbase.com/)**
 
-Coinbase is one of the largest cryptocurrency exchanges in the world. An exchange is what you use to buy crypto with fiat money (US dollars, Euros, etc.). More specifically, Coinbase is a centralized exchange which means it is operated by a single company, is regulated by the government, and requires KYC (Know Your Customer, or basically identity verification). I personally use Coinbase, but other centralized exchanges that offer almost the same functionality are [Gemini](http://localhost:8080/blog/crypto-bookmarks/gemini.com), [Binance](https://www.binance.com/), [Kraken](https://www.kraken.com/), [FTX](https://ftx.com/), and the list goes on.
+Coinbase is one of the largest cryptocurrency exchanges in the world. An exchange is what you use to buy crypto with fiat money (US dollars, Euros, etc.). More specifically, Coinbase is a centralized exchange which means it is operated by a single company, is regulated by the government, and requires KYC (Know Your Customer, or basically identity verification). I personally use Coinbase, but other centralized exchanges that offer almost the same functionality are [Gemini](https://gemini.com), [Binance](https://www.binance.com/), [Kraken](https://www.kraken.com/), [FTX](https://ftx.com/), and the list goes on.
 
 ### **[CoinMarketCap](https://coinmarketcap.com/)**
 
@@ -36,7 +36,7 @@ Etherscan is a blockchain explorer for the Ethereum network. This means that it 
 
 ### **[OpenSea](https://opensea.io/)**
 
-OpenSea is the largest NFT Marketplace, and accounts for a significant portion of all transactions on the Ethereum network. [Learn how to get started with NFTs](http://localhost:8080/blog/get-started-with-nfts/).
+OpenSea is the largest NFT Marketplace, and accounts for a significant portion of all transactions on the Ethereum network. [Learn how to get started with NFTs](/blog/get-started-with-nfts/).
 
 ### **[Rarible Analytics](https://raribleanalytics.com/)**
 
@@ -44,7 +44,7 @@ This is my favorite website for checking the live price of [gas](https://www.inv
 
 ### **[Uniswap](https://uniswap.org/)**
 
-Earlier I mentioned Coinbase is a centralized exchange - well Uniswap is a decentralized exchange (also called a DEX). This means that you have access to “swap” (trade) all tokens on the Ethereum network, rather than being limited to a rather small subset on a centralized exchange. Once you [start using a non-custodial wallet](http://localhost:8080/blog/get-started-with-nfts/) like MetaMask, you'll be using decentralized exchanges more frequently than centralized ones.
+Earlier I mentioned Coinbase is a centralized exchange - well Uniswap is a decentralized exchange (also called a DEX). This means that you have access to “swap” (trade) all tokens on the Ethereum network, rather than being limited to a rather small subset on a centralized exchange. Once you [start using a non-custodial wallet](/blog/get-started-with-nfts/) like MetaMask, you'll be using decentralized exchanges more frequently than centralized ones.
 
 ## **Web3 resources for experienced users**
 
@@ -82,6 +82,6 @@ The websites I mentioned above are my most used, and/or favorite tools that I've
 
 The place I've learned the most about Web3 is undoubtedly Twitter. There's a little niche that people call crypto Twitter - once you're on it, you'll see people post about interesting topics all the time. But getting on to crypto Twitter in the first place is the hard part since you probably don't know who to follow.
 
-To get you started on crypto Twitter, I came up with a list of my favorite thought leaders in the space. You can find that list in my post, [How to Get More Involved in the Crypto and NFT Community](http://localhost:8080/blog/nft-community/).
+To get you started on crypto Twitter, I came up with a list of my favorite thought leaders in the space. You can find that list in my post, [How to Get More Involved in the Crypto and NFT Community](/blog/nft-community/).
 
 For an extended list of trusted people/websites in the space, I recommend scrolling through (and bookmarking with the rest of this list) [0x.supply](https://0x.supply/).

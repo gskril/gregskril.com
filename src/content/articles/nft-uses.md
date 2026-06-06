@@ -107,7 +107,7 @@ It's become very clear that Adidas is heavily investing in this space, so people
 
 ### Token gating a Discord community
 
-As you might have read in my post "[How to Get More Involved in the Crypto and NFT Community](/blog/nft-community/)"**,** NFT communities operate largely on Discord. If you don't know how Discord works, each community has its own server. And within a server there are channels. Each channel can have different permissions, meaning each channel can be gated in a different way.
+NFT communities operate largely on Discord. If you don't know how Discord works, each community has its own server. And within a server there are channels. Each channel can have different permissions, meaning each channel can be gated in a different way.
 
 The way most NFT projects utilize Discord is there will be some channels that are open to everyone - you don't need to own anything in order to participate in the conversation. Alongside those, some channels will be for NFT owners only. So you must own an NFT from a specific collection in order to see that channel.
 

@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from 'astro:content'
+import { getCollection } from 'astro:content'
 import Layout from '../layouts/Layout.astro'
 
 const articles = await getCollection('articles')
@@ -16,9 +16,7 @@ articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
       <div class="content">
         <div class="blog">
           {
-            articles.map(async (article) => {
-              const { Content } = await render(article)
-
+            articles.map((article) => {
               return (
                 <div class="blog__post">
                   <a href={`/blog/${article.id}`} class="blog__title">
@@ -34,7 +32,7 @@ articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
                     </span>
                   </div>
                   <span class="blog__excerpt">{article.data.description}</span>
-                  <a class="cta" href={`/blog/${article.filePath}`}>
+                  <a class="cta" href={`/blog/${article.id}`}>
                     Read
                   </a>
                 </div>

@@ -338,7 +338,7 @@ footer {
 }
 
 .blog__tag:hover,
-.blog__tage:focus-visible {
+.blog__tag:focus-visible {
   color: var(--color-primary-text);
 }
 

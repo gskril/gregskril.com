@@ -1,3 +1,3 @@
 [install]
-# Wait 24 hours before using newly published packages
-minimumReleaseAge = 86400
+# Wait 48 hours before using newly published packages
+minimumReleaseAge = 172800
