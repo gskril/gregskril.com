@@ -3,12 +3,13 @@ import { formatBakes } from '../utils'
 import { getCollection } from 'astro:content'
 import Layout from '../layouts/Layout.astro'
 
+const currentYear = new Date().getFullYear()
+
 const bakes = formatBakes(await getCollection('bakes'))
 bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 ---
 
 <Layout title="Baking Log - Greg Skriloff" description="A personal sourdough baking log.">
-
   <main class="container">
     <div class="section">
       <a class="bake-back" href="/">← Home</a>
@@ -17,15 +18,19 @@ bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
         <ul>
           {
             bakes.map((bake) => {
+              const bakeDate = bake.data.date
+              const isThisYear = bakeDate.getFullYear() === currentYear
               const formatted = new Intl.DateTimeFormat('en-US', {
-                year: 'numeric',
+                year: isThisYear ? undefined : 'numeric',
                 day: 'numeric',
                 month: 'short',
-              }).format(bake.data.date)
+              }).format(bakeDate)
 
               return (
                 <li>
-                  <a href={`/baking/${bake.id}`}>{formatted}</a>
+                  <a href={`/baking/${bake.id}`}>
+                    {formatted} - {bake.data.title}
+                  </a>
                 </li>
               )
             })
