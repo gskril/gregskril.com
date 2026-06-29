@@ -31,7 +31,7 @@ const { data } = bake
 const formatted = fmt(data.bake_date)
 const ingredients = data.ingredients.toSorted((a, b) => a.sort_order - b.sort_order)
 const schedule = data.schedule.toSorted((a, b) => a.sort_order - b.sort_order)
-const ogImages = data.photos.length > 0 ? data.photos.map((p) => `${WORKER_BASE}${p.url}`) : undefined
+  data.photos.length > 0 ? data.photos.map((p) => `${WORKER_BASE}${p.url}`) : undefined
 ---
 
 <Layout
@@ -40,7 +40,6 @@ const ogImages = data.photos.length > 0 ? data.photos.map((p) => `${WORKER_BASE}
   description={`Bake from ${formatted}`}
   image={ogImages}
 >
-
   <main class="container">
     <div class="section">
       <a class="bake-back" href="/baking">← All bakes</a>
@@ -93,7 +92,8 @@ const ogImages = data.photos.length > 0 ? data.photos.map((p) => `${WORKER_BASE}
                   src={`${WORKER_BASE}${photo.url}`}
                   alt={photo.caption || `Bake from ${formatted}`}
                   width={1200}
-                  height={1200}
+                  height={1600}
+                  fit="scale-down"
                   quality="high"
                   loading="lazy"
                 />
