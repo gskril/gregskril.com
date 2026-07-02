@@ -26,7 +26,8 @@ const ingredientSchema = z.object({
   id: z.string(),
   bake_id: z.string(),
   name: z.string(),
-  amount: z.string(),
+  amount_value: z.number(),
+  unit: z.string().nullish(),
   note: z.string().nullish(),
   sort_order: z.number(),
   created_at: z.string(),
@@ -35,7 +36,7 @@ const ingredientSchema = z.object({
 const scheduleSchema = z.object({
   id: z.string(),
   bake_id: z.string(),
-  time: z.string(),
+  occurs_at: z.string(),
   action: z.string(),
   note: z.string().nullish(),
   sort_order: z.number(),

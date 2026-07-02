@@ -11,6 +11,16 @@ const fmt = (dateStr: string) =>
     month: 'short',
   }).format(new Date(dateStr))
 
+// occurs_at is a local wall-clock timestamp with no timezone (e.g. "2026-06-26T14:45:00").
+// Parse as UTC so build output is deterministic regardless of the build server's timezone.
+const fmtTime = (dateStr: string) =>
+  new Intl.DateTimeFormat('en-US', {
+    weekday: 'short',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZone: 'UTC',
+  }).format(new Date(`${dateStr}Z`))
+
 export async function getStaticPaths() {
   const bakes = formatBakes(await getCollection('bakes'))
   bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
@@ -31,6 +41,7 @@ const { data } = bake
 const formatted = fmt(data.bake_date)
 const ingredients = data.ingredients.toSorted((a, b) => a.sort_order - b.sort_order)
 const schedule = data.schedule.toSorted((a, b) => a.sort_order - b.sort_order)
+const ogImages =
   data.photos.length > 0 ? data.photos.map((p) => `${WORKER_BASE}${p.url}`) : undefined
 ---
 
@@ -55,7 +66,8 @@ const schedule = data.schedule.toSorted((a, b) => a.sort_order - b.sort_order)
           {
             ingredients.map((ing) => (
               <li>
-                {ing.amount} {ing.name.toLowerCase()}
+                {ing.amount_value}
+                {ing.unit} {ing.name.toLowerCase()}
                 {ing.note && <span> — {ing.note}</span>}
               </li>
             ))
@@ -68,7 +80,7 @@ const schedule = data.schedule.toSorted((a, b) => a.sort_order - b.sort_order)
           {
             schedule.map((entry) => (
               <li>
-                <strong>{entry.time}</strong> {entry.action}
+                <strong>{fmtTime(entry.occurs_at)}</strong> {entry.action}
                 {entry.note && <span> — {entry.note}</span>}
               </li>
             ))
