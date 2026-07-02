@@ -10,5 +10,5 @@ export function formatBakes(bakes: CollectionEntry<'bakes'>[]) {
   }))
 }
 
-export const WORKER_DOMAIN = 'baking-log.gregskril.workers.dev'
+export const WORKER_DOMAIN = 'baking-log-api.gregskril.com'
 export const WORKER_BASE = `https://${WORKER_DOMAIN}`

@@ -9,7 +9,15 @@ const bakes = formatBakes(await getCollection('bakes'))
 bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 ---
 
-<Layout title="Baking Log - Greg Skriloff" description="A personal sourdough baking log.">
+<Layout
+  title="Baking Log - Greg Skriloff"
+  description="A personal sourdough baking log."
+  image={[
+    'https://gregskril.com/img/baking/og-1.webp',
+    'https://gregskril.com/img/baking/og-2.webp',
+    'https://gregskril.com/img/baking/og-3.webp',
+  ]}
+>
   <main class="container">
     <div class="section">
       <a class="bake-back" href="/">← Home</a>
