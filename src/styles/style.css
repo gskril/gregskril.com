@@ -390,6 +390,70 @@ footer {
 }
 
 /* ----- BAKING ----- */
+.bake-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.bake-schedule__day-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-secondary-text);
+  margin: 0 0 0.75rem;
+}
+
+.bake-schedule__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 1rem;
+  row-gap: 0.65rem;
+}
+
+@media screen and (min-width: 45em) {
+  .bake-schedule__list {
+    column-gap: 1.5rem;
+  }
+}
+
+.bake-schedule__item {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  align-items: start;
+}
+
+.bake-schedule__item:not(:last-of-type) {
+  margin-bottom: 0;
+}
+
+.bake-schedule__time {
+  color: var(--color-secondary-text);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.bake-schedule__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.bake-schedule__action {
+  color: var(--color-primary-text);
+}
+
+.bake-schedule__note {
+  font-size: 0.875rem;
+  color: var(--color-secondary-text);
+}
+
 .bake-photos {
   display: grid;
   grid-template-columns: 1fr;
