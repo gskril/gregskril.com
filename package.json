@@ -14,8 +14,8 @@
     "beautify": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md,astro}\" --ignore-path .gitignore"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.18",
-    "astro": "^6.4.4"
+    "@astrojs/rss": "^4.0.19",
+    "astro": "^6.4.8"
   },
   "devDependencies": {
     "prettier": "^3.7.4",
