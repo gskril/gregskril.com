@@ -56,12 +56,14 @@ const schedule = data.schedule.toSorted((a, b) => a.sort_order - b.sort_order)
 const scheduleByDay = schedule.reduce<
   { key: string; label: string; entries: typeof schedule }[]
 >((groups, entry) => {
-  const key = dayKey(entry.occurs_at)
+  // occurs_at is nullable — an entry can have an action but no scheduled time.
+  const key = entry.occurs_at ? dayKey(entry.occurs_at) : 'unscheduled'
+  const label = entry.occurs_at ? fmtDay(entry.occurs_at) : 'Unscheduled'
   const last = groups[groups.length - 1]
   if (last?.key === key) {
     last.entries.push(entry)
   } else {
-    groups.push({ key, label: fmtDay(entry.occurs_at), entries: [entry] })
+    groups.push({ key, label, entries: [entry] })
   }
   return groups
 }, [])
@@ -98,7 +100,6 @@ const ogImages =
             ))
           }
         </ul>
-        {data.ingredients_text && <p>{data.ingredients_text}</p>}
 
         <h2>Schedule</h2>
         <div class="bake-schedule">
@@ -109,12 +110,20 @@ const ogImages =
                 <ul class="bake-schedule__list">
                   {day.entries.map((entry) => (
                     <li class="bake-schedule__item">
-                      <time class="bake-schedule__time" datetime={entry.occurs_at}>
-                        {fmtTime(entry.occurs_at)}
-                      </time>
+                      {entry.occurs_at ? (
+                        <time class="bake-schedule__time" datetime={entry.occurs_at}>
+                          {fmtTime(entry.occurs_at)}
+                        </time>
+                      ) : (
+                        // Keep the subgrid's first column occupied so the body
+                        // stays aligned with timed entries.
+                        <span class="bake-schedule__time" />
+                      )}
                       <div class="bake-schedule__body">
                         <span class="bake-schedule__action">{entry.action}</span>
-                        {entry.note && <span class="bake-schedule__note">{entry.note}</span>}
+                        {entry.note && (
+                          <span class="bake-schedule__note">{entry.note}</span>
+                        )}
                       </div>
                     </li>
                   ))}
