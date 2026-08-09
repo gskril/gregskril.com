@@ -26,7 +26,9 @@ const ingredientSchema = z.object({
   id: z.string(),
   bake_id: z.string(),
   name: z.string(),
-  amount_value: z.number(),
+  // Nullable in the worker (`amount_value REAL`, typed `number | null`) — rows
+  // predating migration 0003 have no structured amount until backfilled.
+  amount_value: z.number().nullish(),
   unit: z.string().nullish(),
   note: z.string().nullish(),
   sort_order: z.number(),
@@ -36,7 +38,9 @@ const ingredientSchema = z.object({
 const scheduleSchema = z.object({
   id: z.string(),
   bake_id: z.string(),
-  occurs_at: z.string(),
+  // Nullable in the worker (`occurs_at TEXT`, typed `string | null`) — an entry
+  // can carry an action with no scheduled time.
+  occurs_at: z.string().nullish(),
   action: z.string(),
   note: z.string().nullish(),
   sort_order: z.number(),
@@ -56,7 +60,6 @@ const bakeSchema = z.object({
   id: z.string(),
   title: z.string().nullish(),
   bake_date: z.string(),
-  ingredients_text: z.string().nullish(),
   notes: z.string().nullish(),
   created_at: z.string(),
   updated_at: z.string(),

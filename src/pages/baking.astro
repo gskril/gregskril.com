@@ -1,12 +1,10 @@
 ---
-import { formatBakes } from '../utils'
-import { getCollection } from 'astro:content'
+import { sortedBakes } from '../bakes'
 import Layout from '../layouts/Layout.astro'
 
 const currentYear = new Date().getFullYear()
 
-const bakes = formatBakes(await getCollection('bakes'))
-bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+const bakes = await sortedBakes()
 ---
 
 <Layout

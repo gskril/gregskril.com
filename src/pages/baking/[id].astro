@@ -1,8 +1,8 @@
 ---
-import { getCollection } from 'astro:content'
 import { Image } from 'astro:assets'
 import Layout from '../../layouts/Layout.astro'
-import { formatBakes, WORKER_BASE } from '../../utils'
+import { bakeWithNeighbours, sortedBakes } from '../../bakes'
+import { WORKER_BASE } from '../../utils'
 
 const fmt = (dateStr: string) =>
   new Intl.DateTimeFormat('en-US', {
@@ -33,20 +33,27 @@ const fmtTime = (dateStr: string) =>
 const dayKey = (dateStr: string) => dateStr.slice(0, 10)
 
 export async function getStaticPaths() {
-  const bakes = formatBakes(await getCollection('bakes'))
-  bakes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  const bakes = await sortedBakes()
 
   return bakes.map((bake, i) => ({
     params: { id: bake.id },
-    props: {
-      bake,
-      prev: bakes[i + 1] || null,
-      next: bakes[i - 1] || null,
-    },
+    props: bakeWithNeighbours(bakes, i),
   }))
 }
 
-const { bake, prev, next } = Astro.props
+// Astro supplies props by matching each prerendered path back to its
+// getStaticPaths entry. When that lookup misses, props arrive empty and
+// destructuring `bake` throws, which aborts the entire build rather than the
+// one page. Resolve from the route param instead so the page never depends on
+// that match succeeding.
+let { bake, prev, next } = Astro.props
+if (!bake) {
+  const bakes = await sortedBakes()
+  const i = bakes.findIndex((b) => b.id === Astro.params.id)
+  if (i === -1) throw new Error(`No bake matches id "${Astro.params.id}"`)
+  ;({ bake, prev, next } = bakeWithNeighbours(bakes, i))
+}
+
 const { data } = bake
 
 const formatted = fmt(data.bake_date)
@@ -56,12 +63,14 @@ const schedule = data.schedule.toSorted((a, b) => a.sort_order - b.sort_order)
 const scheduleByDay = schedule.reduce<
   { key: string; label: string; entries: typeof schedule }[]
 >((groups, entry) => {
-  const key = dayKey(entry.occurs_at)
+  // occurs_at is nullable — an entry can have an action but no scheduled time.
+  const key = entry.occurs_at ? dayKey(entry.occurs_at) : 'unscheduled'
+  const label = entry.occurs_at ? fmtDay(entry.occurs_at) : 'Unscheduled'
   const last = groups[groups.length - 1]
   if (last?.key === key) {
     last.entries.push(entry)
   } else {
-    groups.push({ key, label: fmtDay(entry.occurs_at), entries: [entry] })
+    groups.push({ key, label, entries: [entry] })
   }
   return groups
 }, [])
@@ -98,7 +107,6 @@ const ogImages =
             ))
           }
         </ul>
-        {data.ingredients_text && <p>{data.ingredients_text}</p>}
 
         <h2>Schedule</h2>
         <div class="bake-schedule">
@@ -109,12 +117,20 @@ const ogImages =
                 <ul class="bake-schedule__list">
                   {day.entries.map((entry) => (
                     <li class="bake-schedule__item">
-                      <time class="bake-schedule__time" datetime={entry.occurs_at}>
-                        {fmtTime(entry.occurs_at)}
-                      </time>
+                      {entry.occurs_at ? (
+                        <time class="bake-schedule__time" datetime={entry.occurs_at}>
+                          {fmtTime(entry.occurs_at)}
+                        </time>
+                      ) : (
+                        // Keep the subgrid's first column occupied so the body
+                        // stays aligned with timed entries.
+                        <span class="bake-schedule__time" />
+                      )}
                       <div class="bake-schedule__body">
                         <span class="bake-schedule__action">{entry.action}</span>
-                        {entry.note && <span class="bake-schedule__note">{entry.note}</span>}
+                        {entry.note && (
+                          <span class="bake-schedule__note">{entry.note}</span>
+                        )}
                       </div>
                     </li>
                   ))}
