@@ -15,10 +15,14 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
-    "astro": "^7.3.2"
+    "astro": "^7.3.3"
   },
   "devDependencies": {
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1"
+  },
+  "overrides": {
+    "js-yaml": ">=4.3.2",
+    "svgo": ">=4.1.0"
   }
 }
