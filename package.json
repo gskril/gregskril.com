@@ -20,9 +20,5 @@
   "devDependencies": {
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1"
-  },
-  "overrides": {
-    "js-yaml": ">=4.3.2",
-    "svgo": ">=4.1.0"
   }
 }
