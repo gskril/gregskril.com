@@ -2,6 +2,14 @@
 const { title, description, image } = Astro.props
 const defaultImage = 'https://gregskril.com/img/banner.jpg'
 const images = Array.isArray(image) ? image : [image || defaultImage]
+
+// Netlify serves pages as directories (/baking -> /baking/), so canonicals use a trailing slash
+const canonicalPath = Astro.url.pathname
+  .replace(/\/index\.html$/, '/')
+  .replace(/\.html$/, '')
+  .replace(/\/?$/, '/')
+const isNotFound = Astro.url.pathname.replace(/(\.html|\/)$/, '') === '/404'
+const canonicalURL = new URL(canonicalPath, Astro.site)
 ---
 
 <meta charset="utf-8" />
@@ -12,6 +20,8 @@ const images = Array.isArray(image) ? image : [image || defaultImage]
 <link rel="icon" type="image/png" sizes="128x128" href="/img/favicon-128.png" />
 
 <title>{title}</title>
+{!isNotFound && <link rel="canonical" href={canonicalURL} />}
+<link rel="sitemap" href="/sitemap-index.xml" />
 <meta name="description" content={description} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
