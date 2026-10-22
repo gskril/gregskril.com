@@ -87,7 +87,7 @@ const ogImages =
 >
   <main class="container">
     <div class="section">
-      <a class="bake-back" href="/baking">← All bakes</a>
+      <a class="bake-back" href="/baking/">← All bakes</a>
 
       <h1>{data.title || 'Bake Log'}</h1>
       <div class="blog__meta">
@@ -169,8 +169,8 @@ const ogImages =
       </div>
 
       <nav class="bake-nav">
-        {prev ? <a href={`/baking/${prev.id}`}>← prev</a> : <span />}
-        {next ? <a href={`/baking/${next.id}`}>next →</a> : <span />}
+        {prev ? <a href={`/baking/${prev.id}/`}>← prev</a> : <span />}
+        {next ? <a href={`/baking/${next.id}/`}>next →</a> : <span />}
       </nav>
     </div>
   </main>
