@@ -19,7 +19,7 @@ articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
             articles.map((article) => {
               return (
                 <div class="blog__post">
-                  <a href={`/blog/${article.id}`} class="blog__title">
+                  <a href={`/blog/${article.id}/`} class="blog__title">
                     {article.data.title}
                   </a>
                   <div class="blog__meta">
@@ -32,7 +32,7 @@ articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
                     </span>
                   </div>
                   <span class="blog__excerpt">{article.data.description}</span>
-                  <a class="cta" href={`/blog/${article.id}`}>
+                  <a class="cta" href={`/blog/${article.id}/`}>
                     Read
                   </a>
                 </div>
