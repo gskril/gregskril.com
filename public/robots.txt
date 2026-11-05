@@ -1,6 +1,6 @@
-# Example: Allow all bots to scan and index your site.
 # Full syntax: https://developers.google.com/search/docs/advanced/robots/create-robots-txt
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 Sitemap: https://gregskril.com/sitemap-index.xml
