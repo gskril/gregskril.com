@@ -9,10 +9,11 @@ const PLAUSIBLE_ROUTES: Record<string, string> = {
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const target = PLAUSIBLE_ROUTES[new URL(request.url).pathname]
+    const url = new URL(request.url)
+    const target = PLAUSIBLE_ROUTES[url.pathname]
     if (!target) return env.ASSETS.fetch(request)
 
-    const proxied = new Request(target, request)
+    const proxied = new Request(target + url.search, request)
     proxied.headers.delete('cookie')
 
     // Plausible derives visitor location from the forwarded IP
