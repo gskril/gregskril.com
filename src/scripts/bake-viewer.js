@@ -135,6 +135,14 @@ import { trapFocus, releaseFocus } from './modal.js'
     else if (e.key === 'ArrowRight') step(1)
     else if (e.key === 'ArrowLeft') step(-1)
   })
+  // phones: never let a swipe on the photo scroll the page underneath
+  box.addEventListener(
+    'touchmove',
+    (e) => {
+      if (!box.hidden) e.preventDefault()
+    },
+    { passive: false }
+  )
   addEventListener('resize', () => {
     if (!box.hidden) size(photos[k])
   })

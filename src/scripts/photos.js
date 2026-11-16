@@ -408,15 +408,15 @@ import { crunch, preloadCrunch } from './crunch.js';
     if (!current || closing || sliding) return;
     const old = current, p = prints[(old.i + dir + prints.length) % prints.length];
     if (reduce.matches) {
-      old.el.classList.remove('away'); current = p; p.el.classList.add('away'); fill(p); return;
+      current = p; fill(p); return;
     }
     sliding = true;
     fig.style.transition = 'transform .22s ease-in, opacity .22s ease-in';
     fig.style.transform = `translateX(${-dir * 70}px) rotate(${-dir * 2}deg)`;
     fig.style.opacity = '0';
     later(() => {
-      old.el.classList.remove('away');
-      current = p; p.el.classList.add('away'); raise(p);
+      /* the pile behind stays exactly as it was while you browse; it only changes on close */
+      current = p;
       fill(p);
       fig.style.transition = 'none';
       fig.style.transform = `translateX(${dir * 70}px) rotate(${dir * 2}deg)`;
@@ -432,6 +432,12 @@ import { crunch, preloadCrunch } from './crunch.js';
     closing = true;
     timers.forEach(clearTimeout); timers.clear(); sliding = false;
     const p = current;
+    /* if you browsed to another photo, it's the one that flies back: tuck it on top of the pile */
+    if (!p.el.classList.contains('away')) {
+      prints.forEach((q) => q.el.classList.remove('away'));
+      p.el.classList.add('away');
+      raise(p);
+    }
     box.classList.remove('open');
     fig.style.transition = '';
     fig.style.opacity = '1';
@@ -483,7 +489,17 @@ import { crunch, preloadCrunch } from './crunch.js';
       if (Math.abs(e.deltaX) > 12 && e.timeStamp > wheelLock) { wheelLock = e.timeStamp + 500; step(e.deltaX > 0 ? 1 : -1); }
     } else if (Math.abs(e.deltaY) > 8) close();
   }, { passive: false });
-  window.addEventListener('resize', () => { if (current) close(); });
+  /* phones: never let a swipe on the photo scroll the page underneath */
+  box.addEventListener('touchmove', (e) => { if (current) e.preventDefault(); }, { passive: false });
+  /* mobile browsers fire resize when the address bar slides; only a real width change closes */
+  let lastW = window.innerWidth;
+  window.addEventListener('resize', () => {
+    const w = window.innerWidth, changed = w !== lastW;
+    lastW = w;
+    if (!current || closing) return;
+    if (changed) close();
+    else if (!sliding) fill(current);
+  });
 
   window.Pile = { layout };
   layout();
