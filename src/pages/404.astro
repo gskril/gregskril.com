@@ -1,17 +1,28 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import GoodBread from '../layouts/GoodBread.astro'
+import Eyes from '../components/Eyes.astro'
 ---
 
-<Layout title="Page Not Found" description="The page you are looking for does not exist.">
-  <main class="container">
-    <div class="section">
-      <h1>Whoops, something went wrong :/</h1>
-      <p>404 Error: Page not found</p>
-    </div>
-    <div class="section">
-      <p>
-        <a href="/">Return home</a>
-      </p>
+<GoodBread
+  title="Page not found"
+  description="The page you are looking for does not exist."
+>
+  <main class="nf">
+    <div class="nf-eyes"><Eyes /></div>
+    <h1 class="nf-title">Hmm, that page isn't here.</h1>
+    <p>It might have moved, or it never existed. Either way, there's still bread.</p>
+    <div class="btns">
+      <a class="btn" href="/">Home</a>
+      <a class="btn" href="/baking/">Bake log</a>
     </div>
   </main>
-</Layout>
+
+  <Fragment slot="foot-links">
+    <a href="/">Home</a>
+    <a href="/baking/">Bake log</a>
+  </Fragment>
+</GoodBread>
+
+<script>
+  import '../scripts/eyes.js'
+</script>

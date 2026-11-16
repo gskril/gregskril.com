@@ -1,9 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
-import Layout from '../../layouts/Layout.astro'
-import Footer from '../../components/Footer.astro'
+import GoodBread from '../../layouts/GoodBread.astro'
 
-// 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const articles = await getCollection('articles')
   return articles.map((article) => ({
@@ -12,56 +10,56 @@ export async function getStaticPaths() {
   }))
 }
 
-// 2. For your template, you can get the entry directly from the prop
 const { article } = Astro.props
 const { Content } = await render(article)
+
+const date = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+}).format(article.data.date)
 ---
 
-<Layout article={true} title={article.data.title} description={article.data.description}>
-  <main class="container">
-    <div class="section">
-      <h1>{article.data.title}</h1>
-      {
-        article.data.subtitle && (
-          <span class="subtitle subtitle--large">{article.data.subtitle}</span>
-        )
-      }
+<GoodBread title={article.data.title} description={article.data.description}>
+  <div class="bk">
+    <nav class="bk-top"><a class="bk-back" href="/blog/">&larr; Blog</a></nav>
 
-      <div class="blog__meta">
-        <span class="blog__date">
-          {
-            new Intl.DateTimeFormat('en-US', {
-              year: 'numeric',
-              day: 'numeric',
-              month: 'short',
-            }).format(new Date(article.data.date))
-          }
-        </span>
-      </div>
+    <main class="post">
+      <header class="post-head">
+        <p class="bk-kicker">
+          <time datetime={article.data.date.toISOString()}>{date}</time>
+        </p>
+        <h1 class="post-title">{article.data.title}</h1>
+        {article.data.subtitle && <p class="post-sub">{article.data.subtitle}</p>}
+      </header>
 
-      <div class="content">
+      <article class="prose">
         <Content />
-      </div>
+      </article>
 
-      <div class="post-end">
-        <div class="author">
-          <img
-            src="/img/profile.jpg"
-            class="author__img"
-            width="42"
-            height="42"
-            alt="Greg Skriloff"
-          />
-          <span class="author__name">Greg Skriloff</span>
+      <aside class="post-end">
+        <img src="/img/profile.jpg" width="56" height="56" alt="Greg Skriloff" />
+        <div>
+          <p class="post-end-lead">Like this post or find it helpful?</p>
+          <p>I talk about this kind of stuff a lot more on Twitter.</p>
+          <div class="btns">
+            <a
+              class="btn"
+              href="https://twitter.com/gregskril"
+              target="_blank"
+              rel="noopener"
+            >
+              Follow me <span aria-hidden="true">&#8599;</span>
+            </a>
+          </div>
         </div>
-        <h4>Like this post or find it helpful?</h4>
-        <p>I talk about this type of stuff much more often on Twitter!</p>
-        <a class="cta" href="https://twitter.com/gregskril" target="_blank" rel="noopener"
-          >Follow me on Twitter</a
-        >
-      </div>
-    </div>
-  </main>
+      </aside>
+    </main>
+  </div>
 
-  <Footer />
-</Layout>
+  <Fragment slot="foot-links">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+  </Fragment>
+</GoodBread>

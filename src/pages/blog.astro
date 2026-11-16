@@ -1,47 +1,54 @@
 ---
 import { getCollection } from 'astro:content'
-import Layout from '../layouts/Layout.astro'
+import GoodBread from '../layouts/GoodBread.astro'
+import Underline from '../components/Underline.astro'
 
 const articles = await getCollection('articles')
 articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+
+const fmt = (d: Date) =>
+  new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  }).format(d)
 ---
 
-<Layout
-  title="Blog - Greg Skriloff"
+<GoodBread
+  title="Blog · Greg Skriloff"
   description="Thoughts and tutorials on tech and crypto."
 >
-  <main class="container">
-    <div class="section">
-      <h1>Blog</h1>
-      <div class="content">
-        <div class="blog">
-          {
-            articles.map((article) => {
-              return (
-                <div class="blog__post">
-                  <a href={`/blog/${article.id}/`} class="blog__title">
-                    {article.data.title}
-                  </a>
-                  <div class="blog__meta">
-                    <span class="blog__date">
-                      {new Intl.DateTimeFormat('en-US', {
-                        year: 'numeric',
-                        day: 'numeric',
-                        month: 'short',
-                      }).format(new Date(article.data.date))}
-                    </span>
-                  </div>
-                  <span class="blog__excerpt">{article.data.description}</span>
-                  <a class="cta" href={`/blog/${article.id}/`}>
-                    Read
-                  </a>
-                </div>
-              )
-            })
-          }
-          <a href="/">Home</a>
-        </div>
-      </div>
-    </div>
-  </main>
-</Layout>
+  <div class="bk">
+    <nav class="bk-top"><a class="bk-back" href="/">&larr; Greg</a></nav>
+
+    <header class="bk-head">
+      <h1 class="bk-title"><Underline>Blog</Underline></h1>
+      <p class="bk-intro">A few things I wrote.</p>
+    </header>
+
+    <main>
+      <ul class="bl-list">
+        {
+          articles.map((a) => (
+            <li>
+              <a href={`/blog/${a.id}/`}>
+                <span class="bl-date">{fmt(a.data.date)}</span>
+                <span class="bl-title">{a.data.title}</span>
+                <span class="bl-desc">{a.data.description}</span>
+                <span class="bl-arrow" aria-hidden="true">
+                  &rarr;
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+  </div>
+
+  <Fragment slot="foot-links">
+    <a href="/">Home</a>
+    <a href="/baking/">Bake log</a>
+  </Fragment>
+</GoodBread>
