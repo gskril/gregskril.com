@@ -388,7 +388,7 @@ h1, h2 { margin: 0; }
 }
 
 
-/* The bake log and single-bake pages: quieter than the homepage, same brand. */
+/* Inner pages (bake log, bakes, blog): quiet, same brand. */
 
 .bk { max-width: 72rem; margin: 0 auto; padding: 1.25rem var(--gutter) 4rem; }
 .bk-top { display: flex; justify-content: space-between; align-items: center; min-height: 2.5rem; }
@@ -412,147 +412,54 @@ h1, h2 { margin: 0; }
 }
 .bk-under > svg path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bk-draw .9s cubic-bezier(.45, .05, .25, 1) .15s forwards; }
 @keyframes bk-draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .bk-under > svg path { animation: none; stroke-dashoffset: 0; } }
 
-/* ---------- the log ---------- */
-.bk-head { padding: clamp(3rem, 7vw, 5.5rem) 0 clamp(2.5rem, 5vw, 4rem); }
-.bk-intro { margin-top: 1.25rem; max-width: 30rem; font-size: 1.25rem; }
-.bk-stats { list-style: none; padding: 0; margin: 1.75rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
-.bk-stats li {
-  font-family: var(--pangram); font-size: .9375rem; text-transform: uppercase;
-  border: 1px solid var(--ink); border-radius: 999px; padding: .4rem .95rem .35rem;
-}
-.bk-stats b { font-weight: 800; }
-
-.bk-month { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
-.bk-month h2 {
-  display: flex; align-items: center; gap: 1rem;
-  font-family: var(--pangram); font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: .06em;
-}
-.bk-month h2::after { content: ""; flex: 1; height: 1px; background: var(--ink); opacity: .35; }
-.bk-grid {
-  list-style: none; padding: 0; margin: 1.5rem 0 0;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr)); gap: 2rem 1.5rem;
-}
-@media (max-width: 560px) { .bk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem .9rem; } .bk-name { font-size: 1rem; } }
-
-.bk-card { display: block; text-decoration: none; color: inherit; }
-/* month tiles sit in the grid like a card */
-.bk-mo {
-  aspect-ratio: 4 / 5; display: flex; flex-direction: column; justify-content: flex-start;
-  padding: .9rem 0 0; border-top: 1.5px solid var(--line);
-}
-.bk-mo span { font-family: var(--pangram); font-weight: 800; font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.25rem); line-height: 1.05; }
-.bk-mo small { font-family: var(--pangram); font-size: 1rem; opacity: .6; margin-top: .25rem; }
-.bk-pic {
-  position: relative; aspect-ratio: 4 / 5; border: 2px solid var(--print-edge); border-radius: .5rem; overflow: hidden;
-  background: var(--paper-2);
-  transform: rotate(var(--tilt, 0deg));
-  box-shadow: 0 1px 2px rgb(0 0 0 / .06), 0 8px 20px -12px rgb(0 0 0 / .3);
-  transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease;
-}
-.bk-pic img { width: 100%; height: 100%; object-fit: cover; }
-.bk-card:hover .bk-pic, .bk-card:focus-visible .bk-pic {
-  transform: rotate(0deg) translateY(-4px) scale(1.02);
-  box-shadow: 0 2px 4px rgb(0 0 0 / .08), 0 18px 34px -14px rgb(0 0 0 / .38);
-}
-.bk-count {
-  position: absolute; right: .5rem; bottom: .5rem;
-  font-family: var(--pangram); font-size: .75rem; line-height: 1;
-  background: var(--paper); color: var(--ink); border-radius: 999px; padding: .3rem .5rem .25rem;
-}
-/* no photo: one of Erin's solid loaves instead */
-.bk-pic.empty { display: grid; place-items: center; align-content: center; gap: .75rem; }
-.bk-pic.empty [data-art] { width: 48%; --ink: var(--line); }
-.bk-pic.empty span.why { font-family: var(--pangram); font-size: .875rem; opacity: .8; }
-.bk-meta { margin-top: .85rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .1rem .5rem; }
-.bk-grid > li { min-width: 0; }
-.bk-name { font-family: var(--pangram); font-weight: 600; font-size: 1.125rem; line-height: 1.25; }
-.bk-date { font-size: .9375rem; opacity: .75; white-space: nowrap; }
-.bk-card:hover .bk-name { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-
-.bk-more { margin: clamp(3.5rem, 7vw, 5rem) auto 0; max-width: 30rem; text-align: center; }
-
-/* ---------- one bake ---------- */
-.bk-bake { padding-top: clamp(2.5rem, 6vw, 4.5rem); }
+/* ---------- shared page header ---------- */
+.bk-head { padding: clamp(3rem, 7vw, 5rem) 0 clamp(2rem, 4vw, 3rem); }
+.bk-intro { margin-top: 1.1rem; max-width: 30rem; font-size: 1.25rem; }
 .bk-kicker { font-family: var(--pangram); font-size: 1rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .9rem; }
-.bk-facts { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
-.bk-facts li {
-  font-family: var(--pangram); font-size: .9375rem; text-transform: uppercase;
-  border: 1px solid var(--ink); border-radius: 999px; padding: .4rem .95rem .35rem;
-}
 
-.bk-prints {
-  display: flex; gap: clamp(.75rem, 2vw, 1.5rem); margin: clamp(2.5rem, 5vw, 3.5rem) 0 0; padding: .5rem .25rem 1rem;
-  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+/* ---------- the bake log: a plain list, on purpose ---------- */
+.bk-log { list-style: none; margin: 0; padding: 0; max-width: 34rem; }
+.bk-log a {
+  display: grid; grid-template-columns: 5.25rem 1fr; gap: 1rem; align-items: baseline;
+  padding: .45rem 0; text-decoration: none;
 }
-.bk-prints::-webkit-scrollbar { display: none; }
-.bk-print {
-  flex: 0 0 auto; height: clamp(16rem, 42vw, 26rem); padding: 0; margin: 0; cursor: zoom-in;
-  border: 2px solid var(--print-edge); border-radius: .5rem; overflow: hidden; background: var(--paper-2);
-  scroll-snap-align: center; transform: rotate(var(--tilt, 0deg));
-  box-shadow: 0 1px 2px rgb(0 0 0 / .06), 0 10px 24px -14px rgb(0 0 0 / .35);
-  transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+.bk-log time { font-family: var(--pangram); font-size: .9375rem; opacity: .65; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bk-log span { font-size: 1.1875rem; }
+.bk-log a:hover span, .bk-log a:focus-visible span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.bk-more { margin-top: 2.5rem; max-width: 34rem; font-size: .9375rem; opacity: .75; }
+
+/* ---------- one bake: just the facts ---------- */
+.bk-bake { max-width: 40rem; padding-top: clamp(2.5rem, 6vw, 4rem); }
+.bk-bake .bk-title { font-size: clamp(2.25rem, 1.5rem + 3vw, 3.5rem); }
+.bk-when { margin-top: .5rem; font-family: var(--pangram); opacity: .7; }
+.bk-h2 { font-family: var(--pangram); font-weight: 800; font-size: 1.25rem; margin: 2.75rem 0 .9rem; }
+.bk-ings { list-style: none; margin: 0; padding: 0; }
+.bk-ings li { padding: .2rem 0; }
+.bk-ings b { font-family: var(--pangram); font-weight: 600; font-variant-numeric: tabular-nums; }
+.bk-ings small { opacity: .7; }
+.bk-day + .bk-day { margin-top: 1.4rem; }
+.bk-day h3 { font-family: var(--pangram); font-weight: 600; font-size: .875rem; text-transform: uppercase; letter-spacing: .06em; opacity: .7; margin: 0 0 .5rem; }
+.bk-steps { list-style: none; margin: 0; padding: 0; }
+.bk-step { display: grid; grid-template-columns: 5.25rem 1fr; gap: 1rem; align-items: baseline; padding: .2rem 0; }
+.bk-time { font-family: var(--pangram); font-size: .9375rem; opacity: .65; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bk-act small { display: block; font-size: .9375rem; opacity: .7; }
+.bk-notes { white-space: pre-line; }
+.bk-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin-top: 2.75rem; }
+@media (max-width: 480px) { .bk-photos { grid-template-columns: 1fr; } }
+.bk-photo {
+  display: block; padding: 0; margin: 0; cursor: zoom-in; overflow: hidden;
+  border: 2px solid var(--print-edge); border-radius: .5rem; background: var(--paper-2);
 }
-.bk-print:hover, .bk-print:focus-visible { transform: rotate(0deg) translateY(-4px); }
-.bk-print img { height: 100%; width: auto; display: block; }
+.bk-photo img { width: 100%; height: auto; display: block; }
 .bk-closer { cursor: zoom-out; }
-
-.bk-cols {
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 6vw, 5rem);
-  margin-top: clamp(3rem, 6vw, 4.5rem); align-items: start;
-}
-@media (max-width: 760px) { .bk-cols { grid-template-columns: 1fr; } }
-.bk-h2 { font-family: var(--pangram); font-weight: 800; font-size: 1.5rem; margin-bottom: 1.1rem; }
-
-/* ingredients: a recipe card */
-.bk-recipe { border: 1px solid var(--ink); border-radius: .75rem; background: var(--paper-2); padding: .5rem 1.25rem; }
-.bk-recipe table { width: 100%; border-collapse: collapse; }
-.bk-recipe td { padding: .7rem 0; border-top: 1px solid color-mix(in srgb, var(--ink) 25%, transparent); vertical-align: baseline; }
-.bk-recipe tr:first-child td { border-top: 0; }
-.bk-amt { font-family: var(--pangram); font-weight: 600; white-space: nowrap; padding-right: 1rem !important; font-variant-numeric: tabular-nums; width: 1%; text-align: right; }
-.bk-ing small { display: block; font-size: .875rem; opacity: .7; }
-.bk-pct { text-align: right; font-size: .9375rem; opacity: .6; white-space: nowrap; font-variant-numeric: tabular-nums; padding-left: .75rem !important; }
-.bk-pct-note { margin-top: .75rem; font-size: .875rem; opacity: .65; }
-
-/* schedule: a timeline */
-.bk-day + .bk-day { margin-top: 1.75rem; }
-.bk-day h3 { font-family: var(--pangram); font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: .05em; margin: 0 0 .6rem; }
-.bk-steps { list-style: none; margin: 0; padding: 0; position: relative; }
-.bk-steps::before { content: ""; position: absolute; left: 5.35rem; top: .7rem; bottom: .7rem; width: 1.5px; background: var(--line); opacity: .55; border-radius: 2px; }
-.bk-step { display: grid; grid-template-columns: 4.6rem 1.5rem 1fr; align-items: baseline; padding: .45rem 0; }
-.bk-time { font-family: var(--pangram); font-size: .9375rem; text-align: right; font-variant-numeric: tabular-nums; opacity: .8; }
-.bk-dot { justify-self: center; width: .6rem; height: .6rem; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--line); transform: translateY(.05rem); position: relative; z-index: 1; }
-.bk-step:last-child .bk-dot { background: var(--line); }
-.bk-act { font-family: var(--pangram); font-size: 1.125rem; }
-.bk-act small { display: block; font-family: var(--compact); font-size: .9375rem; opacity: .75; margin-top: .1rem; }
-.bk-act .bk-since { display: inline; margin-left: .4rem; font-size: .8125rem; opacity: .5; }
-
-/* notes: in my own words */
-.bk-notes { margin-top: clamp(3rem, 6vw, 4.5rem); max-width: 44rem; }
-.bk-notes blockquote {
-  white-space: pre-line;
-  margin: 0; position: relative; padding-left: 1.4rem;
-  font-family: var(--pangram); font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem); line-height: 1.4;
-}
-.bk-notes blockquote::before { content: ""; position: absolute; left: 0; top: .3rem; bottom: .3rem; width: 2px; background: var(--line); border-radius: 2px; }
-
-/* older / newer */
-.bk-pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: clamp(4rem, 8vw, 6rem); }
-.bk-pager a {
-  display: flex; flex-direction: column; gap: .2rem; max-width: 48%;
-  text-decoration: none; border: 1px solid var(--ink); border-radius: 1.25rem; padding: .8rem 1.2rem;
-  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
-}
-.bk-pager a:hover, .bk-pager a:focus-visible { background: var(--hover); color: var(--hover-ink); border-color: var(--hover); }
-.bk-pager .dir { font-family: var(--pangram); font-size: .8125rem; text-transform: uppercase; letter-spacing: .05em; opacity: .7; }
-.bk-pager .t { font-family: var(--pangram); font-weight: 600; }
-.bk-pager .next { margin-left: auto; text-align: right; }
-
-.bk-missing { padding: 6rem 0; text-align: center; }
+.bk-pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3.5rem; font-family: var(--pangram); }
+.bk-pager a { text-decoration: none; }
+.bk-pager a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.bk-pager .next { margin-left: auto; }
 
 .tagline { margin-top: 1rem; }
-
-@media (prefers-reduced-motion: reduce) { .bk-under > svg path { animation: none; stroke-dashoffset: 0; } }
 
 /* ---------- blog ---------- */
 .bl-list { list-style: none; margin: 0; padding: 0; max-width: 52rem; }
