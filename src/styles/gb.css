@@ -246,6 +246,9 @@ h1, h2 { margin: 0; }
 }
 .sticker:hover { --s: 1.06; }
 .sticker.dragging { --s: 1.12; cursor: grabbing; transition: none; filter: drop-shadow(0 10px 14px rgb(0 0 0 / .25)); }
+.sticker-art { display: block; mask-repeat: no-repeat; -webkit-mask-repeat: no-repeat; }
+.sticker-art > svg { display: block; width: 100%; height: auto; }
+.crumb { position: absolute; z-index: 61; border-radius: 40%; background: var(--line); pointer-events: none; }
 
 /* one photo, opened up */
 .lightbox { position: fixed; inset: 0; z-index: 100; touch-action: none; outline: none; }
