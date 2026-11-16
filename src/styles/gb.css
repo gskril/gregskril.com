@@ -410,10 +410,10 @@ h1, h2 { margin: 0; }
 .bk-log { list-style: none; margin: 0; padding: 0; max-width: 34rem; }
 .bk-log a {
   display: grid; grid-template-columns: 5.25rem 1fr; gap: 1rem; align-items: baseline;
-  padding: .45rem 0; text-decoration: none;
+  padding: .15rem 0; line-height: 1.45; text-decoration: none;
 }
 .bk-log time { font-family: var(--pangram); font-size: .9375rem; opacity: .65; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.bk-log span { font-size: 1.1875rem; }
+.bk-log span { font-size: 1.125rem; }
 .bk-log a:hover span, .bk-log a:focus-visible span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .bk-more { margin-top: 2.5rem; max-width: 34rem; font-size: .9375rem; opacity: .75; }
 
