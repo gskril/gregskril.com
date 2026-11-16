@@ -4,6 +4,8 @@
   To add photos (up to ~20), drop the files in public/img/photos/ (a full size and a
   "-sm" thumbnail, like the existing ones) and add a line to PHOTOS. `place` is optional.
 */
+import { trapFocus, releaseFocus } from './modal.js';
+
 (() => {
   'use strict';
 
@@ -186,7 +188,11 @@
   const placeEl = document.getElementById('closer-place');
   const prevBtn = document.getElementById('closer-prev');
   const nextBtn = document.getElementById('closer-next');
+  const closeBtn = document.getElementById('closer-close');
   let current = null, closing = false, sliding = false;
+  /* the slide between photos runs on timers; closing cancels them so no print is left hidden */
+  const timers = new Set();
+  const later = (fn, ms) => { const id = setTimeout(() => { timers.delete(id); fn(); }, ms); timers.add(id); };
 
   function target(p) {
     const ar = p.data.w / p.data.h;
@@ -229,7 +235,7 @@
     fig.getBoundingClientRect();
     fig.style.transition = '';
     requestAnimationFrame(() => { box.classList.add('open'); fig.style.transform = 'none'; });
-    box.focus({ preventScroll: true });
+    trapFocus(box, closeBtn, p.el);
   }
   /* go to the next or previous photo: slide out, swap, slide in */
   function step(dir) {
@@ -242,7 +248,7 @@
     fig.style.transition = 'transform .22s ease-in, opacity .22s ease-in';
     fig.style.transform = `translateX(${-dir * 70}px) rotate(${-dir * 2}deg)`;
     fig.style.opacity = '0';
-    setTimeout(() => {
+    later(() => {
       old.el.classList.remove('away');
       current = p; p.el.classList.add('away'); raise(p);
       fill(p);
@@ -252,12 +258,13 @@
       fig.style.transition = 'transform .32s cubic-bezier(.2,.8,.2,1), opacity .25s ease-out';
       fig.style.transform = 'none';
       fig.style.opacity = '1';
-      setTimeout(() => { sliding = false; fig.style.transition = ''; }, 330);
+      later(() => { sliding = false; fig.style.transition = ''; }, 330);
     }, 200);
   }
   function close() {
     if (!current || closing) return;
     closing = true;
+    timers.forEach(clearTimeout); timers.clear(); sliding = false;
     const p = current;
     box.classList.remove('open');
     fig.style.transition = '';
@@ -269,9 +276,9 @@
       fired = true;
       fig.removeEventListener('transitionend', done);
       box.hidden = true;
-      p.el.classList.remove('away');
+      prints.forEach((q) => q.el.classList.remove('away'));
       current = null; closing = false; sliding = false;
-      p.el.focus({ preventScroll: true });
+      releaseFocus(p.el);
     };
     fig.addEventListener('transitionend', done);
     setTimeout(done, 600);
@@ -280,7 +287,7 @@
   /* tap to close; swipe left or right for the next one */
   let down = null;
   box.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('.closer-nav')) return;
+    if (e.target.closest('button')) return;
     down = { x: e.clientX, y: e.clientY, t: e.timeStamp };
   });
   box.addEventListener('pointerup', (e) => {
@@ -294,6 +301,7 @@
   box.addEventListener('pointercancel', () => { down = null; });
   prevBtn.addEventListener('click', (e) => { e.stopPropagation(); step(-1); });
   nextBtn.addEventListener('click', (e) => { e.stopPropagation(); step(1); });
+  closeBtn.addEventListener('click', (e) => { e.stopPropagation(); close(); });
   window.addEventListener('keydown', (e) => {
     if (!current) return;
     if (e.key === 'Escape') close();

@@ -620,6 +620,7 @@
   function tick(now) {
     raf = 0;
     if (!table || frozen) return;
+    if (reduceMQ.matches) { drawn = target = total; paint(); return; }
     const dt = Math.min(0.05, (now - last) / 1000 || 0.016);
     last = now;
     sy += (window.scrollY - sy) * (1 - Math.exp(-dt / 0.14));
@@ -639,6 +640,8 @@
   }
   function chase() {
     if (!table || frozen) return;
+    /* with reduced motion the whole line is simply there; nothing animates */
+    if (reduceMQ.matches) { if (drawn !== total) { drawn = target = total; paint(); } return; }
     if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
   }
 

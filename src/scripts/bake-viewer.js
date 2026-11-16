@@ -1,4 +1,6 @@
 /* The photos on a bake page: click one to open it, then arrows, swipe or Esc. */
+import { trapFocus, releaseFocus } from './modal.js'
+
 ;(() => {
   'use strict'
   const $ = (s) => document.querySelector(s)
@@ -15,6 +17,21 @@
   }))
   const n = photos.length
   let k = -1
+  let opener = null
+  const closeBtn = $('#closer-close')
+  // the slide between photos and the close fade run on timers; a new open or close cancels them
+  const timers = new Set()
+  const later = (fn, ms) => {
+    const id = setTimeout(() => {
+      timers.delete(id)
+      fn()
+    }, ms)
+    timers.add(id)
+  }
+  const cancel = () => {
+    timers.forEach(clearTimeout)
+    timers.clear()
+  }
   $('#closer-prev').hidden = $('#closer-next').hidden = n < 2
 
   const size = (p) => {
@@ -42,6 +59,8 @@
     img.alt = p.alt
   }
   const open = (j) => {
+    cancel()
+    opener = prints[j]
     show(j)
     box.hidden = false
     fig.style.transition = 'none'
@@ -54,24 +73,26 @@
       fig.style.transform = 'none'
       fig.style.opacity = '1'
     })
-    box.focus({ preventScroll: true })
+    trapFocus(box, closeBtn, opener)
   }
   const close = () => {
-    if (box.hidden) return
+    if (box.hidden || !box.classList.contains('open')) return
+    cancel()
     box.classList.remove('open')
     fig.style.transform = 'scale(.96)'
     fig.style.opacity = '0'
-    setTimeout(() => {
+    releaseFocus(opener)
+    later(() => {
       box.hidden = true
-      prints[k]?.focus({ preventScroll: true })
     }, 260)
   }
   const step = (dir) => {
-    if (n < 2) return
+    if (n < 2 || !box.classList.contains('open')) return
+    cancel()
     fig.style.transition = 'transform .18s ease-in, opacity .18s ease-in'
     fig.style.transform = `translateX(${-dir * 50}px)`
     fig.style.opacity = '0'
-    setTimeout(() => {
+    later(() => {
       show(k + dir)
       fig.style.transition = 'none'
       fig.style.transform = `translateX(${dir * 50}px)`
@@ -92,9 +113,13 @@
     e.stopPropagation()
     step(1)
   })
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation()
+    close()
+  })
   let down = null
   box.addEventListener('pointerdown', (e) => {
-    if (!e.target.closest('.closer-nav')) down = { x: e.clientX, y: e.clientY }
+    if (!e.target.closest('button')) down = { x: e.clientX, y: e.clientY }
   })
   box.addEventListener('pointerup', (e) => {
     if (!down) return
@@ -105,7 +130,7 @@
     else close()
   })
   addEventListener('keydown', (e) => {
-    if (box.hidden) return
+    if (box.hidden || !box.classList.contains('open')) return
     if (e.key === 'Escape') close()
     else if (e.key === 'ArrowRight') step(1)
     else if (e.key === 'ArrowLeft') step(-1)
