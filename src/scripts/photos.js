@@ -5,7 +5,7 @@
   "-sm" thumbnail, like the existing ones) and add a line to PHOTOS. `place` is optional.
 */
 import { trapFocus, releaseFocus } from './modal.js';
-import { crunch } from './crunch.js';
+import { crunch, preloadCrunch } from './crunch.js';
 
 (() => {
   'use strict';
@@ -344,6 +344,8 @@ import { crunch } from './crunch.js';
   }
   prints.forEach((p) => draggable(p, () => { raise(p); open(p); }));
   stickers.forEach((st) => draggable(st, (e) => bite(st, e)));
+  // fetch the crunch clips once the page is idle, so the first bite isn't silent
+  if (stickers.length) (window.requestIdleCallback || ((f) => setTimeout(f, 1500)))(preloadCrunch);
 
   /* ---------- a closer look: the print lifts off the pile and centers ---------- */
   const box = document.getElementById('closer');
