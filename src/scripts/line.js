@@ -488,6 +488,17 @@
     ]);
   }
 
+  /* The line may run close to the sides of the screen, but never off them. A bezier stays
+     inside its control points, so pulling every point in from the edges is enough. */
+  function keepOnScreen(pen, W) {
+    const m = 4, lo = m, hi = W - m;
+    const fix = (q) => { if (q[0] < lo) q[0] = lo; else if (q[0] > hi) q[0] = hi; };
+    for (const s of pen.segs) {
+      if (Array.isArray(s)) s.forEach(fix);
+      else if (s.lift) fix(s.lift);
+    }
+  }
+
   /* ---------- build ---------- */
   const mobileMQ = window.matchMedia('(max-width: 819px)');
   const reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -509,6 +520,7 @@
     const pen = new Pen();
     try {
       (mobileMQ.matches ? routeMobile : routeDesktop)(pen, W);
+      keepOnScreen(pen, W);
     } catch (err) {
       console.error(err);
       return false;

@@ -340,8 +340,10 @@ h1, h2 { margin: 0; }
 /* ---------- small screens: one column, the line becomes a meander ---------- */
 @media (max-width: 819px) {
   .hello { grid-template-columns: 1fr; min-height: 0; padding: 1.25rem var(--gutter) 0; gap: 0; }
-  .hello-copy { order: 1; padding-top: 2.5rem; max-width: none; }
-  .hello-portrait { order: 2; width: min(62%, 16rem); margin-top: 4.5rem; }
+  .hello-copy { order: 1; padding-top: 1rem; max-width: none; }
+  .hello-eyes { font-size: 4.25rem; margin-bottom: .28em; }
+  /* small enough, and close enough, that my face shows on the first screen */
+  .hello-portrait { order: 2; width: min(54%, 14rem); margin-top: 2.25rem; }
 
   .bread { grid-template-columns: 1fr; padding: 6.5rem var(--gutter) 0; gap: 2.5rem; }
   .bread-copy { order: 1; max-width: none; }
