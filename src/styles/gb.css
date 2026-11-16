@@ -410,7 +410,8 @@ h1, h2 { margin: 0; }
   overflow: visible; fill: none; stroke: var(--line); stroke-width: 2; stroke-linecap: round;
   vector-effect: non-scaling-stroke;
 }
-.bk-under > svg path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bk-draw .9s cubic-bezier(.45, .05, .25, 1) .15s forwards; }
+/* the swoosh path runs right to left, so start the dash a full length behind to draw it left to right */
+.bk-under > svg path { stroke-dasharray: 1; stroke-dashoffset: -1; animation: bk-draw .9s cubic-bezier(.45, .05, .25, 1) .15s forwards; }
 @keyframes bk-draw { to { stroke-dashoffset: 0; } }
 @media (prefers-reduced-motion: reduce) { .bk-under > svg path { animation: none; stroke-dashoffset: 0; } }
 
@@ -418,6 +419,9 @@ h1, h2 { margin: 0; }
 .bk-head { padding: clamp(3rem, 7vw, 5rem) 0 clamp(2rem, 4vw, 3rem); }
 .bk-intro { margin-top: 1.1rem; max-width: 30rem; font-size: 1.25rem; }
 .bk-kicker { font-family: var(--pangram); font-size: 1rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .9rem; }
+
+/* the bake log and bake pages keep the current site's narrow column (60ch) */
+.bk.narrow { max-width: calc(36rem + 2 * var(--gutter)); }
 
 /* ---------- the bake log: a plain list, on purpose ---------- */
 .bk-log { list-style: none; margin: 0; padding: 0; max-width: 34rem; }
@@ -450,7 +454,7 @@ h1, h2 { margin: 0; }
 @media (max-width: 480px) { .bk-photos { grid-template-columns: 1fr; } }
 .bk-photo {
   display: block; padding: 0; margin: 0; cursor: zoom-in; overflow: hidden;
-  border: 2px solid var(--print-edge); border-radius: .5rem; background: var(--paper-2);
+  border: 0; border-radius: .5rem; background: var(--paper-2);
 }
 .bk-photo img { width: 100%; height: auto; display: block; }
 .bk-closer { cursor: zoom-out; }
