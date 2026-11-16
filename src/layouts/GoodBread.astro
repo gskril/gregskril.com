@@ -4,7 +4,6 @@
 */
 import '../styles/gb.css'
 import BaseHead from '../components/BaseHead.astro'
-import ART from '../art'
 
 interface Props {
   title: string
@@ -13,7 +12,6 @@ interface Props {
 }
 
 const { title, description, image } = Astro.props
-const year = new Date().getFullYear()
 ---
 
 <!doctype html>
@@ -51,20 +49,6 @@ const year = new Date().getFullYear()
   </head>
   <body>
     <slot />
-
-    <a
-      class="tagline"
-      href="https://goodbread.nyc"
-      target="_blank"
-      rel="noopener"
-      aria-label="It's a good day for bread. Visit Good Bread."
-      set:html={ART.tagline}
-    />
-
-    <footer class="foot">
-      <span>&copy; {year} Greg Skriloff</span>
-      <span class="foot-links"><slot name="foot-links" /></span>
-    </footer>
 
     <slot name="after" />
 

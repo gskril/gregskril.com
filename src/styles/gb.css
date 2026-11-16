@@ -27,7 +27,7 @@
   --paper: var(--cream); --paper-2: var(--cream-2);
   --ink: var(--cobalt); --line: var(--cobalt); --tip: var(--cobalt);
   --hover: var(--lavender); --hover-ink: var(--cobalt);
-  --foot-bg: var(--cobalt); --foot-ink: var(--cream-2);
+ 
   --scrim: rgb(255 246 234 / .9); --print-edge: var(--cobalt);
 }
 @media (prefers-color-scheme: dark) {
@@ -36,7 +36,7 @@
     --paper: #0F1A3D; --paper-2: #16244F;
     --ink: var(--cream); --line: var(--sky); --tip: var(--sky);
     --hover: var(--sky); --hover-ink: #0F1A3D;
-    --foot-bg: #16244F; --foot-ink: var(--cream-2);
+   
     --scrim: rgb(15 26 61 / .92); --print-edge: var(--cream);
   }
 }
@@ -45,7 +45,7 @@
   --paper: #0F1A3D; --paper-2: #16244F;
   --ink: var(--cream); --line: var(--sky); --tip: var(--sky);
   --hover: var(--sky); --hover-ink: #0F1A3D;
-  --foot-bg: #16244F; --foot-ink: var(--cream-2);
+ 
   --scrim: rgb(15 26 61 / .92); --print-edge: var(--cream);
 }
 :root[data-theme="espresso"] {
@@ -53,7 +53,7 @@
   --paper: #1C1814; --paper-2: #26211C;
   --ink: var(--cream-2); --line: #94A8FF; --tip: #94A8FF;
   --hover: var(--lavender); --hover-ink: #1C1814;
-  --foot-bg: #26211C; --foot-ink: var(--cream-2);
+ 
   --scrim: rgb(28 24 20 / .92); --print-edge: var(--cream-2);
 }
 :root[data-theme="charcoal"] {
@@ -61,7 +61,7 @@
   --paper: #181B23; --paper-2: #21252F;
   --ink: var(--cream-2); --line: #A3B6FF; --tip: #A3B6FF;
   --hover: var(--lavender); --hover-ink: #181B23;
-  --foot-bg: #21252F; --foot-ink: var(--cream-2);
+ 
   --scrim: rgb(24 27 35 / .92); --print-edge: var(--cream-2);
 }
 
@@ -108,7 +108,7 @@ h1, h2 { margin: 0; }
 #tip svg { display: block; width: 100%; height: auto; --ink: var(--tip); --paper-2: var(--paper); }
 
 /* things that sit above the line */
-.hello-copy, .bread-copy, .bread-art, .things > *, .photos-head, .hi > *, .tagline, .foot {
+.hello-copy, .bread-copy, .bread-art, .things > *, .photos-head, .hi > * {
   position: relative; z-index: 2;
 }
 
@@ -298,16 +298,7 @@ h1, h2 { margin: 0; }
 .hi-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: clamp(6.5rem, 10vw, 8.5rem); }
 .hi-end { height: clamp(7rem, 11vw, 9rem); }
 
-.tagline { display: block; width: min(24rem, 100% - 3rem); margin: 0 auto; padding: 1rem 0 3rem; }
 
-.foot {
-  display: flex; justify-content: space-between; gap: 1rem;
-  background: var(--foot-bg); color: var(--foot-ink);
-  padding: .5rem 1.5rem; font-size: .875rem; line-height: 1.25rem;
-}
-.foot a { text-decoration: none; }
-.foot a:hover { text-decoration: underline; }
-.foot-links { display: flex; gap: 1.5rem; }
 
 /* ---------- review-only palette picker: shown with ?review in the URL ---------- */
 .review { display: none !important; }
@@ -360,8 +351,6 @@ h1, h2 { margin: 0; }
   .hi-links { margin-top: 6rem; gap: .4rem; }
   .hi-links .btn { font-size: .9375rem; padding-inline: 1rem; }
   .btn { font-size: 1.0625rem; padding-inline: 1.4rem; }
-  .foot { padding-inline: .75rem; }
-  .foot-links { gap: 1rem; }
   .review { left: 50%; transform: translateX(-50%); bottom: .5rem; }
 }
 
@@ -446,7 +435,6 @@ h1, h2 { margin: 0; }
 .bk-pager a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .bk-pager .next { margin-left: auto; }
 
-.tagline { margin-top: 1rem; }
 
 /* ---------- blog ---------- */
 .bl-list { list-style: none; margin: 0; padding: 0; max-width: 52rem; }
