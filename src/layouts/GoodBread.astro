@@ -21,16 +21,16 @@ const { title, description, image } = Astro.props
     <meta name="color-scheme" content="light dark" />
     <link
       rel="preload"
-      href="/fonts/pangram-extrabold.otf"
+      href="/fonts/pangram-extrabold.woff2"
       as="font"
-      type="font/otf"
+      type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/fonts/pangram-compact-regular.otf"
+      href="/fonts/pangram-compact-regular.woff2"
       as="font"
-      type="font/otf"
+      type="font/woff2"
       crossorigin
     />
     <script is:inline>
@@ -45,6 +45,8 @@ const { title, description, image } = Astro.props
         } catch (e) {}
       })()
     </script>
+    <!-- images that wait for the page to load (data-src) show their <noscript> copy instead -->
+    <noscript><style>img[data-src] { display: none; }</style></noscript>
     <slot name="head" />
   </head>
   <body>
@@ -61,6 +63,18 @@ const { title, description, image } = Astro.props
       <button type="button" data-theme="espresso">espresso</button>
     </div>
 
+    <!-- old browsers that can't run the site's scripts still get the pictures -->
+    <script is:inline nomodule>
+      window.addEventListener('load', function () {
+        var imgs = document.querySelectorAll('img[data-src]')
+        for (var i = 0; i < imgs.length; i++) {
+          var img = imgs[i]
+          if (img.getAttribute('data-sizes')) img.sizes = img.getAttribute('data-sizes')
+          if (img.getAttribute('data-srcset')) img.srcset = img.getAttribute('data-srcset')
+          img.src = img.getAttribute('data-src')
+        }
+      })
+    </script>
     <script>
       import '../scripts/review.js'
       import '../scripts/favicon.js'

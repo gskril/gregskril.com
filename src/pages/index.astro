@@ -2,6 +2,30 @@
 import GoodBread from '../layouts/GoodBread.astro'
 import Eyes from '../components/Eyes.astro'
 import ART from '../art'
+import { PHOTOS, DIR, srcset, label } from '../photos.js'
+import { pileLayout } from '../scripts/pile-layout.js'
+import { GREG, GREG_W, GREG_H } from '../portrait.js'
+
+/* Place the prints in plain CSS, with the same numbers photos.js uses, so the pile is in its
+   final spot before the script loads (and stays put if it never does). Columns change with the
+   pile's width, which is the viewport minus the gutters: 2 below ~566px, 3 below ~935px, then 4. */
+const pct = (v: number) => `${(v * 100).toFixed(3)}%`
+const pileCSS = [
+  [2, '(max-width: 565.98px)'],
+  [3, '(min-width: 566px) and (max-width: 934.98px)'],
+  [4, '(min-width: 935px)'],
+]
+  .map(([c, mq]) => {
+    const L = pileLayout(PHOTOS, c as number)
+    const rules = L.items
+      .map((q, i) => `.pile:not(.live) .print[data-i="${i}"]{left:${pct(q.x)};margin-top:${pct(q.y)};width:${pct(q.pw)}}`)
+      .join('')
+    return `@media ${mq}{.pile:not(.live)::before{padding-top:calc(${pct(L.h)} + 24px)}${rules}}`
+  })
+  .join('')
+const firstLayout = pileLayout(PHOTOS, 2)
+// roughly how wide a print shows, so phones pick the small or medium file, never the full one
+const PRINT_SIZES = '(max-width: 565.98px) 48vw, (max-width: 934.98px) 32vw, 270px'
 
 // A few highlights; the rest of the side projects are the tally marks.
 const projects = [
@@ -44,6 +68,12 @@ const projects = [
     title="RSS"
     href="/rss.xml"
   />
+  <noscript slot="head">
+    <style>
+      /* dragging and the lightbox need JavaScript; without it, each print is a plain link */
+      .photos-hint { display: none; }
+    </style>
+  </noscript>
 
   <div class="page" id="page">
     <!-- the one line: built and drawn by line.js -->
@@ -57,6 +87,12 @@ const projects = [
         role="img"
         aria-label="A line drawing of Greg"
       >
+        <!-- the line draws this in; without JavaScript, here's the finished drawing -->
+        <noscript>
+          <svg class="portrait-still" viewBox={`0 0 ${GREG_W} ${GREG_H}`} aria-hidden="true">
+            {GREG.map((d) => <path d={d} />)}
+          </svg>
+        </noscript>
       </div>
 
       <div class="hello-copy">
@@ -124,20 +160,73 @@ const projects = [
             ><span class="coarse">Tap one for a closer look, then swipe.</span>
           </p>
         </div>
-        <div class="pile" id="a-pile"></div>
+        <style is:inline set:html={pileCSS}></style>
+        <div class="pile" id="a-pile">
+          {
+            PHOTOS.map((p, i) => (
+              <a
+                class="print"
+                href={`${DIR}${p.file}.webp`}
+                data-i={i}
+                aria-label={label(p)}
+                style={`--ar:${p.w} / ${p.h};--r:${firstLayout.items[i].r.toFixed(2)}deg;z-index:${i + 1}`}
+                draggable="false"
+              >
+                <img
+                  data-src={`${DIR}${p.file}-sm.webp`}
+                  data-srcset={srcset(p)}
+                  data-sizes={PRINT_SIZES}
+                  width={p.w}
+                  height={p.h}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  draggable="false"
+                />
+                <noscript>
+                  <img
+                    src={`${DIR}${p.file}-sm.webp`}
+                    srcset={srcset(p)}
+                    sizes={PRINT_SIZES}
+                    width={p.w}
+                    height={p.h}
+                    alt=""
+                    loading="lazy"
+                  />
+                </noscript>
+              </a>
+            ))
+          }
+        </div>
       </section>
 
       <section class="hi" id="hi" aria-labelledby="hi-title">
         <img
           class="hi-me"
           id="a-me"
-          src="/img/profile.jpg"
-          width="960"
-          height="960"
+          data-src="/img/profile-336.webp"
+          data-srcset="/img/profile-224.webp 224w, /img/profile-336.webp 336w"
+          data-sizes="112px"
+          width="336"
+          height="336"
           alt="Greg, standing on the roof of a car with mountains behind him"
           loading="lazy"
           decoding="async"
+          fetchpriority="low"
         />
+        <noscript>
+          <img
+            class="hi-me"
+            src="/img/profile-336.webp"
+            srcset="/img/profile-224.webp 224w, /img/profile-336.webp 336w"
+            sizes="112px"
+            width="336"
+            height="336"
+            alt="Greg, standing on the roof of a car with mountains behind him"
+            loading="lazy"
+          />
+        </noscript>
         <h2 class="section-title" id="hi-title">Say hi</h2>
         <p>I'm friendly. You can find me here.</p>
         <div class="hi-links" id="a-links">
@@ -195,4 +284,5 @@ const projects = [
   import '../scripts/eyes.js'
   import '../scripts/photos.js'
   import '../scripts/line.js'
+  import '../scripts/later-images.js'
 </script>

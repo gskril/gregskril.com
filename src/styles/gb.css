@@ -1,10 +1,19 @@
 /* Greg's site in the Good Bread brand (goodbread.nyc, designed by Erin). Tokens come from goodbread.nyc's tailwind.config.ts. */
 
-@font-face { font-family: "Pangram"; src: url(/fonts/pangram-regular.otf) format("opentype"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Pangram"; src: url(/fonts/pangram-semibold.otf) format("opentype"); font-weight: 600; font-display: swap; }
-@font-face { font-family: "Pangram"; src: url(/fonts/pangram-extrabold.otf) format("opentype"); font-weight: 800; font-display: swap; }
-@font-face { font-family: "Pangram Compact"; src: url(/fonts/pangram-compact-regular.otf) format("opentype"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Pangram Compact"; src: url(/fonts/pangram-compact-bold.otf) format("opentype"); font-weight: 700; font-display: swap; }
+/* WOFF2, trimmed to Latin (the .otf originals stay in public/fonts for the share images). */
+@font-face { font-family: "Pangram"; src: url(/fonts/pangram-regular.woff2) format("woff2"), url(/fonts/pangram-regular.otf) format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Pangram"; src: url(/fonts/pangram-semibold.woff2) format("woff2"), url(/fonts/pangram-semibold.otf) format("opentype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Pangram"; src: url(/fonts/pangram-extrabold.woff2) format("woff2"), url(/fonts/pangram-extrabold.otf) format("opentype"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Pangram Compact"; src: url(/fonts/pangram-compact-regular.woff2) format("woff2"), url(/fonts/pangram-compact-regular.otf) format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Pangram Compact"; src: url(/fonts/pangram-compact-bold.woff2) format("woff2"), url(/fonts/pangram-compact-bold.otf) format("opentype"); font-weight: 700; font-display: swap; }
+
+/* While the fonts load (or on a bad connection), Arial stands in, stretched to take up the
+   same room as Pangram, so nothing reflows when the real font swaps in.
+   Numbers measured against the site's own text. */
+@font-face { font-family: "Pangram Fallback"; src: local("Arial"), local("ArialMT"); font-weight: 400; size-adjust: 102.98%; ascent-override: 78.66%; descent-override: 22.34%; line-gap-override: 9.71%; }
+@font-face { font-family: "Pangram Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 600 800; size-adjust: 101.35%; ascent-override: 79.92%; descent-override: 22.69%; line-gap-override: 9.87%; }
+@font-face { font-family: "Pangram Compact Fallback"; src: local("Arial"), local("ArialMT"); font-weight: 400; size-adjust: 94.18%; ascent-override: 86%; descent-override: 24.42%; line-gap-override: 10.62%; }
+@font-face { font-family: "Pangram Compact Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 700; size-adjust: 92.19%; ascent-override: 87.86%; descent-override: 24.95%; line-gap-override: 10.85%; }
 
 /* ---------- palettes ----------
    light    the Good Bread original: cobalt on cream
@@ -17,8 +26,8 @@
   --cream-2: #FFEED8;
   --lavender: #C8B5FF;
   --sky: #A6D8FF;
-  --pangram: "Pangram", "Pangram Compact", ui-rounded, "Arial Rounded MT Bold", system-ui, sans-serif;
-  --compact: "Pangram Compact", "Pangram", ui-rounded, system-ui, sans-serif;
+  --pangram: "Pangram", "Pangram Fallback", ui-rounded, "Arial Rounded MT Bold", system-ui, sans-serif;
+  --compact: "Pangram Compact", "Pangram Compact Fallback", ui-rounded, system-ui, sans-serif;
   --gutter: clamp(1.25rem, 4vw, 3rem);
 }
 
@@ -138,13 +147,20 @@ h1, h2 { margin: 0; }
   padding: var(--gutter);
   display: grid; grid-template-columns: 5fr 6fr; gap: clamp(1.5rem, 5vw, 6rem);
   align-items: center;
+  min-height: min(100vh, 56rem);
   min-height: min(100svh, 56rem);
 }
 /* the line draws the portrait here; this box only holds the space */
 .hello-portrait {
   justify-self: center;
+  width: min(100%, 21rem, 36vh); /* older browsers, without svh */
   width: min(100%, 21rem, 36svh);
   aspect-ratio: 438 / 632;
+}
+/* older browsers without aspect-ratio: hold the portrait's space with padding instead */
+@supports not (aspect-ratio: 1) {
+  .hello-portrait::before { content: ""; display: block; padding-top: 144.29%; }
+  .hello-portrait noscript { display: block; margin-top: -144.29%; }
 }
 .hello-copy { max-width: 32rem; padding-top: 2rem; }
 /* the eyes from Erin's logo sit above the hello and watch your cursor */
@@ -218,15 +234,18 @@ h1, h2 { margin: 0; }
 .pile {
   position: relative; z-index: 3;
   width: min(100% - 2 * var(--gutter), 64rem); margin: clamp(3.5rem, 6vw, 5rem) auto 0;
-  height: 30rem; /* set by photos.js */
+  /* before photos.js runs (or without it) the build's CSS sizes and fills the pile; then photos.js sets the height */
 }
+.pile:not(.live)::before { content: ""; display: block; }
+.pile.instant .print, .pile.instant .sticker { transition: none; }
 .print {
   position: absolute; left: 0; top: 0; margin: 0; padding: 0;
   width: var(--w); aspect-ratio: var(--ar);
   border: 2px solid var(--print-edge); border-radius: .5rem; overflow: hidden;
   background: var(--paper-2);
   box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 6px 18px -8px rgb(0 0 0 / .25);
-  transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(var(--s, 1));
+  display: block;
+  transform: translate(var(--x, 0px), var(--y, 0px)) rotate(var(--r, 0deg)) scale(var(--s, 1));
   transition: transform .4s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease, border-color .3s ease;
   cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent; font: inherit; color: inherit;
@@ -515,10 +534,18 @@ h1, h2 { margin: 0; }
 
 /* ---------- 404 ---------- */
 .nf {
-  min-height: min(78svh, 46rem); padding: 4rem var(--gutter);
+  min-height: min(78vh, 46rem); min-height: min(78svh, 46rem); padding: 4rem var(--gutter);
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
 }
 .nf-eyes { font-size: clamp(6rem, 18vw, 10rem); line-height: 1; margin-bottom: 2.5rem; }
 .nf-title { font-family: var(--pangram); font-weight: 800; font-size: clamp(2rem, 1.3rem + 2.8vw, 3.25rem); line-height: 1.08; text-wrap: balance; margin-bottom: .8rem; }
 .nf > p { max-width: 28rem; }
 .nf .btns { justify-content: center; margin-top: 1.75rem; }
+
+/* the portrait as a plain drawing, for when JavaScript is off (the line draws it otherwise) */
+.portrait-still {
+  display: block; width: 100%; height: auto; overflow: visible;
+  fill: none; stroke: var(--line); stroke-width: 2.5px; stroke-linecap: round; stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.portrait-still path { vector-effect: non-scaling-stroke; }

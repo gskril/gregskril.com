@@ -1,53 +1,27 @@
 /*
-  The pile of prints.
-
-  To add photos (up to ~20), drop the files in public/img/photos/ (a full size and a
-  "-sm" thumbnail, like the existing ones) and add a line to PHOTOS. `place` is optional.
+  The pile of prints. The photos live in src/photos.js; the prints themselves are already in
+  the page (placed by the build with the same pile-layout.js), so this only brings them to
+  life: dragging, the lightbox, and the bread stickers.
 */
 import { trapFocus, releaseFocus } from './modal.js';
 import { crunch, preloadCrunch } from './crunch.js';
+import { PHOTOS, DIR } from '../photos.js';
+import { pileLayout, columnsFor } from './pile-layout.js';
 
 (() => {
   'use strict';
-
-  const PHOTOS = [
-    { file: 'photo-01', w: 1200, h: 1600, place: 'New York', alt: 'A big yellow tree in a park in autumn' },
-    { file: 'photo-03', w: 1600, h: 1070, place: 'Agra, India', alt: 'The Taj Mahal at dusk with the moon up' },
-    { file: 'photo-02', w: 1069, h: 1600, place: 'Guatapé, Colombia', alt: 'A french bulldog sitting in front of a striped door' },
-    { file: 'photo-05', w: 1600, h: 1070, place: 'Ranthambore, India', alt: 'A deer on a dirt road in the woods' },
-    { file: 'photo-04', w: 1070, h: 1600, place: 'Agra, India', alt: 'A minaret at dusk' },
-    { file: 'photo-06', w: 1600, h: 1070, place: 'Sleepy Hollow, New York', alt: 'A country lane with one tree and a fence' },
-    { file: 'photo-07', w: 1200, h: 1600, place: 'Arashiyama, Japan', alt: 'Looking straight up in a bamboo forest' },
-  ];
-  const DIR = '/img/photos/';
 
   const pile = document.getElementById('a-pile');
   if (!pile) return;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
-  /* small seeded random, so the pile looks the same on every visit */
-  const rand = (seed) => () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
-
-  /* ---------- build the prints ---------- */
-  const prints = PHOTOS.map((p, i) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'print';
-    b.style.setProperty('--ar', `${p.w} / ${p.h}`);
-    b.setAttribute('aria-label', `Open photo: ${p.alt}${p.place ? `, ${p.place}` : ''}`);
-    const img = document.createElement('img');
-    img.alt = '';
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.draggable = false;
-    img.width = p.w; img.height = p.h;
-    img.src = `${DIR}${p.file}-sm.webp`;
-    img.srcset = `${DIR}${p.file}-sm.webp 480w, ${DIR}${p.file}.webp 1600w`;
-    b.appendChild(img);
-    pile.appendChild(b);
-    return { el: b, img, data: p, i, fx: 0, fy: 0, r: 0, z: i + 1, moved: undefined };
+  /* ---------- the prints, from the page ---------- */
+  const prints = [...pile.querySelectorAll('.print')].map((el) => {
+    const i = Number(el.dataset.i);
+    return { el, img: el.querySelector('img'), data: PHOTOS[i], i, fx: 0, fy: 0, r: 0, z: i + 1, moved: undefined };
   });
+  if (!prints.length) return;
 
   /* two bread stickers ride along on the pile. Drag them around, or click to take a bite;
      once one is eaten, another bread shows up in its place. */
@@ -225,40 +199,25 @@ import { crunch, preloadCrunch } from './crunch.js';
   function layout() {
     const w = pile.clientWidth;
     if (!w || dragging) return;
-    const n = prints.length;
-    const c = w < 520 ? 2 : w < 860 ? 3 : 4;
+    const c = columnsFor(w);
     const keep = c === cols && Math.abs(w - cw) < 1;
     cols = c; cw = w;
-    const cell = w / c;
-    const R = rand(7 + n);
-    const pos = [];
-    let y = 0, maxB = 0;
-    for (let row = 0; row * c < n; row++) {
-      const items = prints.slice(row * c, row * c + c);
-      const shift = (c - items.length) * cell / 2 + (row % 2 ? cell * 0.08 : -cell * 0.04);
-      let rowH = 0;
-      items.forEach((p, k) => {
-        const land = p.data.w >= p.data.h;
-        const pw = cell * (land ? 0.98 : 0.76) * (0.94 + R() * 0.1);
-        const ph = pw * (p.data.h / p.data.w);
-        let x = shift + k * cell + (cell - pw) / 2 + (R() - 0.5) * cell * 0.22;
-        x = clamp(x, -w * 0.015, w - pw + w * 0.015);
-        const yy = y + (R() - 0.5) * cell * 0.12 + (land ? cell * 0.1 : 0);
-        pos[p.i] = { x, y: yy, pw, ph, r: (R() - 0.5) * 13 };
-        rowH = Math.max(rowH, ph);
-        maxB = Math.max(maxB, yy + ph);
-      });
-      y += rowH * 0.8;
-    }
-    ch = Math.ceil(maxB + 24);
+    const L = pileLayout(PHOTOS, c);
+    ch = Math.ceil(L.h * w + 24);
     pile.style.height = `${ch}px`;
     prints.forEach((p) => {
-      const q = pos[p.i];
-      p.el.style.setProperty('--w', `${q.pw.toFixed(1)}px`);
-      p.img.sizes = `${Math.ceil(q.pw)}px`;
-      if (!keep || !p.moved) { p.fx = q.x / w; p.fy = q.y / ch; p.r = q.r; p.moved = false; }
+      const q = L.items[p.i];
+      const pw = q.pw * w;
+      p.el.style.setProperty('--w', `${pw.toFixed(1)}px`);
+      p.img.sizes = `${Math.ceil(pw)}px`;
+      if (!keep || !p.moved) { p.fx = q.x; p.fy = (q.y * w) / ch; p.r = q.r; p.moved = false; }
       place(p);
     });
+    /* first time through: swap the build's CSS placement for ours in one go, with no animation */
+    if (!pile.classList.contains('live')) {
+      pile.classList.add('live', 'instant');
+      requestAnimationFrame(() => requestAnimationFrame(() => pile.classList.remove('instant')));
+    }
     /* stickers start on the corners of the pile */
     const a = Math.min(64, w * 0.09), b = Math.min(110, w * 0.2);
     stickerBase = b;
@@ -338,14 +297,29 @@ import { crunch, preloadCrunch } from './crunch.js';
     p.el.addEventListener('pointerup', end);
     p.el.addEventListener('pointercancel', end);
     p.el.addEventListener('click', (e) => {
-      if (moved) { e.preventDefault(); moved = false; return; }
+      /* prints are links to the full photo (for no-JS); a modified click still opens it in a new tab */
+      if (!moved && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) return;
+      e.preventDefault();
+      if (moved) { moved = false; return; }
       if (onTap) onTap(e);
     });
   }
   prints.forEach((p) => draggable(p, () => { raise(p); open(p); }));
   stickers.forEach((st) => draggable(st, (e) => bite(st, e)));
-  // fetch the crunch clips once the page is idle, so the first bite isn't silent
-  if (stickers.length) (window.requestIdleCallback || ((f) => setTimeout(f, 1500)))(preloadCrunch);
+  /* fetch the crunch clips after everything else: once the pile is on screen and its
+     pictures are in, so the first bite has sound but nothing important waits on it */
+  if (stickers.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      const imgs = prints.map((p) => p.img);
+      const settled = () => imgs.every((img) => !img.hasAttribute('data-src') && img.complete);
+      let tries = 0;
+      const wait = () => (settled() || ++tries > 20 ? preloadCrunch() : setTimeout(wait, 500));
+      wait();
+    }, { rootMargin: '200px' });
+    io.observe(pile);
+  }
 
   /* ---------- a closer look: the print lifts off the pile and centers ---------- */
   const box = document.getElementById('closer');
