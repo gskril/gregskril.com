@@ -306,6 +306,12 @@ h1, h2 { margin: 0; }
   display: flex; flex-direction: column; align-items: center; text-align: center;
 }
 .hi > p { margin-top: .7rem; }
+/* the same photo as on my socials, so it's recognizably me */
+.hi-me {
+  width: 7rem; height: 7rem; margin-bottom: 1.5rem; object-fit: cover;
+  border-radius: 50%; border: 2px solid var(--print-edge); background: var(--paper-2);
+  box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 10px 24px -12px rgb(0 0 0 / .35);
+}
 .hi-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: clamp(6.5rem, 10vw, 8.5rem); }
 .hi-end { height: clamp(7rem, 11vw, 9rem); }
 

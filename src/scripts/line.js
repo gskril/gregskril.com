@@ -409,8 +409,8 @@
     pen.stroke(fit('circle', b2, { from: 2, to: 7, rot: 2.5 }));
 
     /* down to the links, around them, and a bow */
-    const hi = rect('#hi-title');
-    const g4 = pile.b + (hi.y - pile.b) * 0.5;
+    const hi = rect('#hi-title'), me = $('#a-me') ? rect('#a-me') : hi;
+    const g4 = pile.b + (me.y - pile.b) * 0.5;
     bow(pen, W, (s, box) => {
       const A4 = [Math.min(xr - 40, pen.p[0] + 20), g4 - 4], B4 = [Math.max(xl + 60, box.x - 150), g4 + 24];
       return [
@@ -479,7 +479,8 @@
     cross((note.b + head.y) / 2, 0);
     pen.go([[X(side, 3), head.b + 20], [X(side, -2), pile.y + pile.h * 0.3], [X(side, 4), pile.y + pile.h * 0.7], [X(side, 2), pile.b + 10]]);
     prevY = pen.p[1];
-    cross((pile.b + hi.y) / 2, 1);
+    const me = $('#a-me') ? rect('#a-me') : hi;
+    cross((pile.b + me.y) / 2, 1);
 
     bow(pen, W, (s, box) => [
       [X(side, 2), prevY + 60],
