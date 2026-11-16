@@ -331,7 +331,8 @@
   function bow(pen, W, via) {
     const K = rect('#a-links');
     const w = Math.min(K.w * 1.42, W - 14), h = K.h * (w < K.w * 1.3 ? 3.4 : 3);
-    const box = { x: K.cx - w / 2, y: K.cy - h * 0.45, w, h }; // a touch low: the drawn circle bulges up, so this centers the buttons in it
+    /* sit the loop a little low: the drawn circle bulges up (more so on phones), so this centers the buttons in it */
+    const box = { x: K.cx - w / 2, y: K.cy - h * (W < 820 ? 0.38 : 0.45), w, h };
     const wrap = fit('circle', box, { flipX: true, flipY: true, to: 10, rot: 1.5 });
     pen.stroke(wrap, via(wrap[0][0], box));
     const k = pen.p, s = clamp(K.w / 400, 0.6, 1.1);
