@@ -21,7 +21,11 @@ const date = new Intl.DateTimeFormat('en-US', {
 }).format(article.data.date)
 ---
 
-<GoodBread title={article.data.title} description={article.data.description}>
+<GoodBread
+  title={article.data.title}
+  description={article.data.description}
+  image={`/og/blog/${article.id}.png`}
+>
   <div class="bk">
     <nav class="bk-top"><a class="bk-back" href="/blog/">&larr; Blog</a></nav>
 

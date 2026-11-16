@@ -2,7 +2,6 @@
 import GoodBread from '../../layouts/GoodBread.astro'
 import Underline from '../../components/Underline.astro'
 import { bakeImage, bakeWithNeighbours, sortedBakes } from '../../bakes'
-import { WORKER_BASE } from '../../utils'
 
 export async function getStaticPaths() {
   const bakes = await sortedBakes()
@@ -60,15 +59,12 @@ const photos = await Promise.all(
     return { ...img, alt: p.caption || `${title}, photo ${k + 1}` }
   })
 )
-
-const ogImages =
-  data.photos.length > 0 ? data.photos.map((p) => `${WORKER_BASE}${p.url}`) : undefined
 ---
 
 <GoodBread
   title={`${title} · Bake log`}
   description={`Bake from ${formatted}`}
-  image={ogImages}
+  image={`/og/baking/${bake.id}.png`}
 >
   <div class="bk narrow">
     <nav class="bk-top"><a class="bk-back" href="/baking/">&larr; All bakes</a></nav>
