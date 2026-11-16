@@ -1,17 +1,41 @@
 ---
-import { getCollection } from 'astro:content'
-import Layout from '../layouts/Layout.astro'
-import ProjectFeed from '../components/ProjectFeed.astro'
-import ProfileHeader from '../components/ProfileHeader.astro'
-import Socials from '../components/Socials.astro'
+import GoodBread from '../layouts/GoodBread.astro'
+import ART from '../art'
 
-const projects = await getCollection('projects')
-projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+// A few highlights; the rest of the side projects are the tally marks.
+const projects = [
+  {
+    name: 'Good Bread',
+    url: 'https://goodbread.nyc',
+    desc: 'My tiny bakery. You order bread, I bake it.',
+  },
+  {
+    name: 'API Racer',
+    url: 'https://api-racer.gregskril.com',
+    desc: "Races an API from 5 regions to see where it's slow.",
+  },
+  {
+    name: 'RPC Monitor',
+    url: 'https://rpc-monitor.gregskril.com/',
+    desc: "Keeps an eye on RPC endpoints so I don't have to.",
+  },
+  {
+    name: 'Make Quotes',
+    url: 'https://makequotes.gregskril.com/',
+    desc: 'Square text graphics for posting on social.',
+  },
+  {
+    name: 'Searchcaster',
+    url: 'https://searchcaster.xyz/',
+    desc: 'Search for a decentralized social network.',
+  },
+]
 ---
 
-<Layout
+<GoodBread
   title="Greg Skriloff"
-  description="I like baking and building software, usually in the crypto space."
+  description="I'm Greg. I live in New York, and I like baking bread and building software."
+  heroPicker
 >
   <link
     slot="head"
@@ -20,24 +44,171 @@ projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
     title="RSS"
     href="/rss.xml"
   />
-  <main class="container">
-    <div class="section" style="margin-top: 4.5rem; margin-bottom: -1.5rem;">
-      <ProfileHeader />
-    </div>
-    <div class="section">
-      <h3 class="section__title">About</h3>
-      <p>
-        I like{' '}
-        <a href="/baking/">baking</a>{' '}
-        and building software, usually in the crypto space. I work as a Developer Relations
-        Engineer at{' '}
-        <a href="https://ens.domains/" target="_blank">ENS Labs</a>.
-      </p>
-    </div>
-    <div class="section">
-      <h3 class="section__title section__title--mb" id="projects">Side Projects</h3>
-      <ProjectFeed projects={projects} />
-    </div>
-    <Socials />
-  </main>
-</Layout>
+
+  <div class="page" id="page">
+    <!-- the one line: built and drawn by line.js -->
+    <svg id="line" aria-hidden="true" focusable="false"></svg>
+    <div id="tip" aria-hidden="true"><span set:html={ART.loaf} /></div>
+
+    <header class="hello" id="hello">
+      <div
+        class="hello-portrait"
+        id="a-portrait"
+        role="img"
+        aria-label="A line drawing of Greg"
+      >
+      </div>
+
+      <div class="hello-copy">
+        <h1 class="wordmark" id="a-word">
+          <svg
+            class="eyes"
+            id="eyes"
+            viewBox="0 0 210 130"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path class="brow" d="M21 17C24 17 27 15 30 14C35 11 40 8 45 4"></path>
+            <path class="brow" d="M163 4C167 8 170 11 176 14C181 16 185 17 190 17"></path>
+            <g class="lid">
+              <ellipse cx="62" cy="92" rx="39" ry="62" transform="rotate(11 62 92)"
+              ></ellipse>
+              <ellipse cx="146" cy="92" rx="39" ry="62" transform="rotate(11 146 92)"
+              ></ellipse>
+              <g class="pupils" id="pupils">
+                <path d="M66 62L61 88"></path>
+                <path d="M150 62L145 88"></path>
+              </g>
+            </g>
+          </svg>
+          <span class="wm-text">GREG</span>
+        </h1>
+        <div class="hello-text">
+          <p class="lead" id="a-lead">Hi, I'm Greg.</p>
+          <p>I live in New York. I like baking bread and building software.</p>
+          <p class="aside">By day I'm a Developer Relations Engineer at ENS&nbsp;Labs.</p>
+          <div class="btns">
+            <a class="btn" href="#things">Things I made</a>
+            <a class="btn" href="#hi">Say hi</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="bread" id="bread" aria-labelledby="bread-title">
+        <div class="bread-art" id="a-art" set:html={ART.holding} />
+        <div class="bread-copy">
+          <h2 class="section-title" id="bread-title">
+            I bake a lot of bread and <span class="nowrap" id="a-phrase"
+              >write it all down</span
+            >
+          </h2>
+          <p>
+            Every loaf goes in my bake log, the good ones and the flat ones. When there's
+            extra, I sell it to friends. That part is called Good&nbsp;Bread.
+          </p>
+          <div class="btns">
+            <a class="btn" href="/baking/">Bake log</a>
+            <a class="btn" href="https://goodbread.nyc" target="_blank" rel="noopener">
+              Good Bread <span aria-hidden="true">&#8599;</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="things" id="things" aria-labelledby="things-title">
+        <h2 class="section-title" id="things-title">Some things I made</h2>
+        <ul class="rows" id="a-rows">
+          {
+            projects.map((p, i) => (
+              <li>
+                <a href={p.url} target="_blank" rel="noopener">
+                  <span class="r-name">
+                    {i === 0 ? <span id="a-circle">{p.name}</span> : p.name}
+                  </span>
+                  <span class="r-desc">{p.desc}</span>
+                  <span class="r-arrow" aria-hidden="true">
+                    &#8599;
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="tally" id="a-tally" aria-hidden="true"></div>
+        <p class="tally-note">
+          Plus 60+ more that I made by hand, back before AI could lend&nbsp;one.
+        </p>
+      </section>
+
+      <section class="photos" id="photos" aria-labelledby="photos-title">
+        <div class="photos-head">
+          <h2 class="section-title" id="photos-title">Pictures from places I've been</h2>
+          <p class="photos-hint">
+            <span class="fine">Drag them around, or click one for a closer look.</span
+            ><span class="coarse">Tap one for a closer look, then swipe.</span>
+          </p>
+        </div>
+        <div class="pile" id="a-pile"></div>
+      </section>
+
+      <section class="hi" id="hi" aria-labelledby="hi-title">
+        <h2 class="section-title" id="hi-title">Say hi</h2>
+        <p>I'm friendly. You can find me here.</p>
+        <div class="hi-links" id="a-links">
+          <a class="btn" href="https://github.com/gskril" target="_blank" rel="noopener"
+            >GitHub</a
+          >
+          <a
+            class="btn"
+            href="https://twitter.com/gregskril"
+            target="_blank"
+            rel="noopener">Twitter</a
+          >
+        </div>
+        <div class="hi-end" id="a-end"></div>
+      </section>
+    </main>
+  </div>
+
+  <Fragment slot="foot-links">
+    <a href="/baking/">Bake log</a>
+    <a href="https://goodbread.nyc" target="_blank" rel="noopener">
+      Good Bread <span aria-hidden="true">&#8599;</span>
+    </a>
+  </Fragment>
+
+  <!-- one photo, opened up and centered -->
+  <div
+    slot="after"
+    class="lightbox"
+    id="closer"
+    hidden
+    tabindex="-1"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Photo"
+  >
+    <div class="closer-scrim"></div>
+    <figure class="closer-print" id="closer-print">
+      <img id="closer-img" alt="" draggable="false" />
+      <figcaption><span id="closer-place"></span></figcaption>
+    </figure>
+    <button
+      class="closer-nav prev"
+      id="closer-prev"
+      type="button"
+      aria-label="Previous photo">&larr;</button
+    >
+    <button class="closer-nav next" id="closer-next" type="button" aria-label="Next photo"
+      >&rarr;</button
+    >
+  </div>
+</GoodBread>
+
+<script>
+  import '../scripts/art-global'
+  import '../scripts/photos.js'
+  import '../scripts/line.js'
+</script>

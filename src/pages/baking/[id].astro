@@ -1,36 +1,8 @@
 ---
-import { Image } from 'astro:assets'
-import Layout from '../../layouts/Layout.astro'
-import { bakeWithNeighbours, sortedBakes } from '../../bakes'
+import GoodBread from '../../layouts/GoodBread.astro'
+import Underline from '../../components/Underline.astro'
+import { bakeImage, bakeWithNeighbours, dough, sortedBakes, tiltFor } from '../../bakes'
 import { WORKER_BASE } from '../../utils'
-
-const fmt = (dateStr: string) =>
-  new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    day: 'numeric',
-    month: 'short',
-  }).format(new Date(dateStr))
-
-// occurs_at is a local wall-clock timestamp with no timezone (e.g. "2026-06-26T14:45:00").
-// Parse as UTC so build output is deterministic regardless of the build server's timezone.
-const asUtc = (dateStr: string) => new Date(`${dateStr}Z`)
-
-const fmtDay = (dateStr: string) =>
-  new Intl.DateTimeFormat('en-US', {
-    weekday: 'long',
-    month: 'short',
-    day: 'numeric',
-    timeZone: 'UTC',
-  }).format(asUtc(dateStr))
-
-const fmtTime = (dateStr: string) =>
-  new Intl.DateTimeFormat('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    timeZone: 'UTC',
-  }).format(asUtc(dateStr))
-
-const dayKey = (dateStr: string) => dateStr.slice(0, 10)
 
 export async function getStaticPaths() {
   const bakes = await sortedBakes()
@@ -55,123 +27,271 @@ if (!bake) {
 }
 
 const { data } = bake
+const title = data.title || 'Bake'
 
-const formatted = fmt(data.bake_date)
+const fmt = (d: Date, o: Intl.DateTimeFormatOptions) =>
+  new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', ...o }).format(d)
+// occurs_at is a local wall-clock timestamp with no timezone (e.g. "2026-06-26T14:45:00").
+// Parse as UTC so build output is deterministic regardless of the build server's timezone.
+const asUtc = (s: string) => new Date(`${s}Z`)
+
+const short = fmt(data.date, { month: 'short', day: 'numeric', year: 'numeric' })
 const ingredients = data.ingredients.toSorted((a, b) => a.sort_order - b.sort_order)
 const schedule = data.schedule.toSorted((a, b) => a.sort_order - b.sort_order)
+const d = dough(data)
 
-const scheduleByDay = schedule.reduce<
-  { key: string; label: string; entries: typeof schedule }[]
->((groups, entry) => {
-  // occurs_at is nullable — an entry can have an action but no scheduled time.
-  const key = entry.occurs_at ? dayKey(entry.occurs_at) : 'unscheduled'
-  const label = entry.occurs_at ? fmtDay(entry.occurs_at) : 'Unscheduled'
-  const last = groups[groups.length - 1]
-  if (last?.key === key) {
-    last.entries.push(entry)
-  } else {
-    groups.push({ key, label, entries: [entry] })
-  }
-  return groups
-}, [])
+/* quick facts */
+const facts: string[] = []
+if (d.hydration) facts.push(`${Math.round(d.hydration * 100)}% hydration`)
+if (d.grams && d.total) facts.push(`${d.total.toLocaleString('en-US')} g of dough`)
+const timed = schedule.filter((s) => s.occurs_at)
+if (timed.length > 1) {
+  const hrs =
+    (asUtc(timed[timed.length - 1].occurs_at!).getTime() -
+      asUtc(timed[0].occurs_at!).getTime()) /
+    36e5
+  facts.push(
+    hrs >= 1
+      ? `${Math.round(hrs)} hrs start to finish`
+      : `${Math.round(hrs * 60)} min start to finish`
+  )
+}
+
+/* ingredients, with baker's percentages when everything is in grams */
+const pct = (i: (typeof ingredients)[number]) =>
+  d.grams && d.flour && i.unit === 'g' && i.amount_value != null
+    ? `${Math.round((i.amount_value / d.flour) * 100)}%`
+    : ''
+const amount = (i: (typeof ingredients)[number]) =>
+  i.amount_value == null
+    ? ''
+    : `${Number(i.amount_value).toLocaleString('en-US')}${i.unit === 'g' ? ' g' : ` ${i.unit ?? ''}`}`
+const nice = (n: string) => n.charAt(0).toUpperCase() + n.slice(1)
+
+/* schedule, grouped by day, with the time since mixing */
+const t0 = timed.length ? asUtc(timed[0].occurs_at!).getTime() : null
+const since = (s: (typeof schedule)[number]) => {
+  if (t0 === null || !s.occurs_at) return ''
+  const m = Math.round((asUtc(s.occurs_at).getTime() - t0) / 6e4)
+  if (m <= 0) return ''
+  return `+${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`
+}
+const days = schedule.reduce<{ key: string; label: string; steps: typeof schedule }[]>(
+  (groups, s) => {
+    // occurs_at is nullable — an entry can have an action but no scheduled time.
+    const key = s.occurs_at ? s.occurs_at.slice(0, 10) : 'unscheduled'
+    const label = s.occurs_at
+      ? fmt(asUtc(s.occurs_at), { weekday: 'long', month: 'short', day: 'numeric' })
+      : 'Unscheduled'
+    const last = groups[groups.length - 1]
+    if (last?.key === key) last.steps.push(s)
+    else groups.push({ key, label, steps: [s] })
+    return groups
+  },
+  []
+)
+
+/* photos: one size for the prints and the viewer */
+const photos = await Promise.all(
+  data.photos.map(async (p, k) => {
+    const img = await bakeImage(p.url, 1500, 82)
+    return {
+      src: img.src,
+      w: img.width,
+      h: img.height,
+      alt: p.caption || `${title}, photo ${k + 1}`,
+      tilt: tiltFor(p.id, k),
+    }
+  })
+)
 
 const ogImages =
   data.photos.length > 0 ? data.photos.map((p) => `${WORKER_BASE}${p.url}`) : undefined
+const pagerLabel = (b: typeof prev) =>
+  b
+    ? `${b.data.title || 'Bake'}, ${fmt(b.data.date, { month: 'short', day: 'numeric' })}`
+    : ''
 ---
 
-<Layout
-  article={true}
-  title={`${data.title || formatted} - Baking Log`}
-  description={`Bake from ${formatted}`}
+<GoodBread
+  title={`${title}, ${short} · Bake log`}
+  description={`Bake from ${short}`}
   image={ogImages}
 >
-  <main class="container">
-    <div class="section">
-      <a class="bake-back" href="/baking/">← All bakes</a>
+  <div class="bk">
+    <nav class="bk-top"><a class="bk-back" href="/baking/">&larr; Bake log</a></nav>
 
-      <h1>{data.title || 'Bake Log'}</h1>
-      <div class="blog__meta">
-        <span class="blog__date">{formatted}</span>
-      </div>
+    <main class="bk-bake">
+      <p class="bk-kicker">
+        {
+          fmt(data.date, {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          })
+        }
+      </p>
+      <h1 class="bk-title"><Underline>{title}</Underline></h1>
+      {
+        facts.length > 0 && (
+          <ul class="bk-facts">
+            {facts.map((f) => (
+              <li>{f}</li>
+            ))}
+          </ul>
+        )
+      }
 
-      <div class="content">
-        <h2>Ingredients</h2>
-        <ul>
+      {
+        photos.length > 0 && (
+          <div class="bk-prints">
+            {photos.map((p, k) => (
+              <button
+                class="bk-print"
+                type="button"
+                data-full={p.src}
+                data-w={p.w}
+                data-h={p.h}
+                style={`--tilt:${p.tilt.toFixed(2)}deg; aspect-ratio:${p.w} / ${p.h}`}
+                aria-label={`Open photo ${k + 1}`}
+              >
+                <img
+                  src={p.src}
+                  width={p.w}
+                  height={p.h}
+                  alt={p.alt}
+                  loading={k < 3 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </button>
+            ))}
+          </div>
+        )
+      }
+
+      {
+        data.notes && (
+          <section class="bk-notes" aria-label="Notes">
+            <h2 class="bk-h2">Notes</h2>
+            <blockquote>{data.notes}</blockquote>
+          </section>
+        )
+      }
+
+      <div class="bk-cols">
+        <section aria-labelledby="ing-title">
+          <h2 class="bk-h2" id="ing-title">Ingredients</h2>
+          <div class="bk-recipe">
+            <table>
+              {
+                ingredients.map((i) => (
+                  <tr>
+                    <td class="bk-amt">{amount(i)}</td>
+                    <td class="bk-ing">
+                      {nice(i.name)}
+                      {i.note && <small>{i.note}</small>}
+                    </td>
+                    <td class="bk-pct">{pct(i)}</td>
+                  </tr>
+                ))
+              }
+            </table>
+          </div>
           {
-            ingredients.map((ing) => (
-              <li>
-                {ing.amount_value}
-                {ing.unit} {ing.name.toLowerCase()}
-                {ing.note && <span> — {ing.note}</span>}
-              </li>
-            ))
+            d.grams && d.flour > 0 && (
+              <p class="bk-pct-note">Percentages are of the total flour.</p>
+            )
           }
-        </ul>
+        </section>
 
-        <h2>Schedule</h2>
-        <div class="bake-schedule">
+        <section aria-labelledby="sch-title">
+          <h2 class="bk-h2" id="sch-title">Schedule</h2>
+          {days.length === 0 && <p>No schedule for this one.</p>}
           {
-            scheduleByDay.map((day) => (
-              <section class="bake-schedule__day">
-                <h3 class="bake-schedule__day-label">{day.label}</h3>
-                <ul class="bake-schedule__list">
-                  {day.entries.map((entry) => (
-                    <li class="bake-schedule__item">
-                      {entry.occurs_at ? (
-                        <time class="bake-schedule__time" datetime={entry.occurs_at}>
-                          {fmtTime(entry.occurs_at)}
-                        </time>
-                      ) : (
-                        // Keep the subgrid's first column occupied so the body
-                        // stays aligned with timed entries.
-                        <span class="bake-schedule__time" />
-                      )}
-                      <div class="bake-schedule__body">
-                        <span class="bake-schedule__action">{entry.action}</span>
-                        {entry.note && (
-                          <span class="bake-schedule__note">{entry.note}</span>
+            days.map((g) => (
+              <div class="bk-day">
+                <h3>{g.label}</h3>
+                <ol class="bk-steps">
+                  {g.steps.map((s) => (
+                    <li class="bk-step">
+                      <span class="bk-time">
+                        {s.occurs_at && (
+                          <time datetime={s.occurs_at}>
+                            {fmt(asUtc(s.occurs_at), {
+                              hour: 'numeric',
+                              minute: '2-digit',
+                            })}
+                          </time>
                         )}
-                      </div>
+                      </span>
+                      <span class="bk-dot" aria-hidden="true" />
+                      <span class="bk-act">
+                        {s.action}
+                        {since(s) && <span class="bk-since">{since(s)}</span>}
+                        {s.note && <small>{s.note}</small>}
+                      </span>
                     </li>
                   ))}
-                </ul>
-              </section>
+                </ol>
+              </div>
             ))
           }
-        </div>
-
-        {
-          data.notes && (
-            <>
-              <h2>Notes</h2>
-              <p>{data.notes}</p>
-            </>
-          )
-        }
-
-        {
-          data.photos.length > 0 && (
-            <div class="bake-photos">
-              {data.photos.map((photo) => (
-                <Image
-                  src={`${WORKER_BASE}${photo.url}`}
-                  alt={photo.caption || `Bake from ${formatted}`}
-                  width={1200}
-                  height={1600}
-                  fit="scale-down"
-                  quality="high"
-                  loading="lazy"
-                />
-              ))}
-            </div>
-          )
-        }
+        </section>
       </div>
 
-      <nav class="bake-nav">
-        {prev ? <a href={`/baking/${prev.id}/`}>← prev</a> : <span />}
-        {next ? <a href={`/baking/${next.id}/`}>next →</a> : <span />}
+      <nav class="bk-pager" aria-label="More bakes">
+        {
+          prev && (
+            <a class="prev" href={`/baking/${prev.id}/`}>
+              <span class="dir">&larr; Older</span>
+              <span class="t">{pagerLabel(prev)}</span>
+            </a>
+          )
+        }
+        {
+          next && (
+            <a class="next" href={`/baking/${next.id}/`}>
+              <span class="dir">Newer &rarr;</span>
+              <span class="t">{pagerLabel(next)}</span>
+            </a>
+          )
+        }
       </nav>
-    </div>
-  </main>
-</Layout>
+    </main>
+  </div>
+
+  <Fragment slot="foot-links">
+    <a href="/">Home</a>
+    <a href="/baking/">Bake log</a>
+  </Fragment>
+
+  <div
+    slot="after"
+    class="lightbox"
+    id="closer"
+    hidden
+    tabindex="-1"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Photo"
+  >
+    <div class="closer-scrim"></div>
+    <figure class="closer-print bk-closer" id="closer-print">
+      <img id="closer-img" alt="" draggable="false" />
+    </figure>
+    <button
+      class="closer-nav prev"
+      id="closer-prev"
+      type="button"
+      aria-label="Previous photo">&larr;</button
+    >
+    <button class="closer-nav next" id="closer-next" type="button" aria-label="Next photo"
+      >&rarr;</button
+    >
+  </div>
+</GoodBread>
+
+<script>
+  import '../../scripts/bake-viewer.js'
+</script>

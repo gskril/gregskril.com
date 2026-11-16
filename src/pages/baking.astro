@@ -1,55 +1,138 @@
 ---
-import { sortedBakes } from '../bakes'
-import Layout from '../layouts/Layout.astro'
-
-const currentYear = new Date().getFullYear()
+import GoodBread from '../layouts/GoodBread.astro'
+import Underline from '../components/Underline.astro'
+import ART from '../art'
+import { bakeImage, dough, sortedBakes, tiltFor } from '../bakes'
 
 const bakes = await sortedBakes()
+const fmt = (d: Date, o: Intl.DateTimeFormatOptions) =>
+  new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', ...o }).format(d)
+
+const kg = bakes.reduce((t, b) => t + dough(b.data).flour, 0) / 1000
+const first = bakes[bakes.length - 1]
+
+// One continuous grid; each new month gets its own tile in the flow, so there are no gaps.
+type Item =
+  | { kind: 'month'; month: string; year: string }
+  | {
+      kind: 'bake'
+      id: string
+      title: string
+      date: string
+      hydration: number | null
+      thumb: string | null
+      more: number
+      tilt: number
+    }
+
+const items: Item[] = []
+let month = ''
+for (const b of bakes) {
+  const key = b.data.bake_date.slice(0, 7)
+  if (key !== month) {
+    month = key
+    items.push({
+      kind: 'month',
+      month: fmt(b.data.date, { month: 'long' }),
+      year: fmt(b.data.date, { year: 'numeric' }),
+    })
+  }
+  const photo = b.data.photos[0]
+  const thumb = photo ? (await bakeImage(photo.url, 560, 78)).src : null
+  const d = dough(b.data)
+  items.push({
+    kind: 'bake',
+    id: b.id,
+    title: b.data.title || 'Bake',
+    date: fmt(b.data.date, { month: 'short', day: 'numeric' }),
+    hydration: d.hydration,
+    thumb,
+    more: Math.max(0, b.data.photos.length - 1),
+    tilt: tiltFor(b.id),
+  })
+}
 ---
 
-<Layout
-  title="Baking Log - Greg Skriloff"
-  description="A personal sourdough baking log."
+<GoodBread
+  title="Bake log · Greg Skriloff"
+  description="Every loaf I've baked, the good ones and the flat ones."
   image={[
     'https://gregskril.com/img/baking/og-1.webp',
     'https://gregskril.com/img/baking/og-2.webp',
     'https://gregskril.com/img/baking/og-3.webp',
   ]}
 >
-  <main class="container">
-    <div class="section">
-      <a class="bake-back" href="/">← Home</a>
-      <h1>Baking Log</h1>
-      <div class="content">
-        <ul>
-          {
-            bakes.map((bake) => {
-              const bakeDate = bake.data.date
-              const isThisYear = bakeDate.getFullYear() === currentYear
-              const formatted = new Intl.DateTimeFormat('en-US', {
-                year: isThisYear ? undefined : 'numeric',
-                day: 'numeric',
-                month: 'short',
-              }).format(bakeDate)
+  <div class="bk">
+    <nav class="bk-top"><a class="bk-back" href="/">&larr; Greg</a></nav>
 
-              return (
-                <li>
-                  <a href={`/baking/${bake.id}/`}>
-                    {formatted} - {bake.data.title}
-                  </a>
-                </li>
-              )
-            })
-          }
-        </ul>
-        <p style="color: var(--color-secondary-text); font-size: 0.875rem;">
-          ...and dozens of other loaves before I started this log. See some on <a
-            href="https://goodbread.nyc/?ref=gregskril.com"
-            target="_blank"
-            rel="noopener">goodbread.nyc</a
-          >
-        </p>
-      </div>
-    </div>
-  </main>
-</Layout>
+    <header class="bk-head">
+      <h1 class="bk-title"><Underline>Bake log</Underline></h1>
+      <p class="bk-intro">
+        Every loaf I've baked since January, the good ones and the flat ones.
+      </p>
+      <ul class="bk-stats" aria-label="Stats">
+        <li><b>{bakes.length}</b> bakes</li>
+        <li><b>{kg.toFixed(1)} kg</b> of flour</li>
+        <li>since <b>{fmt(first.data.date, { month: 'short', year: 'numeric' })}</b></li>
+      </ul>
+    </header>
+
+    <main class="bk-log">
+      <ul class="bk-grid">
+        {
+          items.map((it) =>
+            it.kind === 'month' ? (
+              <li class="bk-mo" aria-hidden="true">
+                <span>{it.month}</span>
+                <small>{it.year}</small>
+              </li>
+            ) : (
+              <li>
+                <a class="bk-card" href={`/baking/${it.id}/`}>
+                  {it.thumb ? (
+                    <div class="bk-pic" style={`--tilt:${it.tilt.toFixed(2)}deg`}>
+                      <img
+                        src={it.thumb}
+                        alt={`${it.title} from ${it.date}`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      {it.more > 0 && <span class="bk-count">+{it.more}</span>}
+                    </div>
+                  ) : (
+                    <div class="bk-pic empty" style={`--tilt:${it.tilt.toFixed(2)}deg`}>
+                      <span data-art="loaf" set:html={ART.loaf} />
+                      <span class="why">no photo (forgot)</span>
+                    </div>
+                  )}
+                  <div class="bk-meta">
+                    <span class="bk-name">{it.title}</span>
+                    <span class="bk-date">
+                      {it.date}
+                      {it.hydration && ` · ${Math.round(it.hydration * 100)}%`}
+                    </span>
+                  </div>
+                </a>
+              </li>
+            )
+          )
+        }
+      </ul>
+    </main>
+
+    <p class="bk-more">
+      &hellip;and dozens of loaves before I started writing them down. Some of them are on <a
+        href="https://goodbread.nyc/?ref=gregskril.com"
+        target="_blank"
+        rel="noopener">goodbread.nyc</a
+      >.
+    </p>
+  </div>
+
+  <Fragment slot="foot-links">
+    <a href="/">Home</a>
+    <a href="https://goodbread.nyc" target="_blank" rel="noopener">
+      Good Bread <span aria-hidden="true">&#8599;</span>
+    </a>
+  </Fragment>
+</GoodBread>
