@@ -191,14 +191,15 @@ h1, h2 { margin: 0; }
 .rows li { border-top: 1px solid var(--ink); }
 .rows li:last-child { border-bottom: 1px solid var(--ink); }
 .rows a {
-  display: grid; grid-template-columns: minmax(10rem, 16rem) 1fr auto; gap: 0 1.5rem; align-items: baseline;
+  display: grid; grid-template-columns: minmax(10rem, 20.5rem) 1fr auto; gap: 0 1.5rem; align-items: baseline;
   padding: .7rem .25rem; text-decoration: none;
   transition: background-color .15s ease, color .15s ease;
 }
 .r-name { font-family: var(--pangram); font-size: clamp(1.25rem, 1rem + 1vw, 1.5rem); line-height: 2rem; }
 .r-desc { font-size: 1.125rem; }
 .r-arrow { font-family: var(--pangram); font-size: 1.5rem; line-height: 1; transition: transform .2s ease; }
-.rows a:hover .r-name, .rows a:focus-visible .r-name { font-weight: 600; }
+/* a hairline stroke reads as bold without making the name wider, so long names never re-wrap on hover */
+.rows a:hover .r-name, .rows a:focus-visible .r-name { -webkit-text-stroke: .04em currentColor; }
 .rows a:hover .r-arrow, .rows a:focus-visible .r-arrow { transform: translate(3px, -3px); }
 
 /* the line draws 60 tally marks in here; the box only holds the space (height set by line.js) */
