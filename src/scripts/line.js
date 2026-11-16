@@ -245,15 +245,14 @@
     return groups;
   }
 
-  /* Scribble under GREG: Erin's UnderlineScribble2, minus its last little hook */
+  /* Scribble under "Hi, I'm Greg." */
   function underGreg(pen, W, mobile) {
-    const full = !document.documentElement.dataset.hero;
-    const el = full ? $('#a-word .wm-text') : $('#a-lead');
+    const el = $('#a-lead');
     const word = rect(el);
-    const fs = parseFloat(getComputedStyle(full ? $('#a-word') : el).fontSize);
+    const fs = parseFloat(getComputedStyle(el).fontSize);
     const wb = baseline(el);
     /* one clean pass of Erin's UnderlineScribble, right to left */
-    const box = { x: word.x - fs * 0.04, y: wb + fs * (full ? 0.1 : 0.27), w: Math.min(word.w + fs * 0.12, W - 12 - (word.x - fs * 0.04)), h: fs * 0.15 };
+    const box = { x: word.x - fs * 0.04, y: wb + fs * 0.27, w: Math.min(word.w + fs * 0.12, W - 12 - (word.x - fs * 0.04)), h: fs * 0.15 };
     const u = fit('under', box);
     if (mobile) {
       pen.start([W - 26, -30], [-0.15, 1]);

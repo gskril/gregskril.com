@@ -1,4 +1,4 @@
-/* Review-only: the palette and hero pickers, shown when the URL has ?review. Remove once decided. */
+/* Review-only: the palette picker, shown when the URL has ?review. Remove once decided. */
 ;(() => {
   'use strict'
   const root = document.documentElement
@@ -22,9 +22,4 @@
     })
   )
   markPick()
-  document
-    .querySelectorAll('#review a[data-hero]')
-    .forEach((a) =>
-      a.setAttribute('aria-current', String((root.dataset.hero || '') === a.dataset.hero))
-    )
 })()

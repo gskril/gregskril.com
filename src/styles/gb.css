@@ -147,15 +147,10 @@ h1, h2 { margin: 0; }
   aspect-ratio: 438 / 632;
 }
 .hello-copy { max-width: 32rem; padding-top: 2rem; }
-.wordmark {
-  position: relative; display: inline-block;
-  font-family: var(--pangram); font-weight: 800;
-  font-size: clamp(5.5rem, 12.5vw, 11rem); line-height: .78; letter-spacing: -.012em;
-  margin: .34em 0 0 -.045em; padding-bottom: .02em;
-}
-.wm-text { position: relative; }
+/* the eyes from Erin's logo sit above the hello and watch your cursor */
+.hello-eyes { font-size: clamp(5rem, 9vw, 8rem); line-height: 1; margin: 0 0 .12em -.04em; }
 .eyes {
-  position: absolute; left: .895em; bottom: .915em; width: .96em; height: auto;
+  display: block; width: 1.05em; height: auto;
   overflow: visible; fill: none; stroke: var(--ink); stroke-width: 6.2; stroke-linecap: round;
 }
 .eyes .lid { clip-path: inset(-20px -20px 0 -20px); transform-box: fill-box; transform-origin: 50% 60%; transition: transform .09s ease-in; }
@@ -166,25 +161,13 @@ h1, h2 { margin: 0; }
 .eyes .brow { stroke-width: 5; transition: transform .25s ease; }
 .eyes.surprised .brow { transform: translateY(-6px); }
 
-.hello-text { margin-top: clamp(3rem, 5vw, 4.5rem); }
-.lead { font-family: var(--pangram); font-weight: 800; font-size: 1.5rem; line-height: 2rem; margin-bottom: .35rem; }
-.hello-text p { max-width: 26rem; }
-.aside { margin-top: .6rem; }
-
-/* ---------- hero variants (review): just the eyes, or no wordmark at all ---------- */
-.vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-[data-hero] .wm-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-[data-hero] .lead {
-  font-size: clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem); line-height: 1.02; letter-spacing: -.01em;
+.lead {
+  font-family: var(--pangram); font-weight: 800; letter-spacing: -.01em;
+  font-size: clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem); line-height: 1.02;
   margin-bottom: .75em;
 }
-[data-hero] .hello-text { margin-top: 0; }
-@media (max-width: 819px) { [data-hero] .hello-copy { padding-top: 3.5rem; } [data-hero="eyes"] .hello-copy { padding-top: 2.5rem; } }
-[data-hero="none"] .wordmark { display: none; }
-[data-hero="eyes"] .wordmark {
-  display: block; font-size: clamp(5rem, 9vw, 8rem); margin: 0 0 .12em -.04em; line-height: 1;
-}
-[data-hero="eyes"] .eyes { position: relative; left: auto; bottom: auto; display: block; width: 1.05em; }
+.hello-text p { max-width: 26rem; }
+.aside { margin-top: .6rem; }
 
 /* ---------- bread ---------- */
 .bread {
@@ -326,7 +309,7 @@ h1, h2 { margin: 0; }
 .foot a:hover { text-decoration: underline; }
 .foot-links { display: flex; gap: 1.5rem; }
 
-/* ---------- review-only palette + hero picker: shown with ?review in the URL ---------- */
+/* ---------- review-only palette picker: shown with ?review in the URL ---------- */
 .review { display: none !important; }
 [data-review] .review { display: flex !important; }
 .review {
@@ -339,10 +322,6 @@ h1, h2 { margin: 0; }
   box-shadow: 0 6px 18px -8px rgb(0 0 0 / .35);
 }
 .review-label { padding: 0 .35rem; opacity: .6; }
-.review-sep { width: 1px; align-self: stretch; margin: .2rem .3rem; background: var(--ink); opacity: .3; }
-.review a { color: var(--ink); text-decoration: none; border: 1px solid transparent; border-radius: 999px; padding: .35rem .55rem; }
-.review a[aria-current="true"] { border-color: var(--ink); }
-.review a:hover { background: var(--hover); color: var(--hover-ink); }
 .review button {
   font: inherit; color: var(--ink); background: none; cursor: pointer;
   border: 1px solid transparent; border-radius: 999px; padding: .35rem .55rem;
@@ -358,10 +337,8 @@ h1, h2 { margin: 0; }
 /* ---------- small screens: one column, the line becomes a meander ---------- */
 @media (max-width: 819px) {
   .hello { grid-template-columns: 1fr; min-height: 0; padding: 1.25rem var(--gutter) 0; gap: 0; }
-  .hello-copy { order: 1; padding-top: 0; max-width: none; }
+  .hello-copy { order: 1; padding-top: 2.5rem; max-width: none; }
   .hello-portrait { order: 2; width: min(62%, 16rem); margin-top: 4.5rem; }
-  .wordmark { font-size: clamp(4.75rem, 27vw, 8.5rem); margin-top: .78em; }
-  .hello-text { margin-top: 3rem; }
 
   .bread { grid-template-columns: 1fr; padding: 6.5rem var(--gutter) 0; gap: 2.5rem; }
   .bread-copy { order: 1; max-width: none; }
@@ -539,7 +516,6 @@ h1, h2 { margin: 0; }
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
 }
 .nf-eyes { font-size: clamp(6rem, 18vw, 10rem); line-height: 1; margin-bottom: 1.5rem; }
-.nf-eyes .eyes { position: static; display: block; width: 1.05em; }
 .nf-title { font-family: var(--pangram); font-weight: 800; font-size: clamp(2rem, 1.3rem + 2.8vw, 3.25rem); line-height: 1.08; text-wrap: balance; margin-bottom: .8rem; }
 .nf > p { max-width: 28rem; }
 .nf .btns { justify-content: center; margin-top: 1.75rem; }
