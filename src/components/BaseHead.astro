@@ -3,7 +3,7 @@ const { title, description, image } = Astro.props
 const defaultImage = 'https://gregskril.com/img/banner.jpg'
 const images = Array.isArray(image) ? image : [image || defaultImage]
 
-// Netlify serves pages as directories (/baking -> /baking/), so canonicals use a trailing slash
+// Cloudflare serves pages as directories (/baking -> /baking/), so canonicals use a trailing slash
 const canonicalPath = Astro.url.pathname
   .replace(/\/index\.html$/, '/')
   .replace(/\.html$/, '')
