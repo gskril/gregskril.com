@@ -383,6 +383,9 @@ h1, h2 { margin: 0; }
 
 /* the bake log and bake pages keep the current site's narrow column (60ch) */
 .bk.narrow { max-width: calc(36rem + 2 * var(--gutter)); }
+/* sized to the content so the page sits centered: lists (blog, projects) and articles */
+.bk.list { max-width: calc(52rem + 2 * var(--gutter)); }
+.bk.article { max-width: calc(42rem + 2 * var(--gutter)); }
 
 /* ---------- the bake log: a plain list, on purpose ---------- */
 .bk-log { list-style: none; margin: 0; padding: 0; max-width: 34rem; }
