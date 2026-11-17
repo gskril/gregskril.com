@@ -160,7 +160,7 @@ h1, h2 { margin: 0; }
 /* older browsers without aspect-ratio: hold the portrait's space with padding instead */
 @supports not (aspect-ratio: 1) {
   .hello-portrait::before { content: ""; display: block; padding-top: 144.29%; }
-  .hello-portrait noscript { display: block; margin-top: -144.29%; }
+  .hello-portrait noscript, .hello-portrait > .portrait-still { display: block; margin-top: -144.29%; }
 }
 .hello-copy { max-width: 32rem; padding-top: 2rem; }
 /* the eyes from Erin's logo sit above the hello and watch your cursor */
@@ -542,7 +542,7 @@ h1, h2 { margin: 0; }
 .nf > p { max-width: 28rem; }
 .nf .btns { justify-content: center; margin-top: 1.75rem; }
 
-/* the portrait as a plain drawing, for when JavaScript is off (the line draws it otherwise) */
+/* the portrait as a plain drawing, for when the line can't run (it draws it otherwise) */
 .portrait-still {
   display: block; width: 100%; height: auto; overflow: visible;
   fill: none; stroke: var(--line); stroke-width: 2.5px; stroke-linecap: round; stroke-linejoin: round;

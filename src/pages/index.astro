@@ -87,8 +87,8 @@ const projects = [
         role="img"
         aria-label="A line drawing of Greg"
       >
-        <!-- the line draws this in; without JavaScript, here's the finished drawing -->
-        <noscript>
+        <!-- the line draws this in; without it, here's the finished drawing -->
+        <noscript data-unless-line>
           <svg class="portrait-still" viewBox={`0 0 ${GREG_W} ${GREG_H}`} aria-hidden="true">
             {GREG.map((d) => <path d={d} />)}
           </svg>
@@ -284,5 +284,4 @@ const projects = [
   import '../scripts/eyes.js'
   import '../scripts/photos.js'
   import '../scripts/line.js'
-  import '../scripts/later-images.js'
 </script>

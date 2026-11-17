@@ -27,6 +27,8 @@ import { GREG, GREG_W } from '../portrait.js';
   });
 
   if (!svg || !page) return;
+  /* the line is on; the page's fallback drawing (see GoodBread.astro) stays hidden */
+  document.documentElement.setAttribute('data-line', '');
 
   /* ---------- Erin's strokes, straight from the Good Bread source ---------- */
   const RAW = {
