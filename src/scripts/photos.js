@@ -5,7 +5,7 @@
 */
 import { trapFocus, releaseFocus } from './modal.js';
 import { crunch, preloadCrunch } from './crunch.js';
-import { PHOTOS, DIR } from '../photos.js';
+import { PHOTOS, photoUrl } from '../photos.js';
 import { pileLayout, columnsFor } from './pile-layout.js';
 
 (() => {
@@ -357,9 +357,9 @@ import { pileLayout, columnsFor } from './pile-layout.js';
     placeEl.textContent = p.data.place || '';
     const full = new Image();
     full.onload = () => { if (current === p) big.src = full.src; };
-    full.src = `${DIR}${p.data.file}.webp`;
+    full.src = photoUrl(p.data);
     /* warm up the neighbours so swiping is instant */
-    [prints[(p.i + 1) % prints.length], prints[(p.i - 1 + prints.length) % prints.length]].forEach((q) => { new Image().src = `${DIR}${q.data.file}.webp`; });
+    [prints[(p.i + 1) % prints.length], prints[(p.i - 1 + prints.length) % prints.length]].forEach((q) => { new Image().src = photoUrl(q.data); });
     return t;
   }
   function open(p) {

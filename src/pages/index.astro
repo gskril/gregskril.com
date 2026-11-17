@@ -2,7 +2,7 @@
 import GoodBread from '../layouts/GoodBread.astro'
 import Eyes from '../components/Eyes.astro'
 import ART from '../art'
-import { PHOTOS, DIR, srcset, label } from '../photos.js'
+import { PHOTOS, CDN, photoUrl, srcset, label } from '../photos.js'
 import { pileLayout } from '../scripts/pile-layout.js'
 import { GREG, GREG_W, GREG_H } from '../portrait.js'
 
@@ -68,6 +68,8 @@ const projects = [
     title="RSS"
     href="/rss.xml"
   />
+  <!-- the photos come from here; opening the connection early saves a few round trips later -->
+  <link slot="head" rel="preconnect" href={CDN} />
   <noscript slot="head">
     <style>
       /* dragging and the lightbox need JavaScript; without it, each print is a plain link */
@@ -166,14 +168,14 @@ const projects = [
             PHOTOS.map((p, i) => (
               <a
                 class="print"
-                href={`${DIR}${p.file}.webp`}
+                href={photoUrl(p)}
                 data-i={i}
                 aria-label={label(p)}
                 style={`--ar:${p.w} / ${p.h};--r:${firstLayout.items[i].r.toFixed(2)}deg;z-index:${i + 1}`}
                 draggable="false"
               >
                 <img
-                  data-src={`${DIR}${p.file}-sm.webp`}
+                  data-src={photoUrl(p, 'sm')}
                   data-srcset={srcset(p)}
                   data-sizes={PRINT_SIZES}
                   width={p.w}
@@ -186,7 +188,7 @@ const projects = [
                 />
                 <noscript>
                   <img
-                    src={`${DIR}${p.file}-sm.webp`}
+                    src={photoUrl(p, 'sm')}
                     srcset={srcset(p)}
                     sizes={PRINT_SIZES}
                     width={p.w}
