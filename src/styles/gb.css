@@ -193,6 +193,7 @@ h1, h2 { margin: 0; }
 /* the line draws 60 tally marks in here; the box only holds the space (height set by line.js) */
 .tally { width: 100%; max-width: 46rem; height: 5rem; margin-top: 3rem; }
 .tally-note { text-align: center; max-width: 25rem; margin-top: 1rem; }
+.tally-note a { display: block; width: fit-content; margin: .5rem auto 0; text-underline-offset: 3px; }
 
 /* ---------- photos ---------- */
 .photos { padding: clamp(6rem, 11vw, 9rem) 0 1rem; }
@@ -421,6 +422,24 @@ h1, h2 { margin: 0; }
 .bk-pager a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .bk-pager .next { margin-left: auto; }
 
+
+/* ---------- all projects ---------- */
+.pj-list { list-style: none; margin: 0; padding: 0; max-width: 52rem; }
+.pj-list li {
+  display: grid; grid-template-columns: 6.5rem 1fr; gap: .25rem 1.5rem;
+  padding: 1.1rem .25rem; border-top: 1px solid var(--ink);
+}
+.pj-list li:last-child { border-bottom: 1px solid var(--ink); }
+.pj-date { font-family: var(--pangram); font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; opacity: .8; padding-top: .3rem; }
+.pj-title { font-family: var(--pangram); font-weight: 800; font-size: 1.25rem; line-height: 1.25; text-decoration: none; }
+.pj-title:hover, .pj-title:focus-visible { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.pj-desc { margin-top: .25rem; opacity: .85; max-width: 40rem; }
+.pj-desc p { margin: 0; }
+.pj-desc a { text-underline-offset: 3px; }
+@media (max-width: 559px) {
+  .pj-list li { grid-template-columns: 1fr; }
+  .pj-date { padding-top: 0; }
+}
 
 /* ---------- blog ---------- */
 .bl-list { list-style: none; margin: 0; padding: 0; max-width: 52rem; }

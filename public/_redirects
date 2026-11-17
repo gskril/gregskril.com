@@ -2,8 +2,6 @@ https://gregskril.netlify.app/* https://gregskril.com/:splat 301!
 
 /about / 301
 /about/ / 301
-/projects / 301
-/projects/ / 301
 /sitemap.xml /sitemap-index.xml 301
 /baking/2026-01-16 /baking/51ef3b28-adc9-4678-be0b-3bf6395dd6b9/ 301
 /baking/2026-01-16/ /baking/51ef3b28-adc9-4678-be0b-3bf6395dd6b9/ 301

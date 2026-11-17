@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content'
+import GoodBread from '../layouts/GoodBread.astro'
+import Underline from '../components/Underline.astro'
+
+// Every side project, newest first, from src/content/projects.
+const projects = await getCollection('projects')
+projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+const items = await Promise.all(projects.map(async (p) => ({ p, Content: (await render(p)).Content })))
+
+const fmt = (d: Date) =>
+  new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', timeZone: 'UTC' }).format(d)
+---
+
+<GoodBread
+  title="Projects · Greg Skriloff"
+  description={`All ${projects.length} of my side projects, newest first.`}
+>
+  <div class="bk">
+    <nav class="bk-top"><a class="bk-back" href="/">&larr; Greg</a></nav>
+
+    <header class="bk-head">
+      <h1 class="bk-title"><Underline>Projects</Underline></h1>
+      <p class="bk-intro">All {projects.length} of my side projects, newest first.</p>
+    </header>
+
+    <main>
+      <ul class="pj-list">
+        {
+          items.map(({ p, Content }) => (
+            <li>
+              <time class="pj-date" datetime={p.data.date.toISOString().slice(0, 10)}>
+                {fmt(p.data.date)}
+              </time>
+              <div>
+                <a class="pj-title" href={p.data.url} target="_blank" rel="noopener">
+                  {p.data.title}
+                  <span aria-hidden="true"> &#8599;</span>
+                </a>
+                <div class="pj-desc">
+                  <Content />
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+  </div>
+</GoodBread>
