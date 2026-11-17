@@ -27,8 +27,6 @@ import { GREG, GREG_W } from '../portrait.js';
   });
 
   if (!svg || !page) return;
-  /* the line is on; the page's fallback drawing (see GoodBread.astro) stays hidden */
-  document.documentElement.setAttribute('data-line', '');
 
   /* ---------- Erin's strokes, straight from the Good Bread source ---------- */
   const RAW = {
@@ -668,8 +666,11 @@ import { GREG, GREG_W } from '../portrait.js';
   };
 
   function startUp() {
+    /* if the route can't be built, leave the page as is: GoodBread.astro shows the finished portrait */
+    if (!build()) return;
+    /* the line is on; the page's fallback drawing stays hidden */
+    document.documentElement.setAttribute('data-line', '');
     started = true;
-    build();
     if (reduceMQ.matches) { drawn = target = total; paint(); return; }
     /* on a fresh load at the top, the line draws itself in; otherwise it's already there */
     sy = window.scrollY;

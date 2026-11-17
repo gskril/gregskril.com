@@ -6,7 +6,7 @@
 import { trapFocus, releaseFocus } from './modal.js';
 import { crunch, preloadCrunch } from './crunch.js';
 import { PHOTOS, photoUrl } from '../photos.js';
-import { pileLayout, columnsFor } from './pile-layout.js';
+import { pileLayout, columnsNow } from './pile-layout.js';
 
 (() => {
   'use strict';
@@ -199,7 +199,7 @@ import { pileLayout, columnsFor } from './pile-layout.js';
   function layout() {
     const w = pile.clientWidth;
     if (!w || dragging) return;
-    const c = columnsFor(w);
+    const c = columnsNow();
     const keep = c === cols && Math.abs(w - cw) < 1;
     cols = c; cw = w;
     const L = pileLayout(PHOTOS, c);
@@ -456,7 +456,7 @@ import { pileLayout, columnsFor } from './pile-layout.js';
   });
   /* trackpads: a sideways swipe flips photos, scrolling closes */
   let wheelLock = 0;
-  window.addEventListener('wheel', (e) => {
+  box.addEventListener('wheel', (e) => {
     if (!current) return;
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
       e.preventDefault();

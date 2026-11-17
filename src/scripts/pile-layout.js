@@ -11,8 +11,18 @@
 export const rand = (seed) => () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
-/* columns for a pile this wide (in px) */
-export const columnsFor = (w) => (w < 520 ? 2 : w < 860 ? 3 : 4);
+/* Columns by viewport width. The build writes one CSS block per query and the script asks the
+   same queries, so the two always pick the same count (measuring the pile instead would
+   disagree whenever a scrollbar takes up width). */
+export const COLUMN_QUERIES = [
+  [2, '(max-width: 565.98px)'],
+  [3, '(min-width: 566px) and (max-width: 934.98px)'],
+  [4, '(min-width: 935px)'],
+];
+export const columnsNow = () => {
+  const hit = COLUMN_QUERIES.find(([, q]) => window.matchMedia(q).matches);
+  return hit ? hit[0] : 4;
+};
 
 /**
  * @returns {{ items: { x: number, y: number, pw: number, r: number }[], h: number }}

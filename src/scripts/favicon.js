@@ -23,7 +23,8 @@
   const canvas = document.createElement('canvas')
   canvas.width = canvas.height = SIZE
   const ctx = canvas.getContext('2d')
-  if (!ctx || !('Path2D' in window)) return
+  // older browsers (no roundRect) keep the static icon instead of losing it
+  if (!ctx || !('Path2D' in window) || !ctx.roundRect) return
   const paths = PARTS.map((d) => new Path2D(d))
   const closed = new Path2D(CLOSED_EYE)
 

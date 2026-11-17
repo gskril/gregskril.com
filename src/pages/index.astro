@@ -1,20 +1,17 @@
 ---
+import { getCollection } from 'astro:content'
 import GoodBread from '../layouts/GoodBread.astro'
 import Eyes from '../components/Eyes.astro'
 import ART from '../art'
 import { PHOTOS, CDN, photoUrl, srcset, label } from '../photos.js'
-import { pileLayout } from '../scripts/pile-layout.js'
+import { pileLayout, COLUMN_QUERIES } from '../scripts/pile-layout.js'
 import { GREG, GREG_W, GREG_H } from '../portrait.js'
 
 /* Place the prints in plain CSS, with the same numbers photos.js uses, so the pile is in its
    final spot before the script loads (and stays put if it never does). Columns change with the
    pile's width, which is the viewport minus the gutters: 2 below ~566px, 3 below ~935px, then 4. */
 const pct = (v: number) => `${(v * 100).toFixed(3)}%`
-const pileCSS = [
-  [2, '(max-width: 565.98px)'],
-  [3, '(min-width: 566px) and (max-width: 934.98px)'],
-  [4, '(min-width: 935px)'],
-]
+const pileCSS = COLUMN_QUERIES
   .map(([c, mq]) => {
     const L = pileLayout(PHOTOS, c as number)
     const rules = L.items
@@ -55,6 +52,9 @@ const projects = [
     desc: 'Ethereum dev tools for AI agents, like ABI encoding.',
   },
 ]
+
+// the tally note counts every other side project (all of them are on /projects/)
+const moreProjects = (await getCollection('projects')).length - projects.length
 ---
 
 <GoodBread
@@ -102,7 +102,7 @@ const projects = [
         <div class="hello-text">
           <h1 class="lead" id="a-lead">Hi, I'm Greg.</h1>
           <p>I live in New York. I like baking bread and building software.</p>
-          <p class="aside">By day I'm a Developer Relations Engineer at ENS&nbsp;Labs.</p>
+          <p class="aside">By day I'm a Developer Relations Engineer at <a href="https://ens.domains/" target="_blank" rel="noopener">ENS&nbsp;Labs</a>.</p>
         </div>
       </div>
     </header>
@@ -150,7 +150,7 @@ const projects = [
         </ul>
         <div class="tally" id="a-tally" aria-hidden="true"></div>
         <p class="tally-note">
-          Plus 60+ more that I made by hand, back before AI could lend&nbsp;one.
+          Plus {moreProjects} more, most of them made by hand before AI could lend&nbsp;one.
           <a href="/projects/">See them&nbsp;all&nbsp;&rarr;</a>
         </p>
       </section>

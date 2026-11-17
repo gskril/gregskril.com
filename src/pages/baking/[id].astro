@@ -141,7 +141,7 @@ const photos = await Promise.all(
                 data-full={p.src}
                 data-w={p.width}
                 data-h={p.height}
-                aria-label={`Open photo ${k + 1}`}
+                aria-label={`Open photo: ${p.alt}`}
               >
                 <img
                   src={p.src}

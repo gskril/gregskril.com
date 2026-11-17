@@ -155,6 +155,7 @@ h1, h2 { margin: 0; }
   font-family: var(--pangram); font-weight: 800; letter-spacing: -.01em;
   font-size: clamp(2.75rem, 1.6rem + 3.6vw, 4.5rem); line-height: 1.02;
   margin-bottom: .75em;
+  width: -webkit-fit-content; width: fit-content; /* so the line underlines the words, not the column */
 }
 .hello-text p { max-width: 26rem; }
 .aside { margin-top: .6rem; }
@@ -388,15 +389,15 @@ h1, h2 { margin: 0; }
 .bk.article { max-width: calc(42rem + 2 * var(--gutter)); }
 
 /* ---------- the bake log: a plain list, on purpose ---------- */
-.bk-log { list-style: none; margin: 0; padding: 0; max-width: 34rem; }
+.bk-log { list-style: none; margin: 0; padding: 0; }
 .bk-log a {
-  display: grid; grid-template-columns: 5.25rem 1fr; gap: 1rem; align-items: baseline;
+  display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; align-items: baseline;
   padding: .15rem 0; line-height: 1.45; text-decoration: none;
 }
 .bk-log time { font-family: var(--pangram); font-size: .9375rem; opacity: .8; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .bk-log span { font-size: 1.125rem; }
 .bk-log a:hover span, .bk-log a:focus-visible span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-.bk-more { margin-top: 2.5rem; max-width: 34rem; font-size: .9375rem; opacity: .8; }
+.bk-more { margin-top: 2.5rem; font-size: .9375rem; opacity: .8; }
 
 /* ---------- one bake: just the facts ---------- */
 .bk-bake { max-width: 40rem; padding-top: clamp(2.5rem, 6vw, 4rem); }
