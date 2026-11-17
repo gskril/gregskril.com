@@ -33,18 +33,6 @@ const { title, description, image } = Astro.props
       type="font/woff2"
       crossorigin
     />
-    <script is:inline>
-      // Review-only: ?review shows the palette picker, and a chosen palette sticks around.
-      ;(() => {
-        const root = document.documentElement
-        const q = new URLSearchParams(location.search)
-        if (q.has('review')) root.dataset.review = ''
-        try {
-          const t = localStorage.getItem('gb-theme')
-          if (t && /^(light|navy|charcoal|espresso)$/.test(t)) root.dataset.theme = t
-        } catch (e) {}
-      })()
-    </script>
     <!-- without JavaScript, images that wait for the page to load (data-src) show their <noscript> copy instead -->
     <noscript><style>img[data-src] { display: none; }</style></noscript>
     <slot name="head" />
@@ -53,15 +41,6 @@ const { title, description, image } = Astro.props
     <slot />
 
     <slot name="after" />
-
-    <div class="review" id="review" role="group" aria-label="Palette (review only)">
-      <span class="review-label">palette</span>
-      <button type="button" data-theme="">auto</button>
-      <button type="button" data-theme="light">light</button>
-      <button type="button" data-theme="navy">navy</button>
-      <button type="button" data-theme="charcoal">charcoal</button>
-      <button type="button" data-theme="espresso">espresso</button>
-    </div>
 
     <!--
       Pictures load last: images marked up with data-src only get their real source once the
@@ -95,7 +74,6 @@ const { title, description, image } = Astro.props
       })()
     </script>
     <script>
-      import '../scripts/review.js'
       import '../scripts/favicon.js'
     </script>
   </body>

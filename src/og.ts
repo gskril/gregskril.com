@@ -446,7 +446,7 @@ function loadFonts() {
       name,
       weight,
       style: 'normal' as const,
-      data: await fs.readFile(path.join(process.cwd(), 'public/fonts', file)),
+      data: await fs.readFile(path.join(process.cwd(), 'src/fonts', file)),
     }))
   )
   return fonts
