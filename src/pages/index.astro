@@ -1,5 +1,4 @@
 ---
-import { getCollection } from 'astro:content'
 import GoodBread from '../layouts/GoodBread.astro'
 import Eyes from '../components/Eyes.astro'
 import ART from '../art'
@@ -54,7 +53,6 @@ const projects = [
 ]
 
 // the tally note counts every other side project (all of them are on /projects/)
-const moreProjects = (await getCollection('projects')).length - projects.length
 ---
 
 <GoodBread
@@ -150,7 +148,7 @@ const moreProjects = (await getCollection('projects')).length - projects.length
         </ul>
         <div class="tally" id="a-tally" aria-hidden="true"></div>
         <p class="tally-note">
-          Plus {moreProjects} more, most of them made by hand before AI could lend&nbsp;one.
+          Plus 50+ more, most of them made by hand before AI could lend&nbsp;one.
           <a href="/projects/">See them&nbsp;all&nbsp;&rarr;</a>
         </p>
       </section>
