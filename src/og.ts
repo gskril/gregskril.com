@@ -137,7 +137,6 @@ function loaf(width: number, style: Style = {}) {
 
 /* ---------------------------------------------------------------- photos */
 
-const SHADOW = '0 2px 4px rgba(0,0,0,.1), 0 18px 34px -14px rgba(0,0,0,.4)'
 
 const photoCache = new Map<string, Promise<Buffer>>()
 async function fetchPhoto(url: string) {
@@ -173,8 +172,10 @@ export async function bakePhoto(url: string, w: number, h: number) {
   return `data:image/jpeg;base64,${jpg.toString('base64')}`
 }
 
-// A tilted photo print with the cobalt border, like the photos on the site.
-function print(
+// A tilted photo print with the cobalt border, like the photos on the site. satori doesn't
+// clip a photo to a rotated frame (it stays upright and spills past the border), so the whole
+// print, shadow included, is drawn here as one PNG and placed on the card unrotated.
+async function print(
   src: string,
   box: {
     left: number
@@ -185,23 +186,37 @@ function print(
     round?: boolean
   }
 ) {
-  const radius = box.round ? box.w / 2 : 12
-  return div(
-    {
-      position: 'absolute',
-      left: box.left,
-      top: box.top,
-      width: box.w,
-      height: box.h,
-      border: `3px solid ${COBALT}`,
-      borderRadius: radius,
-      overflow: 'hidden',
-      background: CREAM2,
-      boxShadow: SHADOW,
-      transform: `rotate(${box.rotate}deg)`,
-    },
-    img(src, { width: box.w - 6, height: box.h - 6, objectFit: 'cover' })
-  )
+  const { w, h } = box
+  const rx = box.round ? w / 2 : 12
+  const t = (box.rotate * Math.PI) / 180
+  const m = 48 // room for the shadow
+  const bw = Math.ceil(w * Math.abs(Math.cos(t)) + h * Math.abs(Math.sin(t))) + 2 * m
+  const bh = Math.ceil(w * Math.abs(Math.sin(t)) + h * Math.abs(Math.cos(t))) + 2 * m
+  const shape = (inset: number, extra = '') =>
+    `<rect x="${inset}" y="${inset}" width="${w - 2 * inset}" height="${h - 2 * inset}" rx="${Math.max(0, rx - inset)}" ${extra}/>`
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${bw}" height="${bh}" viewBox="0 0 ${bw} ${bh}">
+    <defs>
+      <filter id="s1" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2"/></filter>
+      <filter id="s2" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="17"/></filter>
+      <clipPath id="c">${shape(3)}</clipPath>
+    </defs>
+    <g transform="translate(${bw / 2} ${bh / 2}) rotate(${box.rotate}) translate(${-w / 2} ${-h / 2})">
+      <g transform="translate(0 2)" filter="url(#s1)">${shape(0, 'fill="#000" fill-opacity=".1"')}</g>
+      <g transform="translate(0 18)" filter="url(#s2)">${shape(14, 'fill="#000" fill-opacity=".4"')}</g>
+      ${shape(0, `fill="${CREAM2}"`)}
+      <image x="3" y="3" width="${w - 6}" height="${h - 6}" preserveAspectRatio="xMidYMid slice" clip-path="url(#c)" href="${src}" xlink:href="${src}"/>
+      ${shape(1.5, `fill="none" stroke="${COBALT}" stroke-width="3"`)}
+    </g>
+  </svg>`
+  // drawn at 2x, like the photos themselves
+  const png = await sharp(Buffer.from(svg), { density: 144 }).png().toBuffer()
+  return img(`data:image/png;base64,${png.toString('base64')}`, {
+    position: 'absolute',
+    left: box.left + w / 2 - bw / 2,
+    top: box.top + h / 2 - bh / 2,
+    width: bw,
+    height: bh,
+  })
 }
 
 /* ---------------------------------------------------------------- type */
@@ -282,7 +297,7 @@ export async function bakeLogCard(photoUrls: string[]) {
   // Oldest of the three at the back, newest on top.
   const urls = photoUrls.slice(0, 3).reverse()
   const prints = await Promise.all(
-    urls.map(async (u, i) => print(await bakePhoto(u, boxes[i].w, boxes[i].h), boxes[i]))
+    urls.map(async (u, i) => await print(await bakePhoto(u, boxes[i].w, boxes[i].h), boxes[i]))
   )
   return card(
     text({ ...KICKER, position: 'absolute', left: 90, top: 220 }, 'Greg Skriloff'),
@@ -336,7 +351,7 @@ export async function bakeCard({ title, date, photoUrl, notes }: BakeCardData) {
 
   if (photo) {
     return card(
-      print(photo, { left: 70, top: 60, w: 410, h: 510, rotate: -2.5 }),
+      await print(photo, { left: 70, top: 60, w: 410, h: 510, rotate: -2.5 }),
       column()
     )
   }
