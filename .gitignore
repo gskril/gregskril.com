@@ -8,6 +8,8 @@
 *.ogg
 *.ogv
 *.webm
+# ...except the site's own sound effects
+!public/sfx/*.mp3
 
 # Custom #
 .env
