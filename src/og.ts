@@ -448,6 +448,55 @@ export async function articleCard({ title, date }: { title: string; date: string
   )
 }
 
+// /game: the bread you press, a few "+1"s floating off it, and the title.
+export async function gameCard() {
+  const plus = (label: string, left: number, top: number, size: number, opacity: number) =>
+    text(
+      { ...H1, position: 'absolute', left, top, fontSize: size, opacity },
+      label
+    )
+  return card(
+    div(
+      {
+        position: 'absolute',
+        left: 90,
+        top: 135,
+        width: 380,
+        height: 380,
+        borderRadius: 190,
+        background: CREAM2,
+        border: `3px solid ${COBALT}`,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      div({ transform: 'rotate(-6deg)' }, loaf(250))
+    ),
+    // a burst of presses: bigger and darker near the bread, smaller and fainter as they rise
+    plus('+1', 410, 108, 54, 1),
+    plus('+1', 300, 66, 46, 0.85),
+    plus('+1', 128, 92, 40, 0.7),
+    plus('+1', 470, 40, 38, 0.55),
+    plus('+1', 212, 22, 32, 0.45),
+    plus('+1', 372, 6, 28, 0.3),
+    plus('+1', 40, 30, 26, 0.25),
+    div(
+      {
+        position: 'absolute',
+        left: 570,
+        top: 0,
+        width: 560,
+        height: OG_H,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+      },
+      text({ ...H1, fontSize: 100 }, 'Loaf Around'),
+      uline(360),
+      text({ fontSize: 36, lineHeight: 1.3 }, 'Press the bread. Build a bakery.')
+    )
+  )
+}
+
 /* ---------------------------------------------------------------- render */
 
 let fonts: Promise<
