@@ -3,7 +3,7 @@
 
   A single line runs the length of the page and is drawn as you scroll. On the way
   down it draws Erin's portrait of Greg, underlines things, circles a project, makes
-  60 tally marks, wraps the photos and ties a bow around the links.
+  50 tally marks, wraps the photos and ties a bow around the links.
 
   Its scribbles are Erin's real strokes from goodbread.nyc, placed exactly. The long
   wandering runs between them borrow the shape of her hero line and dividers. The whole
@@ -195,14 +195,14 @@ import { GREG, GREG_W } from '../portrait.js';
     return GREG_SEGS.map((segs) => segs.map((s) => s.map(([x, y]) => [box.x + x * k, box.y + y * k])));
   }
 
-  /* 60 tally marks in groups of five, laid out to fit #a-tally */
-  const TALLY = { groups: 12, gw: 40, gap: 22, mh: 34, row: 22 };
+  /* 50 tally marks in groups of five, laid out to fit #a-tally */
+  const TALLY = { groups: 10, gw: 40, gap: 22, mh: 34, row: 22 };
   function tallyLayout() {
     const el = $('#a-tally');
     const w = el.clientWidth;
     const fits = clamp(Math.floor((w + TALLY.gap) / (TALLY.gw + TALLY.gap)), 1, TALLY.groups);
     const rows = Math.ceil(TALLY.groups / fits);
-    const per = Math.ceil(TALLY.groups / rows); // balanced rows: 6 + 6 rather than 10 + 2
+    const per = Math.ceil(TALLY.groups / rows); // balanced rows: 5 + 5 rather than 8 + 2
     const h = rows * TALLY.mh + (rows - 1) * TALLY.row + 12;
     if (el.style.height !== `${h}px`) el.style.height = `${h}px`;
     return { per, rows };

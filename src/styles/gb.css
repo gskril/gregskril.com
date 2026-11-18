@@ -193,7 +193,7 @@ h1, h2 { margin: 0; }
 .rows a:hover .r-name, .rows a:focus-visible .r-name { -webkit-text-stroke: .04em currentColor; }
 .rows a:hover .r-arrow, .rows a:focus-visible .r-arrow { transform: translate(3px, -3px); }
 
-/* the line draws 60 tally marks in here; the box only holds the space (height set by line.js) */
+/* the line draws 50 tally marks in here; the box only holds the space (height set by line.js) */
 .tally { width: 100%; max-width: 46rem; height: 5rem; margin-top: 3rem; }
 .tally-note { text-align: center; max-width: 25rem; margin-top: 1rem; }
 .tally-note a { display: block; width: fit-content; margin: .5rem auto 0; text-underline-offset: 3px; }
