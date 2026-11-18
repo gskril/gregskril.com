@@ -261,12 +261,12 @@ export async function homeCard() {
         justifyContent: 'center',
         alignItems: 'flex-start',
       },
-      text({ ...H1, fontSize: 96 }, "Hi, I'm Greg."),
-      uline(540),
+      text({ ...H1, fontWeight: 600, fontSize: 92 }, "Hi, I'm Greg."),
+      uline(505),
       div(
-        { flexDirection: 'column', fontSize: 34, lineHeight: 1.3 },
-        text({}, 'I bake bread and build software'),
-        text({}, 'in New York.')
+        { flexDirection: 'column', fontSize: 40, lineHeight: 1.3 },
+        text({}, 'I bake bread and build'),
+        text({}, 'software in New York.')
       )
     )
   )
