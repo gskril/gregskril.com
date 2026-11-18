@@ -407,6 +407,72 @@ export async function blogCard() {
   )
 }
 
+// Tally marks in groups of five, like the ones the line draws on the homepage: four
+// slightly bowed uprights and a sagging slash. Seeded, so the card is the same every build.
+function tally(groups: number, perRow: number, left: number, top: number) {
+  let seed = 60
+  const R = () => {
+    seed = (seed * 16807) % 2147483647
+    return (seed - 1) / 2147483646
+  }
+  const gw = 64,
+    gap = 28,
+    mh = 58,
+    row = 40,
+    pad = 10
+  const rows = Math.ceil(groups / perRow)
+  const W = perRow * gw + (perRow - 1) * gap + 2 * pad
+  const H = rows * mh + (rows - 1) * row + 2 * pad
+  const pt = ([x, y]: number[]) => `${x.toFixed(1)} ${y.toFixed(1)}`
+  const paths: string[] = []
+  for (let g = 0; g < groups; g++) {
+    const x0 = pad + (g % perRow) * (gw + gap)
+    const y0 = pad + Math.floor(g / perRow) * (mh + row) + (R() - 0.5) * 6
+    for (let i = 0; i < 4; i++) {
+      const x = x0 + 6 + i * 15 + (R() - 0.5) * 4
+      const top = [x + (R() - 0.3) * 4, y0 + (R() - 0.5) * 8]
+      const bot = [x + (R() - 0.5) * 5, y0 + mh + (R() - 0.5) * 8]
+      const bow = (R() - 0.5) * 5
+      paths.push(
+        `M${pt(top)}C${pt([top[0] + bow, top[1] + mh * 0.33])} ${pt([bot[0] + bow, bot[1] - mh * 0.33])} ${pt(bot)}`
+      )
+    }
+    const a = [x0 - 5 + R() * 5, y0 + mh * (0.72 + R() * 0.1)]
+    const b = [x0 + gw + 3 + R() * 6, y0 + mh * (0.22 + R() * 0.1)]
+    const sag = 5 + R() * 5
+    const at = (k: number) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k + sag]
+    paths.push(`M${pt(a)}C${pt(at(0.33))} ${pt(at(0.66))} ${pt(b)}`)
+  }
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" fill="none" stroke="${COBALT}" stroke-width="3.5" stroke-linecap="round">${paths.map((d) => `<path d="${d}"/>`).join('')}</svg>`
+  return img(svgUri(svg), {
+    position: 'absolute',
+    left: left - pad,
+    top: top - pad,
+    width: W,
+    height: H,
+  })
+}
+
+export async function projectsCard() {
+  return card(
+    text({ ...KICKER, position: 'absolute', left: 90, top: 185 }, 'Greg Skriloff'),
+    text({ ...H1, position: 'absolute', left: 86, top: 225, fontSize: 120 }, 'Projects'),
+    under(520, 80, 365),
+    text(
+      {
+        position: 'absolute',
+        left: 90,
+        top: 425,
+        fontSize: 36,
+        width: 520,
+        lineHeight: 1.3,
+      },
+      'I like to build a lot of side projects.'
+    ),
+    tally(10, 5, 680, 245)
+  )
+}
+
 export async function articleCard({ title, date }: { title: string; date: string }) {
   return card(
     div(
