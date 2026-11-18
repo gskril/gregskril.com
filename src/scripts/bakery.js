@@ -342,6 +342,8 @@ function render() {
   checkMiles()
   const rate = lps()
   setText(el.count, fmt(state.loaves))
+  // long counts ("7.11 million") get smaller on phones so the pinned bar stays short
+  el.count.classList.toggle('long', el.count.textContent.length > 7)
   setText(el.unit, plural(state.loaves, 'loaf', 'loaves'))
   setText(el.rate, `${fmt(rate, 1)} per second`)
   setText(el.perClick, `Each press bakes ${fmt(perClick(), 1)} ${plural(perClick(), 'loaf', 'loaves')}.`)
