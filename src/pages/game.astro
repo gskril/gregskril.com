@@ -157,37 +157,54 @@ import { loaf, babka, baguette } from '../art'
   .gm-shop > section + section { margin-top: 2.75rem; }
   .gm-h2 { font-family: var(--pangram); font-weight: 800; font-size: 1.25rem; margin-bottom: .25rem; }
   .gm-helpers, .gm-tech, .gm-miles { list-style: none; margin: .9rem 0 0; padding: 0; }
-  .gm-helpers li { border-top: 1px solid var(--rule); }
-  .gm-helpers li:last-of-type { border-bottom: 1px solid var(--rule); }
+  .gm-helpers { display: grid; gap: .6rem; }
   .gm-helpers li[hidden] { display: none; }
 
+  /* every buyable thing is a bordered card with a Buy pill, so it reads as a button */
   .gm-buy, .gm-tech-btn {
     font: inherit; color: inherit; text-align: left; cursor: pointer;
+    border: 1px solid var(--ink); border-radius: 1rem; background: var(--paper);
     -webkit-tap-highlight-color: transparent; touch-action: manipulation;
-    transition: background-color .15s ease, opacity .15s ease, border-color .15s ease;
+    transition: background-color .15s ease, opacity .15s ease, transform .1s ease;
   }
   .gm-buy {
-    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: center;
-    width: 100%; padding: .8rem .75rem; border: 0; border-radius: .75rem; background: none;
+    display: grid; grid-template-columns: 2.75rem minmax(0, 1fr) auto; gap: .5rem .75rem; align-items: center;
+    width: 100%; padding: .8rem 1rem .8rem .75rem;
   }
   .gm-buy:hover, .gm-tech-btn:hover { background: var(--paper-2); }
-  .gm-buy[aria-disabled="true"], .gm-tech-btn[aria-disabled="true"] { opacity: .45; cursor: default; }
-  .gm-buy[aria-disabled="true"]:hover, .gm-tech-btn[aria-disabled="true"]:hover { background: none; }
-  .gm-buy-text, .gm-buy-side { display: flex; flex-direction: column; min-width: 0; }
-  .gm-buy-side { align-items: flex-end; text-align: right; }
+  .gm-buy:active, .gm-tech-btn:active { transform: scale(.985); }
+  .gm-buy[aria-disabled="true"], .gm-tech-btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+  .gm-buy[aria-disabled="true"]:hover, .gm-tech-btn[aria-disabled="true"]:hover { background: var(--paper); }
+  .gm-buy[aria-disabled="true"]:active, .gm-tech-btn[aria-disabled="true"]:active { transform: none; }
+
+  .gm-buy-count { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .gm-buy-own { font-family: var(--pangram); font-weight: 800; font-size: 1.5rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .gm-buy-owned { font-size: .75rem; opacity: .8; }
+  .gm-buy-text { display: flex; flex-direction: column; min-width: 0; }
   .gm-buy-name { font-family: var(--pangram); font-weight: 600; font-size: 1.0625rem; }
   .gm-buy-desc { font-size: .9375rem; opacity: .8; line-height: 1.35; }
-  .gm-buy-cost { font-family: var(--pangram); font-variant-numeric: tabular-nums; font-size: .9375rem; white-space: nowrap; }
-  .gm-buy-cost::after { content: " loaves"; opacity: .8; }
-  .gm-tech .gm-buy-cost::after { content: none; }
-  .gm-buy-own { font-family: var(--pangram); font-weight: 800; font-size: 1.5rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+
+  .gm-buy-pill {
+    justify-self: end; white-space: nowrap;
+    font-family: var(--pangram); font-size: .875rem; text-transform: uppercase; font-variant-numeric: tabular-nums;
+    border: 1px solid var(--ink); border-radius: 999px; padding: .35rem .85rem .3rem;
+    transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .gm-buy:not([aria-disabled="true"]):hover .gm-buy-pill, .gm-buy:focus-visible .gm-buy-pill,
+  .gm-tech-btn:not([aria-disabled="true"]):hover .gm-buy-pill, .gm-tech-btn:focus-visible .gm-buy-pill {
+    background: var(--hover); color: var(--hover-ink); border-color: var(--hover);
+  }
+  /* narrow screens: the pill drops under the description */
+  @media (max-width: 30rem) {
+    .gm-buy { grid-template-columns: 2.75rem minmax(0, 1fr); align-items: start; }
+    .gm-buy-count { grid-row: span 2; padding-top: .1rem; }
+    .gm-buy-pill { justify-self: start; }
+  }
 
   .gm-tech { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr)); gap: .6rem; }
-  .gm-tech-btn {
-    display: flex; flex-direction: column; gap: .2rem; width: 100%; height: 100%;
-    padding: .8rem 1rem; border: 1px solid var(--ink); border-radius: 1rem; background: var(--paper);
-  }
-  .gm-tech-btn .gm-buy-cost { margin-top: auto; padding-top: .3rem; }
+  .gm-tech-btn { display: flex; flex-direction: column; gap: .2rem; width: 100%; height: 100%; padding: .8rem 1rem; }
+  .gm-tech-btn .gm-buy-pill { align-self: flex-start; margin-top: auto; }
+  .gm-tech-btn .gm-buy-desc { margin-bottom: .6rem; }
 
   .gm-miles { display: grid; gap: .35rem; }
   .gm-miles li { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); column-gap: .5rem; opacity: .55; }

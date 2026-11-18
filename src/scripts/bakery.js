@@ -197,8 +197,9 @@ const rows = HELPERS.map((h) => {
   b.type = 'button'
   b.className = 'gm-buy'
   b.innerHTML =
+    '<span class="gm-buy-count"><span class="gm-buy-own"></span><span class="gm-buy-owned">owned</span></span>' +
     '<span class="gm-buy-text"><span class="gm-buy-name"></span><span class="gm-buy-desc"></span></span>' +
-    '<span class="gm-buy-side"><span class="gm-buy-cost"></span><span class="gm-buy-own"></span></span>'
+    '<span class="gm-buy-pill">Buy · <span class="gm-buy-cost"></span></span>'
   b.querySelector('.gm-buy-name').textContent = h.name
   b.querySelector('.gm-buy-desc').textContent = h.desc
   b.addEventListener('click', () => buyHelper(h))
@@ -265,10 +266,13 @@ function renderTech() {
       b.type = 'button'
       b.className = 'gm-tech-btn'
       b.dataset.id = t.id
-      b.innerHTML = '<span class="gm-buy-name"></span><span class="gm-buy-desc"></span><span class="gm-buy-cost"></span>'
+      b.innerHTML =
+        '<span class="gm-buy-name"></span><span class="gm-buy-desc"></span>' +
+        '<span class="gm-buy-pill">Learn · <span class="gm-buy-cost"></span></span>'
       b.children[0].textContent = t.name
       b.children[1].textContent = t.desc
-      b.children[2].textContent = fmt(t.cost) + ' loaves'
+      b.querySelector('.gm-buy-cost').textContent = fmt(t.cost)
+      b.setAttribute('aria-label', `${t.name}, costs ${fmt(t.cost)} loaves. ${t.desc}`)
       b.addEventListener('click', () => buyTech(t))
       li.appendChild(b)
       el.tech.appendChild(li)
