@@ -10,6 +10,7 @@ import satori from 'satori'
 import sharp from 'sharp'
 
 import ART from './art'
+import { GREG, GREG_W, GREG_H } from './portrait.js'
 import { WORKER_BASE } from './utils'
 
 export const OG_W = 1200
@@ -171,15 +172,6 @@ export async function bakePhoto(url: string, w: number, h: number) {
   return `data:image/jpeg;base64,${jpg.toString('base64')}`
 }
 
-async function localPhoto(file: string, w: number, h: number) {
-  const buf = await fs.readFile(path.join(process.cwd(), 'public', file))
-  const jpg = await sharp(buf)
-    .resize(w * 2, h * 2, { fit: 'cover' })
-    .jpeg({ quality: 85 })
-    .toBuffer()
-  return `data:image/jpeg;base64,${jpg.toString('base64')}`
-}
-
 // A tilted photo print with the cobalt border, like the photos on the site.
 function print(
   src: string,
@@ -245,23 +237,28 @@ function card(...children: Child[]) {
 
 /* ---------------------------------------------------------------- cards */
 
+// Erin's whole line drawing of Greg, as on the homepage. resvg has no non-scaling-stroke, so the
+// stroke is set in drawing units to come out at `stroke` px.
+function greg(height: number, stroke: number, style: Style = {}) {
+  const width = Math.round((height * GREG_W) / GREG_H)
+  const sw = (stroke * GREG_H) / height
+  const pad = sw
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-pad} ${-pad} ${GREG_W + 2 * pad} ${GREG_H + 2 * pad}" fill="none" stroke="${COBALT}" stroke-width="${sw.toFixed(2)}" stroke-linecap="round" stroke-linejoin="round">${GREG.map((d) => `<path d="${d}"/>`).join('')}</svg>`
+  const k = height / GREG_H
+  return img(svgUri(svg), { width: width + 2 * pad * k, height: height + 2 * pad * k, ...style })
+}
+
 export async function homeCard() {
   return card(
-    print(await localPhoto('img/profile.jpg', 310, 310), {
-      left: 90,
-      top: 165,
-      w: 310,
-      h: 310,
-      rotate: -3,
-      round: true,
-    }),
-    eyes(104, 300, 92, 8),
+    greg(500, 3.5, { position: 'absolute', left: 125, top: 65 }),
     div(
       {
         position: 'absolute',
-        left: 470,
-        top: 182,
+        left: 540,
+        top: 0,
+        height: OG_H,
         flexDirection: 'column',
+        justifyContent: 'center',
         alignItems: 'flex-start',
       },
       text({ ...H1, fontSize: 96 }, "Hi, I'm Greg."),
