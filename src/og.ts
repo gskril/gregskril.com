@@ -136,7 +136,6 @@ function loaf(width: number, style: Style = {}) {
 
 /* ---------------------------------------------------------------- photos */
 
-
 const photoCache = new Map<string, Promise<Buffer>>()
 async function fetchPhoto(url: string) {
   if (!photoCache.has(url)) {
@@ -260,7 +259,11 @@ function greg(height: number, stroke: number, style: Style = {}) {
   const pad = sw
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-pad} ${-pad} ${GREG_W + 2 * pad} ${GREG_H + 2 * pad}" fill="none" stroke="${COBALT}" stroke-width="${sw.toFixed(2)}" stroke-linecap="round" stroke-linejoin="round">${GREG.map((d) => `<path d="${d}"/>`).join('')}</svg>`
   const k = height / GREG_H
-  return img(svgUri(svg), { width: width + 2 * pad * k, height: height + 2 * pad * k, ...style })
+  return img(svgUri(svg), {
+    width: width + 2 * pad * k,
+    height: height + 2 * pad * k,
+    ...style,
+  })
 }
 
 export async function homeCard() {
@@ -296,7 +299,9 @@ export async function bakeLogCard(photoUrls: string[]) {
   // Oldest of the three at the back, newest on top.
   const urls = photoUrls.slice(0, 3).reverse()
   const prints = await Promise.all(
-    urls.map(async (u, i) => await print(await bakePhoto(u, boxes[i].w, boxes[i].h), boxes[i]))
+    urls.map(
+      async (u, i) => await print(await bakePhoto(u, boxes[i].w, boxes[i].h), boxes[i])
+    )
   )
   return card(
     text({ ...KICKER, position: 'absolute', left: 90, top: 220 }, 'Greg Skriloff'),
@@ -460,7 +465,9 @@ function loadFonts() {
       style: 'normal' as const,
       // satori can't read WOFF2, so unpack the same files the site serves (no font originals in the repo)
       data: Buffer.from(
-        await wawoff2.decompress(await fs.readFile(path.join(process.cwd(), 'public/fonts', `${file}.woff2`)))
+        await wawoff2.decompress(
+          await fs.readFile(path.join(process.cwd(), 'public/fonts', `${file}.woff2`))
+        )
       ),
     }))
   )

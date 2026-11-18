@@ -26,7 +26,8 @@ function fetchAll() {
 // some clips open with a little silence; skip it so the crunch lands on the click
 function firstSound(buf) {
   const d = buf.getChannelData(0)
-  for (let i = 0; i < d.length; i++) if (Math.abs(d[i]) > 0.05) return Math.max(0, i / buf.sampleRate - 0.005)
+  for (let i = 0; i < d.length; i++)
+    if (Math.abs(d[i]) > 0.05) return Math.max(0, i / buf.sampleRate - 0.005)
   return 0
 }
 

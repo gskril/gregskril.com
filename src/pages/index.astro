@@ -11,15 +11,16 @@ import { GREG, GREG_W, GREG_H } from '../portrait.js'
    final spot before the script loads (and stays put if it never does). Columns change with the
    pile's width, which is the viewport minus the gutters: 2 below ~566px, 3 below ~935px, then 4. */
 const pct = (v: number) => `${(v * 100).toFixed(3)}%`
-const pileCSS = COLUMN_QUERIES
-  .map(([c, mq]) => {
-    const L = pileLayout(PHOTOS, c as number)
-    const rules = L.items
-      .map((q, i) => `.pile:not(.live) .print[data-i="${i}"]{left:${pct(q.x)};margin-top:${pct(q.y)};width:${pct(q.pw)}}`)
-      .join('')
-    return `@media ${mq}{.pile:not(.live)::before{padding-top:calc(${pct(L.h)} + 24px)}${rules}}`
-  })
-  .join('')
+const pileCSS = COLUMN_QUERIES.map(([c, mq]) => {
+  const L = pileLayout(PHOTOS, c as number)
+  const rules = L.items
+    .map(
+      (q, i) =>
+        `.pile:not(.live) .print[data-i="${i}"]{left:${pct(q.x)};margin-top:${pct(q.y)};width:${pct(q.pw)}}`
+    )
+    .join('')
+  return `@media ${mq}{.pile:not(.live)::before{padding-top:calc(${pct(L.h)} + 24px)}${rules}}`
+}).join('')
 const firstLayout = pileLayout(PHOTOS, 2)
 // roughly how wide a print shows, so phones pick the small or medium file, never the full one
 const PRINT_SIZES = '(max-width: 565.98px) 48vw, (max-width: 934.98px) 32vw, 270px'
@@ -72,7 +73,9 @@ const projects = [
   <noscript slot="head">
     <style>
       /* dragging and the lightbox need JavaScript; without it, each print is a plain link */
-      .photos-hint { display: none; }
+      .photos-hint {
+        display: none;
+      }
     </style>
   </noscript>
 
@@ -90,7 +93,11 @@ const projects = [
       >
         <!-- the line draws this in; without it, here's the finished drawing -->
         <noscript data-unless-line>
-          <svg class="portrait-still" viewBox={`0 0 ${GREG_W} ${GREG_H}`} aria-hidden="true">
+          <svg
+            class="portrait-still"
+            viewBox={`0 0 ${GREG_W} ${GREG_H}`}
+            aria-hidden="true"
+          >
             {GREG.map((d) => <path d={d} />)}
           </svg>
         </noscript>
@@ -101,7 +108,13 @@ const projects = [
         <div class="hello-text">
           <h1 class="lead" id="a-lead">Hi, I'm Greg.</h1>
           <p>I live in New York. I like baking bread and building software.</p>
-          <p class="aside">By day I'm a Developer Relations Engineer at <a href="https://ens.domains/" target="_blank" rel="noopener">ENS&nbsp;Labs</a>.</p>
+          <p class="aside">
+            By day I'm a Developer Relations Engineer at <a
+              href="https://ens.domains/"
+              target="_blank"
+              rel="noopener">ENS&nbsp;Labs</a
+            >.
+          </p>
         </div>
       </div>
     </header>
@@ -228,16 +241,15 @@ const projects = [
             loading="lazy"
           />
         </noscript>
-        <h2 class="section-title" id="hi-title">Say hi<span class="sr-only">: contact links</span></h2>
+        <h2 class="section-title" id="hi-title">
+          Say hi<span class="sr-only">: contact links</span>
+        </h2>
         <div class="hi-links" id="a-links">
           <a class="btn" href="https://github.com/gskril" target="_blank" rel="noopener"
             >GitHub</a
           >
-          <a
-            class="btn"
-            href="https://x.com/gregskril"
-            target="_blank"
-            rel="noopener">Twitter</a
+          <a class="btn" href="https://x.com/gregskril" target="_blank" rel="noopener"
+            >Twitter</a
           >
         </div>
         <div class="hi-end" id="a-end"></div>

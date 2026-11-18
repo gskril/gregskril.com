@@ -34,7 +34,13 @@ const { title, description, image } = Astro.props
       crossorigin
     />
     <!-- without JavaScript, images that wait for the page to load (data-src) show their <noscript> copy instead -->
-    <noscript><style>img[data-src] { display: none; }</style></noscript>
+    <noscript
+      ><style>
+        img[data-src] {
+          display: none;
+        }
+      </style></noscript
+    >
     <slot name="head" />
   </head>
   <body>
@@ -55,15 +61,18 @@ const { title, description, image } = Astro.props
           for (var i = 0; i < imgs.length; i++) {
             var img = imgs[i]
             // photos.js may already know the exact size
-            if (img.getAttribute('data-sizes') && !img.getAttribute('sizes')) img.sizes = img.getAttribute('data-sizes')
-            if (img.getAttribute('data-srcset')) img.srcset = img.getAttribute('data-srcset')
+            if (img.getAttribute('data-sizes') && !img.getAttribute('sizes'))
+              img.sizes = img.getAttribute('data-sizes')
+            if (img.getAttribute('data-srcset'))
+              img.srcset = img.getAttribute('data-srcset')
             img.src = img.getAttribute('data-src')
             img.removeAttribute('data-src')
           }
           // if the line never started (a browser too old for it), show its finished drawings instead
           if (!document.documentElement.hasAttribute('data-line')) {
             var still = document.querySelectorAll('noscript[data-unless-line]')
-            for (var j = 0; j < still.length; j++) still[j].insertAdjacentHTML('afterend', still[j].textContent)
+            for (var j = 0; j < still.length; j++)
+              still[j].insertAdjacentHTML('afterend', still[j].textContent)
           }
         }
         function later() {
