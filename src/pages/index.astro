@@ -1,5 +1,6 @@
 ---
 import GoodBread from '../layouts/GoodBread.astro'
+import Lightbox from '../components/Lightbox.astro'
 import Eyes from '../components/Eyes.astro'
 import ART from '../art'
 import { PHOTOS, CDN, photoUrl, srcset, label } from '../photos.js'
@@ -244,38 +245,7 @@ const projects = [
     </main>
   </div>
 
-  <!-- one photo, opened up and centered -->
-  <div
-    slot="after"
-    class="lightbox"
-    id="closer"
-    hidden
-    tabindex="-1"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Photo"
-  >
-    <div class="closer-scrim"></div>
-    <button class="closer-close" id="closer-close" type="button" aria-label="Close photo"
-      ><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"
-        ><path d="M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-        ></path></svg
-      ></button
-    >
-    <figure class="closer-print" id="closer-print">
-      <img id="closer-img" alt="" draggable="false" />
-      <figcaption><span id="closer-place"></span></figcaption>
-    </figure>
-    <button
-      class="closer-nav prev"
-      id="closer-prev"
-      type="button"
-      aria-label="Previous photo">&larr;</button
-    >
-    <button class="closer-nav next" id="closer-next" type="button" aria-label="Next photo"
-      >&rarr;</button
-    >
-  </div>
+  <Lightbox slot="after" caption />
 </GoodBread>
 
 <script>

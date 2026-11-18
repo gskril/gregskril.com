@@ -232,7 +232,7 @@ h1, h2 { margin: 0; }
   --s: 1.06; cursor: grabbing; transition: box-shadow .2s ease;
   box-shadow: 0 4px 8px rgb(0 0 0 / .12), 0 26px 50px -14px rgb(0 0 0 / .4);
 }
-.print.away { visibility: hidden; }
+.lifted { visibility: hidden; } /* a photo that is out in the lightbox */
 .print:focus-visible { outline-offset: 4px; }
 .sticker {
   position: absolute; left: 0; top: 0; z-index: 60; --ink: var(--line);
@@ -427,7 +427,6 @@ h1, h2 { margin: 0; }
   border: 0; border-radius: .5rem; background: var(--paper-2);
 }
 .bk-photo img { width: 100%; height: auto; display: block; }
-.bk-closer { cursor: zoom-out; }
 .bk-pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3.5rem; font-family: var(--pangram); }
 .bk-pager a { text-decoration: none; }
 .bk-pager a:hover { text-decoration: underline; text-underline-offset: 3px; }
