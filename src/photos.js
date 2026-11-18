@@ -8,6 +8,24 @@
 */
 export const PHOTOS = [
   {
+    w: 1200, h: 1600, place: 'Agra, India', alt: 'The marble arches of the Taj Mahal in the evening light',
+    full: '5a86ac86681c14cc453962074fd4ffedaf9205e0853764d3ec2877f2d72f2687',
+    md: 'b7716ccd915a08bb886108de9fc4db0218f80d0199689209ac0542068dc01e68',
+    sm: '0558c28ca12506a24d3d0097d8c9617335d049b20040c3b7cf553b3a0efa403e',
+  },
+  {
+    w: 1200, h: 1600, place: 'Jaipur, India', alt: 'Looking down from the walls of Amber Fort over the town and hills',
+    full: '46a02094250e6c2d8c39254f48044f6144b6232109740b065599138a2199ecd3',
+    md: '915ce304ab349d1dc69ba288a6df30111d7cd65bb1a553cfae1f011abcfd340a',
+    sm: '3d2ffe3ff3eebd470fadf9adb121797945a41dbf0e89fba7a2ff33d5c64927ee',
+  },
+  {
+    w: 1070, h: 1600, place: 'Medellín, Colombia', alt: 'A painted street court with a red hoop and goal below houses on a hill',
+    full: '49e8ff8448374623a943d76e82716c8db98c5d69441a7c5b36d666834fd52df4',
+    md: '92fee1757f130601a7b3d563e75946f3709bb062966d713d48ecc946f0a74c70',
+    sm: '28e04a9075b67274c0f722a67fae4d5c32f9911de6c22cefad9fa95af52d5b83',
+  },
+  {
     w: 1200, h: 1600, place: 'New York', alt: 'A big yellow tree in a park in autumn',
     full: '4c7ac1f7bb964d383da0c4d53afb2928a40afa91ea3ff171b3ff071a884341fa',
     md: 'b66f22d1bade3f883ff5d382d268ad7a1a5dad3e66ad0d88088b86486127ef41',
