@@ -3,6 +3,9 @@
   prints). Click one to take a bite; once one is eaten, a different bread pops up in its place.
 */
 import { crunch, preloadCrunch } from './crunch.js'
+import { babka, baguette, loaf } from '../art'
+
+const ART = { babka, baguette, loaf }
 
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
 
@@ -21,7 +24,7 @@ export function createStickers(pile, place) {
     st.bites = []
     st.el.className = `sticker sticker-${name}`
     st.el.dataset.art = name
-    st.art.innerHTML = (window.GB_ART && window.GB_ART[name]) || ''
+    st.art.innerHTML = ART[name]
     st.el.style.width = `${(stickerBase * WIDTH[name]).toFixed(1)}px`
     paintBites(st)
     shape(name)
@@ -33,10 +36,7 @@ export function createStickers(pile, place) {
     if (shapes[name] !== undefined) return shapes[name]
     shapes[name] = null
     try {
-      const svg = ((window.GB_ART && window.GB_ART[name]) || '').replace(
-        /var\(--[\w-]+\)/g,
-        '#000'
-      )
+      const svg = ART[name].replace(/var\(--[\w-]+\)/g, '#000')
       const vb = (svg.match(/viewBox="([\d.\s-]+)"/) || [])[1]
       if (!vb) return null
       const [, , vw, vh] = vb.split(/\s+/).map(Number)

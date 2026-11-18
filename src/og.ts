@@ -12,6 +12,7 @@ import wawoff2 from 'wawoff2'
 
 import ART from './art'
 import { GREG, GREG_W, GREG_H } from './portrait.js'
+import { SCRIBBLE } from './scribble.js'
 import { WORKER_BASE } from './utils'
 
 export const OG_W = 1200
@@ -72,8 +73,6 @@ function eyes(size: number, left: number, top: number, rotate: number) {
 
 // Erin's underline scribble. It's stretched to the given box, so the path is scaled point by point
 // to keep the stroke an even 2.5px (resvg has no non-scaling-stroke).
-const SCRIBBLE =
-  'M306 7.43138C304.04 -6.6374 286.503 6.15162 282.118 10.3037C257.82 33.3098 215.878 24.3375 184.187 19.8783C148.845 14.9053 119.761 29.2492 85.322 29.9847C58.5313 30.5569 39.1608 14.8971 14.4755 11.474C8.11428 10.5918 6.37529 9.96159 0.999998 13.1761'
 function scribble(w: number, h: number) {
   const sx = w / 307
   const sy = h / 40
