@@ -484,7 +484,6 @@ export async function gameCard() {
         justifyContent: 'center',
         alignItems: 'flex-start',
       },
-      text({ ...KICKER, marginBottom: 14 }, 'Greg Skriloff'),
       text({ ...H1, fontSize: 100 }, 'Loaf Around'),
       uline(360),
       text({ fontSize: 36, lineHeight: 1.3 }, 'Press the bread. Build a bakery.')
