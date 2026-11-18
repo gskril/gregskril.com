@@ -53,21 +53,6 @@ const projects = [
     desc: 'Ethereum dev tools for AI agents, like ABI encoding.',
   },
 ]
-
-// the tally note covers every other side project (all of them are on /projects/)
-
-// who this site is about, for search engines (schema.org Person)
-const person = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Greg Skriloff',
-  url: 'https://gregskril.com/',
-  image: 'https://gregskril.com/img/profile.jpg',
-  jobTitle: 'Developer Relations Engineer',
-  worksFor: { '@type': 'Organization', name: 'ENS Labs', url: 'https://ens.domains/' },
-  homeLocation: { '@type': 'Place', name: 'New York' },
-  sameAs: ['https://github.com/gskril', 'https://x.com/gregskril'],
-}
 ---
 
 <GoodBread
@@ -81,7 +66,6 @@ const person = {
     title="RSS"
     href="/rss.xml"
   />
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(person)} />
   <!-- the photos come from here; opening the connection early saves a few round trips later -->
   <link slot="head" rel="preconnect" href={CDN} />
   <noscript slot="head">
