@@ -1,7 +1,7 @@
 /* Greg's site in the Good Bread brand (goodbread.nyc, designed by Erin). Tokens come from goodbread.nyc's tailwind.config.ts. */
 
-/* WOFF2, trimmed to Latin. The .otf originals live in src/fonts, only for drawing the share
-   images at build time, so they're never published. */
+/* WOFF2, trimmed to Latin. The share images (src/og.ts) unpack these same files at build time,
+   so the font originals are never in the repo or published. */
 @font-face { font-family: "Pangram"; src: url(/fonts/pangram-regular.woff2) format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Pangram"; src: url(/fonts/pangram-semibold.woff2) format("woff2"); font-weight: 600; font-display: swap; }
 @font-face { font-family: "Pangram"; src: url(/fonts/pangram-extrabold.woff2) format("woff2"); font-weight: 800; font-display: swap; }

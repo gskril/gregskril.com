@@ -8,6 +8,7 @@ import path from 'node:path'
 import { Resvg } from '@resvg/resvg-js'
 import satori from 'satori'
 import sharp from 'sharp'
+import wawoff2 from 'wawoff2'
 
 import ART from './art'
 import { GREG, GREG_W, GREG_H } from './portrait.js'
@@ -434,16 +435,19 @@ function loadFonts() {
   fonts ??= Promise.all(
     (
       [
-        ['Pangram', 'pangram-regular.otf', 400],
-        ['Pangram', 'pangram-semibold.otf', 600],
-        ['Pangram', 'pangram-extrabold.otf', 800],
-        ['Compact', 'pangram-compact-regular.otf', 400],
+        ['Pangram', 'pangram-regular', 400],
+        ['Pangram', 'pangram-semibold', 600],
+        ['Pangram', 'pangram-extrabold', 800],
+        ['Compact', 'pangram-compact-regular', 400],
       ] as const
     ).map(async ([name, file, weight]) => ({
       name,
       weight,
       style: 'normal' as const,
-      data: await fs.readFile(path.join(process.cwd(), 'src/fonts', file)),
+      // satori can't read WOFF2, so unpack the same files the site serves (no font originals in the repo)
+      data: Buffer.from(
+        await wawoff2.decompress(await fs.readFile(path.join(process.cwd(), 'public/fonts', `${file}.woff2`)))
+      ),
     }))
   )
   return fonts

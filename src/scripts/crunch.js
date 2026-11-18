@@ -12,7 +12,14 @@ let clips = null // Promise<{ buf, start }[]>, decoded on the first bite
 let lastPick = -1
 
 function fetchAll() {
-  bytes ??= Promise.all(FILES.map((f) => fetch(f).then((r) => (r.ok ? r.arrayBuffer() : null))))
+  // one file failing to load just leaves it out of the rotation
+  bytes ??= Promise.all(
+    FILES.map((f) =>
+      fetch(f)
+        .then((r) => (r.ok ? r.arrayBuffer() : null))
+        .catch(() => null)
+    )
+  )
   return bytes
 }
 
