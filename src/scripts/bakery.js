@@ -172,9 +172,13 @@ const el = {
   miles: $('gm-miles'),
   stats: $('gm-stats'),
   away: $('gm-away'),
+  awayText: $('gm-away-text'),
   say: $('gm-say'),
   sayCount: $('gm-say-count'),
   reset: $('gm-reset'),
+  shop: $('gm-shop'),
+  techBadge: $('gm-tech-badge'),
+  milesBadge: $('gm-miles-badge'),
   confirm: $('gm-confirm'),
   yes: $('gm-yes'),
   no: $('gm-no'),
@@ -198,7 +202,7 @@ const rows = HELPERS.map((h) => {
   b.className = 'gm-buy'
   b.innerHTML =
     '<span class="gm-buy-count"><span class="gm-buy-own"></span><span class="gm-buy-owned">owned</span></span>' +
-    '<span class="gm-buy-text"><span class="gm-buy-name"></span><span class="gm-buy-desc"></span></span>' +
+    '<span class="gm-buy-text"><span class="gm-buy-name"></span><span class="gm-buy-desc"></span><span class="gm-buy-rate"></span></span>' +
     '<span class="gm-buy-pill">Buy · <span class="gm-buy-cost"></span></span>'
   b.querySelector('.gm-buy-name').textContent = h.name
   b.querySelector('.gm-buy-desc').textContent = h.desc
@@ -211,7 +215,7 @@ const rows = HELPERS.map((h) => {
     b,
     cost: b.querySelector('.gm-buy-cost'),
     own: b.querySelector('.gm-buy-own'),
-    desc: b.querySelector('.gm-buy-desc'),
+    rate: b.querySelector('.gm-buy-rate'),
   }
 })
 
@@ -280,10 +284,15 @@ function renderTech() {
     }
     el.techNone.hidden = avail.length > 0
   }
+  let affordable = 0
   for (const b of el.tech.querySelectorAll('button')) {
     const t = TECH.find((x) => x.id === b.dataset.id)
     setAttr(b, 'aria-disabled', String(state.loaves < t.cost))
+    if (state.loaves >= t.cost) affordable++
   }
+  el.techBadge.hidden = !avail.length
+  setText(el.techBadge, String(avail.length))
+  el.techBadge.classList.toggle('ready', affordable > 0)
 }
 
 function checkMiles() {
@@ -302,6 +311,7 @@ function renderMiles() {
   const key = state.miles.join()
   if (key === milesKey) return
   milesKey = key
+  el.milesBadge.textContent = `${state.miles.length}/${MILES.length}`
   el.miles.textContent = ''
   for (const m of MILES) {
     const li = document.createElement('li')
@@ -340,7 +350,7 @@ function render() {
     const n = own(state, r.h.id)
     setText(r.cost, fmt(c))
     setText(r.own, String(n))
-    setText(r.desc, r.h.desc + ` Bakes ${fmt(helperRate(r.h), 1)} a second.`)
+    setText(r.rate, `+${fmt(helperRate(r.h), 1)} a second each`)
     setAttr(r.b, 'aria-disabled', String(state.loaves < c))
     setAttr(r.b, 'aria-label', `${r.h.name}, costs ${fmt(c)} loaves, you own ${n}. ${r.h.desc} Bakes ${fmt(helperRate(r.h), 1)} loaves a second each.`)
     // a helper shows up once you're close to affording the one before it
@@ -415,6 +425,20 @@ el.bread.addEventListener('keydown', (e) => {
   if (e.repeat && (e.key === 'Enter' || e.key === ' ')) e.preventDefault()
 })
 
+/* ---------- shop tabs (phones only; CSS ignores them on wider screens) ---------- */
+
+for (const tab of document.querySelectorAll('.gm-tab')) {
+  tab.addEventListener('click', () => {
+    el.shop.dataset.tab = tab.dataset.tab
+    for (const t of document.querySelectorAll('.gm-tab')) t.setAttribute('aria-pressed', String(t === tab))
+  })
+}
+
+$('gm-away-x').addEventListener('click', () => {
+  el.away.hidden = true
+  el.bread.focus()
+})
+
 /* ---------- starting over ---------- */
 
 function showConfirm(on) {
@@ -447,7 +471,7 @@ el.yes.addEventListener('click', () => {
   state.total += gain
   // a quick reload isn't worth a message
   if (sec < 60) return
-  el.away.textContent = `While you were away (${duration(sec)}), your bakery baked ${fmt(gain)} ${plural(gain, 'loaf', 'loaves')}.`
+  el.awayText.textContent = `While you were away (${duration(sec)}), your bakery baked ${fmt(gain)} ${plural(gain, 'loaf', 'loaves')}.`
   el.away.hidden = false
 })()
 

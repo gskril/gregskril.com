@@ -49,23 +49,37 @@ import { loaf, babka, baguette } from '../art'
         </div>
         <p class="gm-bread-name" id="gm-bread-name">Country loaf</p>
         <p class="gm-small" id="gm-per-click">Each press bakes 1 loaf.</p>
-        <p class="gm-away" id="gm-away" role="status" hidden></p>
+        <div class="gm-away" id="gm-away" hidden>
+          <p id="gm-away-text" role="status"></p>
+          <button type="button" class="gm-away-x" id="gm-away-x" aria-label="Dismiss">&times;</button>
+        </div>
       </section>
 
-      <div class="gm-shop">
-        <section aria-labelledby="gm-helpers-title">
+      <div class="gm-shop" id="gm-shop" data-tab="helpers">
+        <!-- on phones the shop is split into tabs; on wider screens everything shows at once -->
+        <div class="gm-tabs" role="group" aria-label="Shop">
+          <button type="button" class="gm-tab" data-tab="helpers" aria-pressed="true">Help</button>
+          <button type="button" class="gm-tab" data-tab="tech" aria-pressed="false"
+            >Techniques <span class="gm-badge" id="gm-tech-badge" hidden></span></button
+          >
+          <button type="button" class="gm-tab" data-tab="miles" aria-pressed="false"
+            >Milestones <span class="gm-badge" id="gm-miles-badge"></span></button
+          >
+        </div>
+
+        <section data-panel="helpers" aria-labelledby="gm-helpers-title">
           <h2 class="gm-h2" id="gm-helpers-title">Help</h2>
           <p class="gm-small">Each one bakes on its own. Prices rise as you buy.</p>
           <ul class="gm-helpers" id="gm-helpers"></ul>
         </section>
 
-        <section aria-labelledby="gm-tech-title">
+        <section data-panel="tech" aria-labelledby="gm-tech-title">
           <h2 class="gm-h2" id="gm-tech-title">Techniques</h2>
           <p class="gm-small" id="gm-tech-none">Keep baking. New techniques show up as you go.</p>
           <ul class="gm-tech" id="gm-tech"></ul>
         </section>
 
-        <section aria-labelledby="gm-miles-title">
+        <section data-panel="miles" aria-labelledby="gm-miles-title">
           <h2 class="gm-h2" id="gm-miles-title">Milestones</h2>
           <p class="gm-small">Each one makes your help bake 5% more.</p>
           <ul class="gm-miles" id="gm-miles"></ul>
@@ -149,9 +163,17 @@ import { loaf, babka, baguette } from '../art'
     text-shadow: 0 0 6px var(--paper), 0 0 2px var(--paper);
   }
   .gm-away {
-    margin: 1.25rem auto 0; max-width: 24rem; padding: .75rem 1rem;
+    display: flex; align-items: flex-start; gap: .5rem; text-align: left;
+    margin: 1.25rem auto 0; max-width: 24rem; padding: .75rem .5rem .75rem 1rem;
     border: 1px solid var(--ink); border-radius: 1rem; font-size: 1rem;
   }
+  .gm-away[hidden] { display: none; }
+  .gm-away p { flex: 1; }
+  .gm-away-x {
+    flex: none; width: 2rem; height: 2rem; margin: -.35rem 0; border: 0; border-radius: 50%;
+    background: none; color: inherit; font: inherit; font-size: 1.5rem; line-height: 1; cursor: pointer;
+  }
+  .gm-away-x:hover { background: var(--paper-2); }
 
   /* ---------- the shop ---------- */
   .gm-shop > section + section { margin-top: 2.75rem; }
@@ -183,6 +205,7 @@ import { loaf, babka, baguette } from '../art'
   .gm-buy-text { display: flex; flex-direction: column; min-width: 0; }
   .gm-buy-name { font-family: var(--pangram); font-weight: 600; font-size: 1.0625rem; }
   .gm-buy-desc { font-size: .9375rem; opacity: .8; line-height: 1.35; }
+  .gm-buy-rate { font-size: .875rem; opacity: .8; font-variant-numeric: tabular-nums; }
 
   .gm-buy-pill {
     justify-self: end; white-space: nowrap;
@@ -194,17 +217,12 @@ import { loaf, babka, baguette } from '../art'
   .gm-tech-btn:not([aria-disabled="true"]):hover .gm-buy-pill, .gm-tech-btn:focus-visible .gm-buy-pill {
     background: var(--hover); color: var(--hover-ink); border-color: var(--hover);
   }
-  /* narrow screens: the pill drops under the description */
-  @media (max-width: 30rem) {
-    .gm-buy { grid-template-columns: 2.75rem minmax(0, 1fr); align-items: start; }
-    .gm-buy-count { grid-row: span 2; padding-top: .1rem; }
-    .gm-buy-pill { justify-self: start; }
-  }
-
   .gm-tech { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12.5rem), 1fr)); gap: .6rem; }
   .gm-tech-btn { display: flex; flex-direction: column; gap: .2rem; width: 100%; height: 100%; padding: .8rem 1rem; }
   .gm-tech-btn .gm-buy-pill { align-self: flex-start; margin-top: auto; }
   .gm-tech-btn .gm-buy-desc { margin-bottom: .6rem; }
+
+  .gm-tabs { display: none; }
 
   .gm-miles { display: grid; gap: .35rem; }
   .gm-miles li { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); column-gap: .5rem; opacity: .55; }
@@ -234,4 +252,84 @@ import { loaf, babka, baguette } from '../art'
     transition: background-color .15s ease, color .15s ease, border-color .15s ease;
   }
   .gm-pill:hover, .gm-pill:focus-visible { background: var(--hover); color: var(--hover-ink); border-color: var(--hover); }
+
+  /* ---------- phones: one screen, like an app ----------
+     The title moves into the top bar, the bread and the numbers share one row that stays
+     pinned while you scroll, and the shop becomes tabs of one-line rows. */
+  @media (max-width: 40rem) {
+    .gm { position: relative; padding-top: .75rem; padding-bottom: 2rem; }
+    .gm .bk-top { min-height: 2.25rem; }
+    .gm-head { position: absolute; top: .75rem; right: var(--gutter); padding: 0; min-height: 2.25rem; display: flex; align-items: center; }
+    .gm-head .bk-title { font-size: 1.375rem; }
+    .gm-head .bk-under { padding-bottom: 0; }
+    .gm-head .bk-under > svg, .gm-head .bk-intro { display: none; }
+
+    .gm-grid { gap: 0; margin-top: .5rem; }
+
+    .gm-oven {
+      position: sticky; top: 0; z-index: 5; background: var(--paper);
+      display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); column-gap: 1rem; align-content: center;
+      grid-template-areas: "stage tally" "stage rate" "stage per" "away away";
+      text-align: left; padding: .5rem 0 .75rem; border-bottom: 1px solid var(--rule);
+      transition: background-color .3s ease;
+    }
+    .gm-tally { grid-area: tally; justify-content: flex-start; align-self: end; }
+    .gm-count { font-size: 2.125rem; }
+    .gm-unit { font-size: 1rem; }
+    .gm-rate { grid-area: rate; font-size: 1rem; }
+    .gm-oven #gm-per-click { grid-area: per; align-self: start; font-size: .8125rem; }
+    .gm-stage { grid-area: stage; padding: 0; overflow: visible; }
+    .gm-bread { width: 7.5rem; }
+    .gm-bread-name { display: none; }
+    .gm-away { grid-area: away; margin: .6rem 0 0; max-width: none; padding: .45rem .35rem .45rem .75rem; font-size: .875rem; }
+
+    .gm-tabs {
+      display: flex; gap: .35rem; padding: .75rem 0 .25rem;
+    }
+    .gm-tab {
+      flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: .3rem;
+      font-family: var(--pangram); font-size: .8125rem; text-transform: uppercase; white-space: nowrap;
+      color: var(--ink); background: var(--paper); border: 1px solid var(--ink); border-radius: 999px;
+      padding: .45rem .5rem .4rem; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    }
+    .gm-tab[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+    .gm-badge {
+      font-size: .6875rem; font-variant-numeric: tabular-nums; line-height: 1;
+      padding: .2rem .35rem .15rem; border-radius: 999px; border: 1px solid currentColor;
+    }
+    .gm-badge[hidden] { display: none; }
+    .gm-badge.ready { background: var(--hover); color: var(--hover-ink); border-color: var(--hover); }
+
+    .gm-shop > section + section { margin-top: 0; }
+    .gm-shop[data-tab="helpers"] > section:not([data-panel="helpers"]),
+    .gm-shop[data-tab="tech"] > section:not([data-panel="tech"]),
+    .gm-shop[data-tab="miles"] > section:not([data-panel="miles"]) { display: none; }
+    /* the tab says what the section is */
+    .gm-shop .gm-h2 {
+      position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+    }
+    .gm-shop section > .gm-small { font-size: .8125rem; margin-top: .35rem; }
+    .gm-helpers, .gm-tech, .gm-miles { margin-top: .5rem; }
+
+    .gm-helpers, .gm-tech { gap: .4rem; }
+    .gm-buy { grid-template-columns: 2.25rem minmax(0, 1fr) auto; gap: .6rem; padding: .5rem .6rem .5rem .5rem; border-radius: .875rem; }
+    .gm-buy-own { font-size: 1.25rem; }
+    .gm-buy-owned { font-size: .625rem; }
+    .gm-buy-name { font-size: 1rem; line-height: 1.25; }
+    .gm-buy .gm-buy-desc { display: none; }
+    .gm-buy-rate { font-size: .8125rem; line-height: 1.3; }
+    .gm-buy-pill { font-size: .8125rem; padding: .35rem .7rem .3rem; }
+
+    .gm-tech { grid-template-columns: minmax(0, 1fr); }
+    .gm-tech-btn {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: .6rem; align-items: center;
+      padding: .5rem .6rem .5rem .85rem; border-radius: .875rem;
+    }
+    .gm-tech-btn .gm-buy-name { grid-column: 1; }
+    .gm-tech-btn .gm-buy-desc { grid-column: 1; margin: 0; font-size: .8125rem; line-height: 1.3; }
+    .gm-tech-btn .gm-buy-pill { grid-column: 2; grid-row: 1 / span 2; margin: 0; align-self: center; }
+
+    .gm-miles { gap: .2rem; }
+    .gm-foot { margin-top: 1.5rem; padding-top: .75rem; }
+  }
 </style>
