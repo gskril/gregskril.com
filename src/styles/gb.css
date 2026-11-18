@@ -435,8 +435,8 @@ h1, h2 { margin: 0; }
   display: grid; grid-template-columns: 6.5rem 1fr; gap: .25rem 1.5rem;
   padding: 1.1rem .25rem; border-top: 1px solid var(--rule);
 }
-.pj-list li:last-child { border-bottom: 1px solid var(--rule); }
-.pj-date { font-family: var(--pangram); font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; opacity: .8; padding-top: .3rem; }
+.pj-list li:first-child { border-top: 0; }
+.pj-date { font-family: var(--pangram); font-size: .9375rem; opacity: .8; padding-top: .25rem; }
 .pj-title { font-family: var(--pangram); font-weight: 800; font-size: 1.25rem; line-height: 1.25; text-decoration: none; }
 .pj-title:hover, .pj-title:focus-visible { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
 .pj-desc { margin-top: .25rem; opacity: .85; max-width: 40rem; }
