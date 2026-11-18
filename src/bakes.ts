@@ -1,6 +1,7 @@
+import { getImage, inferRemoteSize } from 'astro:assets'
 import { getCollection } from 'astro:content'
 
-import { formatBakes } from './utils'
+import { formatBakes, WORKER_BASE } from './utils'
 
 /**
  * Every bake, newest first. Both the list page and the detail page's
@@ -25,4 +26,20 @@ export function bakeWithNeighbours(bakes: SortedBakes, i: number) {
     prev: bakes[i + 1] || null,
     next: bakes[i - 1] || null,
   }
+}
+
+/**
+ * A resized webp of a bake photo from the worker. The size is inferred first so the
+ * height scales with the width (passing inferSize with a width would keep the original height).
+ */
+const sizes = new Map<string, ReturnType<typeof inferRemoteSize>>()
+
+export async function bakeImage(url: string, maxWidth: number, quality = 80) {
+  const src = `${WORKER_BASE}${url}`
+  if (!sizes.has(src)) sizes.set(src, inferRemoteSize(src))
+  const size = await sizes.get(src)!
+  const width = Math.min(maxWidth, size.width)
+  const height = Math.round((width * size.height) / size.width)
+  const img = await getImage({ src, width, height, format: 'webp', quality })
+  return { src: img.src, width, height }
 }

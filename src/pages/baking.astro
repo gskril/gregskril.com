@@ -1,55 +1,54 @@
 ---
+import GoodBread from '../layouts/GoodBread.astro'
+import Underline from '../components/Underline.astro'
 import { sortedBakes } from '../bakes'
-import Layout from '../layouts/Layout.astro'
-
-const currentYear = new Date().getFullYear()
 
 const bakes = await sortedBakes()
+const currentYear = new Date().getFullYear()
+
+const fmt = (date: Date) =>
+  new Intl.DateTimeFormat('en-US', {
+    year: date.getUTCFullYear() === currentYear ? undefined : 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  }).format(date)
 ---
 
-<Layout
-  title="Baking Log - Greg Skriloff"
+<GoodBread
+  title="Bake log · Greg Skriloff"
   description="A personal sourdough baking log."
-  image={[
-    'https://gregskril.com/img/baking/og-1.webp',
-    'https://gregskril.com/img/baking/og-2.webp',
-    'https://gregskril.com/img/baking/og-3.webp',
-  ]}
+  image="/og/baking.png"
+  imageAlt={`Photos of Greg's latest bakes, next to the words "Bake log"`}
 >
-  <main class="container">
-    <div class="section">
-      <a class="bake-back" href="/">← Home</a>
-      <h1>Baking Log</h1>
-      <div class="content">
-        <ul>
-          {
-            bakes.map((bake) => {
-              const bakeDate = bake.data.date
-              const isThisYear = bakeDate.getFullYear() === currentYear
-              const formatted = new Intl.DateTimeFormat('en-US', {
-                year: isThisYear ? undefined : 'numeric',
-                day: 'numeric',
-                month: 'short',
-              }).format(bakeDate)
+  <div class="bk narrow">
+    <nav class="bk-top"><a class="bk-back" href="/">&larr; Home</a></nav>
 
-              return (
-                <li>
-                  <a href={`/baking/${bake.id}/`}>
-                    {formatted} - {bake.data.title}
-                  </a>
-                </li>
-              )
-            })
-          }
-        </ul>
-        <p style="color: var(--color-secondary-text); font-size: 0.875rem;">
-          ...and dozens of other loaves before I started this log. See some on <a
-            href="https://goodbread.nyc/?ref=gregskril.com"
-            target="_blank"
-            rel="noopener">goodbread.nyc</a
-          >
-        </p>
-      </div>
-    </div>
-  </main>
-</Layout>
+    <header class="bk-head">
+      <h1 class="bk-title"><Underline>Bake log</Underline></h1>
+    </header>
+
+    <main>
+      <ul class="bk-log">
+        {
+          bakes.map((bake) => (
+            <li>
+              <a href={`/baking/${bake.id}/`}>
+                <time datetime={bake.data.bake_date}>{fmt(bake.data.date)}</time>
+                <span>{bake.data.title || 'Bake'}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="bk-more">
+        &hellip;and dozens of other loaves before I started this log. See some on <a
+          href="https://goodbread.nyc/?ref=gregskril.com"
+          target="_blank"
+          rel="noopener">goodbread.nyc</a
+        >.
+      </p>
+    </main>
+  </div>
+</GoodBread>

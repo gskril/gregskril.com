@@ -2,9 +2,13 @@ https://gregskril.netlify.app/* https://gregskril.com/:splat 301!
 
 /about / 301
 /about/ / 301
-/projects / 301
-/projects/ / 301
 /sitemap.xml /sitemap-index.xml 301
+
+# old share images, still cached by social sites
+/img/banner.jpg /og/home.png 301
+/img/baking/og-1.webp /og/baking.png 301
+/img/baking/og-2.webp /og/baking.png 301
+/img/baking/og-3.webp /og/baking.png 301
 /baking/2026-01-16 /baking/51ef3b28-adc9-4678-be0b-3bf6395dd6b9/ 301
 /baking/2026-01-16/ /baking/51ef3b28-adc9-4678-be0b-3bf6395dd6b9/ 301
 /baking/2026-01-25 /baking/2d2e58ed-2e62-4d42-ace9-03e05357f236/ 301

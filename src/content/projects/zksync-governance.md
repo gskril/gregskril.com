@@ -1,5 +1,5 @@
 ---
-title: ZKsync Governance Platform
+title: ZKsync Governance
 date: 2025-12-18
 url: https://alt.vote.zknation.io/
 ---

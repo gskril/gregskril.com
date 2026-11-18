@@ -1,7 +1,23 @@
 ---
-const { title, description, image } = Astro.props
-const defaultImage = 'https://gregskril.com/img/banner.jpg'
-const images = Array.isArray(image) ? image : [image || defaultImage]
+interface Props {
+  title: string
+  description: string
+  /** share image path(s), from /og/*.png */
+  image?: string | string[]
+  /** what the share image shows, for screen readers */
+  imageAlt?: string
+  /** for a blog post: marks the page as an article, with its date */
+  published?: Date
+}
+const { title, description, image, imageAlt, published } = Astro.props
+
+// Share images live at /og/*.png (rendered at build time by src/og.ts); paths resolve against the site URL.
+const defaultImage = '/og/home.png'
+const defaultAlt = 'A line drawing of Greg next to the words "Hi, I\'m Greg."'
+const images = (Array.isArray(image) ? image : [image || defaultImage]).map(
+  (img: string) => new URL(img, Astro.site).toString()
+)
+const alt = imageAlt || (image ? title : defaultAlt)
 
 // Cloudflare serves pages as directories (/baking -> /baking/), so canonicals use a trailing slash
 const canonicalPath = Astro.url.pathname
@@ -14,23 +30,47 @@ const canonicalURL = new URL(canonicalPath, Astro.site)
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="icon" type="image/png" href="/img/favicon-32.png" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png" />
 <link rel="icon" type="image/png" sizes="64x64" href="/img/favicon-64.png" />
 <link rel="icon" type="image/png" sizes="128x128" href="/img/favicon-128.png" />
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
 
 <title>{title}</title>
 {!isNotFound && <link rel="canonical" href={canonicalURL} />}
 <link rel="sitemap" href="/sitemap-index.xml" />
 <meta name="description" content={description} />
+{!isNotFound && <meta property="og:url" content={canonicalURL} />}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-{images.map((img) => <meta property="og:image" content={img} />)}
+{
+  images.map((img: string) => (
+    <>
+      <meta property="og:image" content={img} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={alt} />
+    </>
+  ))
+}
 
-<meta property="og:type" content="website" />
+{
+  published ? (
+    <>
+      <meta property="og:type" content="article" />
+      <meta property="article:published_time" content={published.toISOString()} />
+      <meta property="article:author" content="Greg Skriloff" />
+    </>
+  ) : (
+    <meta property="og:type" content="website" />
+  )
+}
 <meta property="og:locale" content="en_US" />
 <meta property="og:site_name" content="Greg Skriloff" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@gregskril" />
+<meta name="twitter:creator" content="@gregskril" />
+<meta name="twitter:image:alt" content={alt} />
 
 <!-- Privacy-friendly analytics by Plausible -->
 <script is:inline async src="/blah/js/script.js"></script>

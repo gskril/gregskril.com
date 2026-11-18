@@ -1,0 +1,94 @@
+---
+/*
+  The site layout, in the Good Bread style (goodbread.nyc, designed by Erin).
+*/
+import '../styles/gb.css'
+import BaseHead from '../components/BaseHead.astro'
+
+interface Props {
+  title: string
+  description: string
+  image?: string | string[]
+  imageAlt?: string
+  published?: Date
+}
+
+const { title, description, image, imageAlt, published } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      published={published}
+    />
+    <meta name="color-scheme" content="light dark" />
+    <link
+      rel="preload"
+      href="/fonts/pangram-extrabold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/pangram-compact-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- without JavaScript, images that wait for the page to load (data-src) show their <noscript> copy instead -->
+    <noscript
+      ><style>
+        img[data-src] {
+          display: none;
+        }
+      </style></noscript
+    >
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+
+    <slot name="after" />
+
+    <!--
+      Pictures load last: images marked up with data-src only get their real source once the
+      page has finished loading (text, fonts, and the line), so on a slow connection they never
+      compete with the content. This is a plain script on purpose, so it still works on old
+      devices that can't run the site's other scripts. Without JavaScript, the <noscript> copies show.
+    -->
+    <script is:inline>
+      ;(function () {
+        function reveal() {
+          var imgs = document.querySelectorAll('img[data-src]')
+          for (var i = 0; i < imgs.length; i++) {
+            var img = imgs[i]
+            // photos.js may already know the exact size
+            if (img.getAttribute('data-sizes') && !img.getAttribute('sizes'))
+              img.sizes = img.getAttribute('data-sizes')
+            if (img.getAttribute('data-srcset'))
+              img.srcset = img.getAttribute('data-srcset')
+            img.src = img.getAttribute('data-src')
+            img.removeAttribute('data-src')
+          }
+          // if the line never started (a browser too old for it), show its finished drawings instead
+          if (!document.documentElement.hasAttribute('data-line')) {
+            var still = document.querySelectorAll('noscript[data-unless-line]')
+            for (var j = 0; j < still.length; j++)
+              still[j].insertAdjacentHTML('afterend', still[j].textContent)
+          }
+        }
+        function later() {
+          window.requestAnimationFrame ? requestAnimationFrame(reveal) : reveal()
+        }
+        if (document.readyState === 'complete') later()
+        else window.addEventListener('load', later)
+      })()
+    </script>
+  </body>
+</html>

@@ -1,17 +1,63 @@
 ---
-import { getCollection } from 'astro:content'
-import Layout from '../layouts/Layout.astro'
-import ProjectFeed from '../components/ProjectFeed.astro'
-import ProfileHeader from '../components/ProfileHeader.astro'
-import Socials from '../components/Socials.astro'
+import GoodBread from '../layouts/GoodBread.astro'
+import Lightbox from '../components/Lightbox.astro'
+import Eyes from '../components/Eyes.astro'
+import ART from '../art'
+import { PHOTOS, CDN, photoUrl, srcset, label } from '../photos.js'
+import { pileLayout, COLUMN_QUERIES } from '../scripts/pile-layout.js'
+import { GREG, GREG_W, GREG_H } from '../portrait.js'
 
-const projects = await getCollection('projects')
-projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+/* Place the prints in plain CSS, with the same numbers photos.js uses, so the pile is in its
+   final spot before the script loads (and stays put if it never does). Columns change with the
+   pile's width, which is the viewport minus the gutters: 2 below ~566px, 3 below ~935px, then 4. */
+const pct = (v: number) => `${(v * 100).toFixed(3)}%`
+const pileCSS = COLUMN_QUERIES.map(([c, mq]) => {
+  const L = pileLayout(PHOTOS, c as number)
+  const rules = L.items
+    .map(
+      (q, i) =>
+        `.pile:not(.live) .print[data-i="${i}"]{left:${pct(q.x)};margin-top:${pct(q.y)};width:${pct(q.pw)}}`
+    )
+    .join('')
+  return `@media ${mq}{.pile:not(.live)::before{padding-top:calc(${pct(L.h)} + 24px)}${rules}}`
+}).join('')
+const firstLayout = pileLayout(PHOTOS, 2)
+// roughly how wide a print shows, so phones pick the small or medium file, never the full one
+const PRINT_SIZES = '(max-width: 565.98px) 48vw, (max-width: 934.98px) 32vw, 270px'
+
+// A few highlights; the rest of the side projects are the tally marks.
+const projects = [
+  {
+    name: 'Good Bread',
+    url: 'https://goodbread.nyc',
+    desc: 'My tiny bakery. You order bread, I bake it.',
+  },
+  {
+    name: 'ZKsync Governance',
+    url: 'https://alt.vote.zknation.io/',
+    desc: 'Delegate, vote on, and create proposals for ZKsync governance.',
+  },
+  {
+    name: 'Plain Safe',
+    url: 'https://plainsafe.gregskril.com/',
+    desc: 'A local-first, private interface for Safe multisigs.',
+  },
+  {
+    name: 'Telegram CLI',
+    url: 'https://github.com/gskril/telegram-cli',
+    desc: 'A small CLI that lets AI agents use a personal Telegram account.',
+  },
+  {
+    name: 'Ethereum MCP',
+    url: 'https://github.com/gskril/ethereum-mcp',
+    desc: 'Ethereum dev tools for AI agents, like ABI encoding.',
+  },
+]
 ---
 
-<Layout
+<GoodBread
   title="Greg Skriloff"
-  description="I like baking and building software, usually in the crypto space."
+  description="I'm Greg. I like baking bread and building software."
 >
   <link
     slot="head"
@@ -20,24 +66,200 @@ projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
     title="RSS"
     href="/rss.xml"
   />
-  <main class="container">
-    <div class="section" style="margin-top: 4.5rem; margin-bottom: -1.5rem;">
-      <ProfileHeader />
-    </div>
-    <div class="section">
-      <h3 class="section__title">About</h3>
-      <p>
-        I like{' '}
-        <a href="/baking/">baking</a>{' '}
-        and building software, usually in the crypto space. I work as a Developer Relations
-        Engineer at{' '}
-        <a href="https://ens.domains/" target="_blank">ENS Labs</a>.
-      </p>
-    </div>
-    <div class="section">
-      <h3 class="section__title section__title--mb" id="projects">Side Projects</h3>
-      <ProjectFeed projects={projects} />
-    </div>
-    <Socials />
-  </main>
-</Layout>
+  <!-- the photos come from here; opening the connection early saves a few round trips later -->
+  <link slot="head" rel="preconnect" href={CDN} />
+  <noscript slot="head">
+    <style>
+      /* dragging and the lightbox need JavaScript; without it, each print is a plain link */
+      .photos-hint {
+        display: none;
+      }
+    </style>
+  </noscript>
+
+  <div class="page" id="page">
+    <!-- the one line: built and drawn by line.js -->
+    <svg id="line" aria-hidden="true" focusable="false"></svg>
+    <div id="tip" aria-hidden="true"><span set:html={ART.loaf} /></div>
+
+    <header class="hello" id="hello">
+      <div
+        class="hello-portrait"
+        id="a-portrait"
+        role="img"
+        aria-label="A line drawing of Greg"
+      >
+        <!-- the line draws this in; without it, here's the finished drawing -->
+        <noscript data-unless-line>
+          <svg
+            class="portrait-still"
+            viewBox={`0 0 ${GREG_W} ${GREG_H}`}
+            aria-hidden="true"
+          >
+            {GREG.map((d) => <path d={d} />)}
+          </svg>
+        </noscript>
+      </div>
+
+      <div class="hello-copy">
+        <div class="hello-eyes" id="a-word"><Eyes /></div>
+        <div class="hello-text">
+          <h1 class="lead" id="a-lead">Hi, I'm Greg.</h1>
+          <p>I live in New York. I like baking bread and building software.</p>
+          <p class="aside">
+            By day I'm a Developer Relations Engineer at <a
+              href="https://ens.domains/"
+              target="_blank"
+              rel="noopener">ENS&nbsp;Labs</a
+            >.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="bread" id="bread" aria-labelledby="bread-title">
+        <div class="bread-art" id="a-art" set:html={ART.holding} />
+        <div class="bread-copy">
+          <h2 class="section-title" id="bread-title">
+            I bake a lot of bread and <span class="nowrap" id="a-phrase"
+              >write it all down</span
+            >
+          </h2>
+          <p>
+            When there's extra, I sell it to friends. That part is called Good&nbsp;Bread.
+          </p>
+          <div class="btns">
+            <a class="btn" href="/baking/">Bake log</a>
+            <a class="btn" href="https://goodbread.nyc" target="_blank" rel="noopener">
+              Good Bread <span aria-hidden="true">&#8599;</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="things" id="things" aria-labelledby="things-title">
+        <h2 class="section-title" id="things-title">Some things I made</h2>
+        <ul class="rows" id="a-rows">
+          {
+            projects.map((p, i) => (
+              <li>
+                <a href={p.url} target="_blank" rel="noopener">
+                  <span class="r-name">
+                    {i === 0 ? <span id="a-circle">{p.name}</span> : p.name}
+                  </span>
+                  <span class="r-desc">{p.desc}</span>
+                  <span class="r-arrow" aria-hidden="true">
+                    &#8599;
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="tally" id="a-tally" aria-hidden="true"></div>
+        <p class="tally-note">
+          Plus 50+ more, most of them made by hand before AI could lend&nbsp;one.
+          <a href="/projects/">See them&nbsp;all&nbsp;&rarr;</a>
+        </p>
+      </section>
+
+      <section class="photos" id="photos" aria-labelledby="photos-title">
+        <div class="photos-head">
+          <h2 class="section-title" id="photos-title">From my camera roll</h2>
+          <p class="photos-hint">
+            <span class="fine">Drag them around, or click one for a closer look.</span
+            ><span class="coarse">Tap one for a closer look, then swipe.</span>
+          </p>
+        </div>
+        <style is:inline set:html={pileCSS}></style>
+        <div class="pile" id="a-pile">
+          {
+            PHOTOS.map((p, i) => (
+              <a
+                class="print"
+                href={photoUrl(p)}
+                data-i={i}
+                aria-label={label(p)}
+                style={`--ar:${p.w} / ${p.h};--r:${firstLayout.items[i].r.toFixed(2)}deg;z-index:${i + 1}`}
+                draggable="false"
+              >
+                <img
+                  data-src={photoUrl(p, 'sm')}
+                  data-srcset={srcset(p)}
+                  data-sizes={PRINT_SIZES}
+                  width={p.w}
+                  height={p.h}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  draggable="false"
+                />
+                <noscript>
+                  <img
+                    src={photoUrl(p, 'sm')}
+                    srcset={srcset(p)}
+                    sizes={PRINT_SIZES}
+                    width={p.w}
+                    height={p.h}
+                    alt=""
+                    loading="lazy"
+                  />
+                </noscript>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="hi" id="hi" aria-labelledby="hi-title">
+        <img
+          class="hi-me"
+          id="a-me"
+          data-src="/img/profile-336.webp"
+          data-srcset="/img/profile-224.webp 224w, /img/profile-336.webp 336w"
+          data-sizes="112px"
+          width="336"
+          height="336"
+          alt="Greg, standing on the roof of a car with mountains behind him"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
+        />
+        <noscript>
+          <img
+            class="hi-me"
+            src="/img/profile-336.webp"
+            srcset="/img/profile-224.webp 224w, /img/profile-336.webp 336w"
+            sizes="112px"
+            width="336"
+            height="336"
+            alt="Greg, standing on the roof of a car with mountains behind him"
+            loading="lazy"
+          />
+        </noscript>
+        <h2 class="section-title" id="hi-title">
+          Say hi<span class="sr-only">: contact links</span>
+        </h2>
+        <div class="hi-links" id="a-links">
+          <a class="btn" href="https://x.com/gregskril" target="_blank" rel="noopener"
+            >Twitter</a
+          >
+          <a class="btn" href="https://github.com/gskril" target="_blank" rel="noopener"
+            >GitHub</a
+          >
+        </div>
+        <div class="hi-end" id="a-end"></div>
+      </section>
+    </main>
+  </div>
+
+  <Lightbox slot="after" caption />
+</GoodBread>
+
+<script>
+  import '../scripts/eyes.js'
+  import '../scripts/photos.js'
+  import '../scripts/line.js'
+</script>
