@@ -25,6 +25,8 @@ const date = new Intl.DateTimeFormat('en-US', {
   title={article.data.title}
   description={article.data.description}
   image={`/og/blog/${article.id}.png`}
+  imageAlt={`"${article.data.title}", from Greg's blog`}
+  published={article.data.date}
 >
   <div class="bk article">
     <nav class="bk-top"><a class="bk-back" href="/blog/">&larr; Blog</a></nav>

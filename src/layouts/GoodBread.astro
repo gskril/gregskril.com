@@ -9,15 +9,23 @@ interface Props {
   title: string
   description: string
   image?: string | string[]
+  imageAlt?: string
+  published?: Date
 }
 
-const { title, description, image } = Astro.props
+const { title, description, image, imageAlt, published } = Astro.props
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} image={image} />
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      published={published}
+    />
     <meta name="color-scheme" content="light dark" />
     <link
       rel="preload"

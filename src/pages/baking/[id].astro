@@ -66,6 +66,7 @@ const photos = await Promise.all(
   title={`${title} · Bake log`}
   description={`Bake from ${formatted}`}
   image={`/og/baking/${bake.id}.png`}
+  imageAlt={`${title}, from Greg's bake log (${formatted})`}
 >
   <div class="bk narrow">
     <nav class="bk-top"><a class="bk-back" href="/baking/">&larr; All bakes</a></nav>
